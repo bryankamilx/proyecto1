@@ -15,6 +15,10 @@ public class SistemaAlquiler {
         this.clientes = clientes;
         this.reservas = reservas;
     }
+    
+    public SistemaAlquiler() {
+
+    }
 
     public void agregarSede(Sede sede) {
         sedes.add(sede);
@@ -41,6 +45,15 @@ public class SistemaAlquiler {
 
     public void devolverVehiculo(Vehiculo vehiculo) {
 
+    }
+    
+    public Cliente autenticarCliente(String nombreUsuario, String contrasena) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getNombreUsuario().equals(nombreUsuario) && cliente.getContrasena().equals(contrasena)) {
+                return cliente; 
+            }
+        }
+        return null; 
     }
 
 }
