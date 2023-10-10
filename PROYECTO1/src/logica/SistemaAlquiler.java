@@ -2,6 +2,17 @@ package logica;
 
 import java.util.Date;
 import java.util.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import com.opencsv.CSVWriter;
+import java.text.SimpleDateFormat;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
+import org.apache.commons.lang3.ObjectUtils;
+import java.io.FileReader;
+
 
 public class SistemaAlquiler {
     private List<Sede> sedes;
@@ -19,6 +30,73 @@ public class SistemaAlquiler {
     public SistemaAlquiler() {
 
     }
+    
+    
+    public void agregarCliente(Cliente datos)
+    {
+    	 String rutaCompleta = "datos/clientes.csv";
+    	 SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+    	 boolean archivoExiste = new File(rutaCompleta).exists();
+
+         List<String> nuevaFila = new ArrayList<>();
+         
+         nuevaFila.add(datos.getNombreUsuario());
+         nuevaFila.add(datos.getContrasena());
+         nuevaFila.add(datos.getNombre());
+         nuevaFila.add(datos.getNumeroTelefonico());
+         nuevaFila.add(datos.getCorreo());
+         nuevaFila.add(formatoFecha.format(datos.getFechaNacimiento()));
+         nuevaFila.add(datos.getNacionalidad());
+         nuevaFila.add(datos.getImagenDocumento());
+         nuevaFila.add(datos.getNumeroLicencia());
+         nuevaFila.add(datos.getPaisExpedicionLicencia());
+         nuevaFila.add(formatoFecha.format(datos.getFechaVencimientoLicencia()));
+         nuevaFila.add(datos.getDatosTarjetaCredito());
+         
+
+         try (CSVWriter writer = new CSVWriter(new FileWriter(rutaCompleta, true))) {
+             if (archivoExiste==false) {
+                 String[] encabezados = {"Nombre Usuario", "Contrasena", "Nombre Completo", "Numero Telefonico", "Correo",
+                		 "Fecha De Nacimiento", "Nacionalidad", "Archivo Documentos", "Numero Licencia Conduccion", 
+                		 "Pais Expedicion Licencia", "Fecha Vencimiento Licencia", "Datos Medio De Pago" };
+                 writer.writeNext(encabezados);
+             }
+             writer.writeNext(nuevaFila.toArray(new String[0]));
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+    }
+    
+    public boolean autenticarCliente(String nombreUsuario, String contrasena) {
+    	String usuarioIngresado = nombreUsuario;
+        String contrasenaIngresada = contrasena;
+        boolean bandera = false;
+
+        try (CSVReader reader = new CSVReader(new FileReader("datos/clientes.csv"))) {
+            
+            int indiceUsuario = 0;
+            int indiceContrasena = 1;
+
+            String[] fila;
+            while ((fila = reader.readNext()) != null) {
+                String usuarioEnArchivo = fila[indiceUsuario];
+                String contrasenaEnArchivo = fila[indiceContrasena];
+
+                if (usuarioEnArchivo.equals(usuarioIngresado) && contrasenaEnArchivo.equals(contrasenaIngresada)) {
+                    System.out.println("Autenticacion exitosa.");
+                    bandera = true;
+                    return bandera;
+                    
+                }
+            }
+            if (bandera==false) {	
+            System.out.println("Nombre de usuario o contrasena incorrectos.");
+            return bandera;}
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        }
+        return bandera;
+    }
 
     public void agregarSede(Sede sede) {
         sedes.add(sede);
@@ -26,10 +104,6 @@ public class SistemaAlquiler {
 
     public void agregarVehiculo(Vehiculo vehiculo) {
         inventario.add(vehiculo);
-    }
-
-    public void agregarCliente(Cliente cliente) {
-        clientes.add(cliente);
     }
 
     public void realizarReserva(Cliente cliente, Vehiculo vehiculo, Sede sedeRecogida, Sede sedeEntrega,
@@ -47,13 +121,6 @@ public class SistemaAlquiler {
 
     }
     
-    public Cliente autenticarCliente(String nombreUsuario, String contrasena) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getNombreUsuario().equals(nombreUsuario) && cliente.getContrasena().equals(contrasena)) {
-                return cliente; 
-            }
-        }
-        return null; 
-    }
+    
 
 }
