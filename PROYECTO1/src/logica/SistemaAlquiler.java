@@ -102,9 +102,17 @@ public class SistemaAlquiler {
         sedes.add(sede);
     }
 
-    public void agregarVehiculo(Vehiculo vehiculo) {
-        inventario.add(vehiculo);
+    public Administrador nuevoAdministrador(String usuario,String contraseña) {
+        Administrador administrador = new Administrador(usuario,contraseña);
+		return administrador;
     }
+
+    public void agregarVehiculo(String placa, String marca, String modelo, String color, String transmision, String categoria, 
+    		String estado, String pasajeros, String tarifa) {
+        Vehiculo nuevoVehiculo = new Vehiculo(placa, marca, modelo, color, transmision, categoria, estado, pasajeros, tarifa);
+        //inventario.add(nuevoVehiculo);
+    }
+
 
     public void realizarReserva(Cliente cliente, Vehiculo vehiculo, Sede sedeRecogida, Sede sedeEntrega,
                                 Date fechaRecogida, Date fechaEntrega) {

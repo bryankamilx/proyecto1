@@ -3,6 +3,7 @@ package consola;
 import java.util.Scanner;
 import logica.SistemaAlquiler;
 import logica.Cliente;
+import logica.Administrador;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
@@ -22,6 +23,8 @@ public class aplicacion {
     public static void main(String[] args) {
 
         SistemaAlquiler sistema = new SistemaAlquiler();
+        Administrador administrador = sistema.nuevoAdministrador("grupo9", "123");
+
 
         Scanner scanner = new Scanner(System.in);
         boolean salir = false;
@@ -49,6 +52,24 @@ public class aplicacion {
                 boolean verif = sistema.autenticarCliente(nombreUsuario, contrasena);
             	
             } else if (opcion == 2) {
+            	boolean autenticado = false;
+                while (!autenticado) {
+                    System.out.print("Ingrese su nombre de usuario: ");
+                    String nombreUsuario = scanner.nextLine();
+                    System.out.print("Ingrese su contraseña: ");
+                    String contrasena = scanner.nextLine();
+
+                    if (nombreUsuario.equals(administrador.getNombreUsuario()) && contrasena.equals(administrador.getContrasena())) {
+
+                        System.out.println("\nInicio de sesión exitoso como administrador.");
+                        ejecutarMenuAdministrador(sistema);
+                        autenticado = true;
+
+                    } else {
+                        System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
+                    }
+                }
+
 
             } else if (opcion == 3) {
                 
@@ -110,4 +131,82 @@ public class aplicacion {
 
         scanner.close();
     }
+    
+    private static void ejecutarMenuAdministrador(SistemaAlquiler sistema) {
+
+        System.out.println("1. Registrar compra de nuevos vehículos");
+        System.out.println("2. Dar de baja un vehículo");
+        System.out.println("3. Configurar seguros");
+        System.out.println("4. Acceso a las sedes");
+        System.out.println("5. Crear usuario de empleado");
+
+        Scanner scanner = new Scanner(System.in);
+
+        boolean salir = false;
+        while (!salir) {
+            System.out.println("\nBienvenido administrador");
+
+            System.out.println("1. Registrar compra de nuevos vehículos");
+            System.out.println("2. Dar de baja un vehículo");
+            System.out.println("3. Configurar seguros");
+            System.out.println("4. Acceso a las sedes");
+            System.out.println("5. Crear usuario de empleado");
+            System.out.println("6. Salir del menú de administrador\n");
+            System.out.print("Seleccione una opción: ");
+
+            int opcion = scanner.nextInt();
+            scanner.nextLine();
+
+            if (opcion == 1) {
+
+                System.out.println("Ingrese los detalles del nuevo vehículo:\n");
+
+                System.out.print("Placa: ");
+                String placa = scanner.nextLine();
+
+                System.out.print("Marca: ");
+                String marca = scanner.nextLine();
+
+                System.out.print("Modelo: ");
+                String modelo = scanner.nextLine();
+
+                System.out.print("Color: ");
+                String color = scanner.nextLine();
+
+                System.out.print("Transmisión: ");
+                String transmision = scanner.nextLine();
+
+                System.out.print("Categoría: ");
+                String categoria = scanner.nextLine();
+                
+                System.out.print("Estado: ");
+                String estado = scanner.nextLine();
+                
+                System.out.print("Pasajeros: ");
+                String pasajeros = scanner.nextLine();
+                
+                System.out.print("Tarifa: ");
+                String tarifa = scanner.nextLine();
+                
+
+                sistema.agregarVehiculo(placa, marca, modelo, color, transmision, categoria, estado, pasajeros, tarifa);
+//                sistema.getVehiculos();
+
+            } else if (opcion == 2) {
+                // Lógica para dar de baja un vehículo
+            } else if (opcion == 3) {
+                // Lógica para configurar seguros
+            } else if (opcion == 4) {
+                // Lógica para el acceso a las sedes
+            } else if (opcion == 5) {
+                // Lógica para crear usuario de empleado
+            } else if (opcion == 6) {
+                salir = true;
+            } else {
+                System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
+            }
+        }
+        scanner.close();
+    }
+
 }

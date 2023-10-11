@@ -9,16 +9,22 @@ public class Vehiculo {
     private String color;
     private String transmision;
     private String categoria;
-    private String estado; 
+    private String estado;
+    private String pasajeros;
+    private String tarifa;
 
-    public Vehiculo(String placa, String marca, String modelo, String color, String transmision, String categoria) {
+    public Vehiculo(String placa, String marca, String modelo, String color, String transmision, String categoria, String estado, String pasajeros,
+    		String tarifa) {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
         this.color = color;
         this.transmision = transmision;
         this.categoria = categoria;
-        this.estado = "DISPONIBLE"; 
+        this.estado = estado;
+        this.pasajeros = pasajeros;
+        this.tarifa = tarifa;
+        
     }
 
     public String getPlaca() {
@@ -77,10 +83,29 @@ public class Vehiculo {
         this.estado = estado;
     }
     
+    public String getPasajeros()
+	{
+		return pasajeros;
+	}
+    
+    public String getTarifa()
+	{
+		return tarifa;
+	}
+    public void setPasajeros(String pasajeros)
+	{
+		this.pasajeros = pasajeros;
+	}
+
+	public void setTarifa(String tarifa)
+	{
+		this.tarifa = tarifa;
+	}
+    
     
     // METODOS
-    
-    public void reservar(Date fechaRecogida, Date fechaEntrega) {
+
+	public void reservar(Date fechaRecogida, Date fechaEntrega) {
         if (estado.equals("DISPONIBLE")) {
             estado = "RESERVADO";
         }
@@ -106,6 +131,8 @@ public class Vehiculo {
     public void finalizarMantenimiento() {
         estado = "DISPONIBLE";
     }
+
+	
 }
 	
 	

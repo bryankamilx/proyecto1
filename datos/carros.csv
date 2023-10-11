@@ -1,0 +1,161 @@
+Placa,Marca,Modelo,Color ,Transmision,Categoria,Estado,Cantidad pasajeros,Tarifa diaria,Observaciones ,Ubicación
+ABC123,Kia,Picanto 1.0,Blanco,Mecanica,C -Economico con aire,Disponible,5,152250,.,.
+XYZ456,Kia,Picanto 1.0,Blanco,Mecanica,C -Economico con aire,Disponible,5,152250,.,.
+DEF789,Kia,Picanto 1.0,Blanco,Mecanica,C -Economico con aire,Disponible,5,152250,.,.
+GHI101,Kia,Picanto 1.0,Blanco,Mecanica,C -Economico con aire,Disponible,5,152250,.,.
+JKL202,Fiat,Mobi 1.0,Blanco,Mecanica,C -Economico con aire,Disponible,5,152250,.,.
+MNO303,Fiat,Mobi 1.0,Blanco,Mecanica,C -Economico con aire,Disponible,5,152250,.,.
+PQR404,Fiat,Mobi 1.0,Blanco,Mecanica,C -Economico con aire,Disponible,5,152250,.,.
+STU505,Suzuki,S-Presso 1.0,Naranja,Mecanica,C -Economico con aire,Disponible,5,152250,.,.
+VWX606,Suzuki,S-Presso 1.0,Naranja,Mecanica,C -Economico con aire,Disponible,5,152250,.,.
+YZA707,Suzuki,S-Presso 1.0,Naranja,Mecanica,C -Economico con aire,Disponible,5,152250,.,.
+FAA456,Suzuki,Swift Dzire 1.2,Azul,Mecanica,F -Intermedio mecanico,Disponible,5,166455,.,.
+OUT894,Suzuki,Swift Dzire 1.2,Azul,Mecanica,F -Intermedio mecanico,Disponible,5,166455,.,.
+DHD657,Suzuki,Swift Dzire 1.2,Azul,Mecanica,F -Intermedio mecanico,Disponible,5,166455,.,.
+FDS357,Suzuki,Swift Dzire 1.2,Azul,Mecanica,F -Intermedio mecanico,Disponible,5,166455,.,.
+YWR447,Renault,Logan 1.6,Gris,Mecanica,F -Intermedio mecanico,Disponible,5,166455,.,.
+DXR566,Renault,Logan 1.6,Gris,Mecanica,F -Intermedio mecanico,Disponible,5,166455,.,.
+GAY654,Renault,Logan 1.6,Gris,Mecanica,F -Intermedio mecanico,Disponible,5,166455,.,.
+RES466,Volkswagen,Gol Trendline 1.6,Plateado,Mecanica,F -Intermedio mecanico,Disponible,5,166455,.,.
+DGF798,Volkswagen,Gol Trendline 1.6,Plateado,Mecanica,F -Intermedio mecanico,Disponible,5,166455,.,.
+DGE899,Volkswagen,Gol Trendline 1.6,Plateado,Mecanica,F -Intermedio mecanico,Disponible,5,166455,.,.
+TFY756,Suzuki,Swift Dzire 1.2,Gris,Automatica,FX -Intermedio automatico,Disponible,5,173455,.,.
+DGE323,Suzuki,Swift Dzire 1.2,Gris,Automatica,FX -Intermedio automatico,Disponible,5,173455,.,.
+FDS595,Suzuki,Swift Dzire 1.2,Gris,Automatica,FX -Intermedio automatico,Disponible,5,173455,.,.
+GDF520,Suzuki,Swift Dzire 1.2,Gris,Automatica,FX -Intermedio automatico,Disponible,5,173455,.,.
+FSD665,Hyundai,Accent Advance 1.6,Gris,Automatica,FX -Intermedio automatico,Disponible,5,173455,.,.
+DDS566,Hyundai,Accent Advance 1.6,Gris,Automatica,FX -Intermedio automatico,Disponible,5,173455,.,.
+FSR987,Hyundai,Accent Advance 1.6,Gris,Automatica,FX -Intermedio automatico,Disponible,5,173455,.,.
+TSD456,Renault,Logan Dynamique 1.6,Gris,Automatica,FX -Intermedio automatico,Disponible,5,173455,.,.
+POL675,Renault,Logan Dynamique 1.6,Gris,Automatica,FX -Intermedio automatico,Disponible,5,173455,.,.
+IOB654,Renault,Logan Dynamique 1.6,Gris,Automatica,FX -Intermedio automatico,Disponible,5,173455,.,.
+XDS789,Suzuki,Swift Híbrido,Plateado,Mecanica,FY -Intermedio hibrido ,Disponible,5,195773,.,.
+KOS987,Suzuki,Swift Híbrido,Plateado,Mecanica,FY -Intermedio hibrido ,Disponible,5,195773,.,.
+TYR798,Suzuki,Swift Híbrido,Plateado,Mecanica,FY -Intermedio hibrido ,Disponible,5,195773,.,.
+FAF185,Suzuki,Swift Híbrido,Plateado,Mecanica,FY -Intermedio hibrido ,Disponible,5,195773,.,.
+FSE456,Suzuki,Swift Híbrido,Plateado,Mecanica,FY -Intermedio hibrido ,Disponible,5,195773,.,.
+FRE670,Suzuki,Swift Híbrido,Plateado,Mecanica,FY -Intermedio hibrido ,Disponible,5,195773,.,.
+SDF595,Suzuki,Swift Híbrido,Plateado,Mecanica,FY -Intermedio hibrido ,Disponible,5,195773,.,.
+NDD498,Suzuki,Swift Híbrido,Plateado,Mecanica,FY -Intermedio hibrido ,Disponible,5,195773,.,.
+FAD321,Suzuki,Swift Híbrido,Plateado,Mecanica,FY -Intermedio hibrido ,Disponible,5,195773,.,.
+HSE652,Suzuki,Swift Híbrido,Plateado,Mecanica,FY -Intermedio hibrido ,Disponible,5,195773,.,.
+QAF645,Fiat,Pulse 1.3,Negro,Mecanica,G -SUV compacto,Disponible,5,237900,.,.
+GSF201,Fiat,Pulse 1.3,Negro,Mecanica,G -SUV compacto,Disponible,5,237900,.,.
+LRT014,Fiat,Pulse 1.3,Negro,Mecanica,G -SUV compacto,Disponible,5,237900,.,.
+BCV458,Fiat,Pulse 1.3,Negro,Mecanica,G -SUV compacto,Disponible,5,237900,.,.
+EFC014,Renault,Duster 1.6,Cafe,Mecanica,G -SUV compacto,Disponible,5,237900,.,.
+FSR987,Renault,Duster 1.6,Cafe,Mecanica,G -SUV compacto,Disponible,5,237900,.,.
+GEC799,Renault,Duster 1.6,Cafe,Mecanica,G -SUV compacto,Disponible,5,237900,.,.
+TSE789,Suzuki,Vitara 1.6,Beige,Mecanica,G -SUV compacto,Disponible,5,237900,.,.
+FER564,Suzuki,Vitara 1.6,Beige,Mecanica,G -SUV compacto,Disponible,5,237900,.,.
+FSD104,Suzuki,Vitara 1.6,Beige,Mecanica,G -SUV compacto,Disponible,5,237900,.,.
+GSX025,Opel ,Crossland 1.2,Plateado,Automatica,GC -SUV compacto automatico,Disponible,5,481436,.,.
+GLO987,Opel ,Crossland 1.2,Plateado,Automatica,GC -SUV compacto automatico,Disponible,5,481436,.,.
+TRE369,Opel ,Crossland 1.2,Plateado,Automatica,GC -SUV compacto automatico,Disponible,5,481436,.,.
+CSE015,Opel ,Crossland 1.2,Plateado,Automatica,GC -SUV compacto automatico,Disponible,5,481436,.,.
+AFE312,Hyundai,Creta 1.6,Blanco,Automatica,GC -SUV compacto automatico,Disponible,5,481436,.,.
+SXY518,Hyundai,Creta 1.6,Blanco,Automatica,GC -SUV compacto automatico,Disponible,5,481436,.,.
+ELV127,Hyundai,Creta 1.6,Blanco,Automatica,GC -SUV compacto automatico,Disponible,5,481436,.,.
+BTR197,Kia,Sonet 1.5,Negro,Automatica,GC -SUV compacto automatico,Disponible,5,481436,.,.
+GER357,Kia,Sonet 1.5,Negro,Automatica,GC -SUV compacto automatico,Disponible,5,481436,.,.
+LQP917,Kia,Sonet 1.5,Negro,Automatica,GC -SUV compacto automatico,Disponible,5,481436,.,.
+QWQ024,Renault,Duster 1.3,Cafe,Mecanica,G4 -SUV mecanica 4x4,Disponible,5,474436,.,.
+NYR731,Renault,Duster 1.3,Cafe,Mecanica,G4 -SUV mecanica 4x4,Disponible,5,474436,.,.
+FRE781,Renault,Duster 1.3,Cafe,Mecanica,G4 -SUV mecanica 4x4,Disponible,5,474436,.,.
+WAQ741,Renault,Duster 1.3,Cafe,Mecanica,G4 -SUV mecanica 4x4,Disponible,5,474436,.,.
+FWA097,Suzuki,Vitara 1.6,Blanco,Mecanica,G4 -SUV mecanica 4x4,Disponible,5,474436,.,.
+FEW111,Suzuki,Vitara 1.6,Blanco,Mecanica,G4 -SUV mecanica 4x4,Disponible,5,474436,.,.
+VFS444,Suzuki,Vitara 1.6,Blanco,Mecanica,G4 -SUV mecanica 4x4,Disponible,5,474436,.,.
+LEO789,Renault,Duster 2.0,Blanco,Mecanica,G4 -SUV mecanica 4x4,Disponible,5,474436,.,.
+LES961,Renault,Duster 2.0,Blanco,Mecanica,G4 -SUV mecanica 4x4,Disponible,5,474436,.,.
+AIR911,Renault,Duster 2.0,Blanco,Mecanica,G4 -SUV mecanica 4x4,Disponible,5,474436,.,.
+BIN143,Mitsubishi,Montero Sport GLS 3.0,Blanco,Automatica,GR -SUV elite,Disponible,7,488436,.,.
+FRA974,Mitsubishi,Montero Sport GLS 3.0,Blanco,Automatica,GR -SUV elite,Disponible,7,488436,.,.
+INT327,Mitsubishi,Montero Sport GLS 3.0,Blanco,Automatica,GR -SUV elite,Disponible,7,488436,.,.
+LOS457,Mitsubishi,Montero Sport GLS 3.0,Blanco,Automatica,GR -SUV elite,Disponible,7,488436,.,.
+DEW189,Mitsubishi,Montero Sport GLS 3.0,Blanco,Automatica,GR -SUV elite,Disponible,7,488436,.,.
+CSD982,Chevrolet,Trailblazer LTZ 3.6,Blanco,Automatica,GR -SUV elite,Disponible,7,488436,.,.
+CSS367,Chevrolet,Trailblazer LTZ 3.6,Blanco,Automatica,GR -SUV elite,Disponible,7,488436,.,.
+CRE322,Chevrolet,Trailblazer LTZ 3.6,Blanco,Automatica,GR -SUV elite,Disponible,7,488436,.,.
+AAA111,Chevrolet,Trailblazer LTZ 3.6,Blanco,Automatica,GR -SUV elite,Disponible,7,488436,.,.
+EDS976,Chevrolet,Trailblazer LTZ 3.6,Blanco,Automatica,GR -SUV elite,Disponible,7,488436,.,.
+SER761,Suzuki,Vitara 2.4,Beige,Automatica,GX -SUV automatico ,Disponible,5,400000,.,.
+LPW357,Suzuki,Vitara 2.4,Beige,Automatica,GX -SUV automatico ,Disponible,5,400000,.,.
+DWA498,Suzuki,Vitara 2.4,Beige,Automatica,GX -SUV automatico ,Disponible,5,400000,.,.
+LLO789,Suzuki,Vitara 2.4,Beige,Automatica,GX -SUV automatico ,Disponible,5,400000,.,.
+FER978,Renault,Captur 2.0,Negro,Automatica,GX -SUV automatico ,Disponible,5,400000,.,.
+MWE345,Renault,Captur 2.0,Negro,Automatica,GX -SUV automatico ,Disponible,5,400000,.,.
+FRW479,Renault,Captur 2.0,Negro,Automatica,GX -SUV automatico ,Disponible,5,400000,.,.
+AQW301,Chevrolet,Tracker 1.8,Blanco,Automatica,GX -SUV automatico ,Disponible,5,400000,.,.
+PIE897,Chevrolet,Tracker 1.8,Blanco,Automatica,GX -SUV automatico ,Disponible,5,400000,.,.
+VWA310,Chevrolet,Tracker 1.8,Blanco,Automatica,GX -SUV automatico ,Disponible,5,400000,.,.
+QOP931,Renault,Sandero Stepway 1.6,Cafe,Automatica,H -Ejecutivo automatico,Disponible,5,235545,.,.
+DWQ014,Renault,Sandero Stepway 1.6,Cafe,Automatica,H -Ejecutivo automatico,Disponible,5,235545,.,.
+LOP978,Renault,Sandero Stepway 1.6,Cafe,Automatica,H -Ejecutivo automatico,Disponible,5,235545,.,.
+DER364,Renault,Sandero Stepway 1.6,Cafe,Automatica,H -Ejecutivo automatico,Disponible,5,235545,.,.
+PLO781,Renault,Sandero Stepway 1.6,Cafe,Automatica,H -Ejecutivo automatico,Disponible,5,235545,.,.
+AWS815,Hyundai,Accent Premium 1.6,Blanco,Automatica,H -Ejecutivo automatico,Disponible,5,235545,.,.
+MUS614,Hyundai,Accent Premium 1.6,Blanco,Automatica,H -Ejecutivo automatico,Disponible,5,235545,.,.
+GWA976,Hyundai,Accent Premium 1.6,Blanco,Automatica,H -Ejecutivo automatico,Disponible,5,235545,.,.
+XXC321,Hyundai,Accent Premium 1.6,Blanco,Automatica,H -Ejecutivo automatico,Disponible,5,235545,.,.
+FWR986,Hyundai,Accent Premium 1.6,Blanco,Automatica,H -Ejecutivo automatico,Disponible,5,235545,.,.
+VFS258,Volkswagen,Jetta R-Line 1.4,Plateado,Automatica,L -Premium automatico,Disponible,5,285545,.,.
+SFE147,Volkswagen,Jetta R-Line 1.4,Plateado,Automatica,L -Premium automatico,Disponible,5,285545,.,.
+VSD631,Volkswagen,Jetta R-Line 1.4,Plateado,Automatica,L -Premium automatico,Disponible,5,285545,.,.
+LOA617,Volkswagen,Jetta R-Line 1.4,Plateado,Automatica,L -Premium automatico,Disponible,5,285545,.,.
+LUZ666,Volkswagen,Jetta R-Line 1.4,Plateado,Automatica,L -Premium automatico,Disponible,5,285545,.,.
+CDA904,Volkswagen,Jetta R-Line 1.4,Plateado,Automatica,L -Premium automatico,Disponible,5,285545,.,.
+GAF678,Volkswagen,Jetta R-Line 1.4,Plateado,Automatica,L -Premium automatico,Disponible,5,285545,.,.
+LON456,Volkswagen,Jetta R-Line 1.4,Plateado,Automatica,L -Premium automatico,Disponible,5,285545,.,.
+CAS370,Volkswagen,Jetta R-Line 1.4,Plateado,Automatica,L -Premium automatico,Disponible,5,285545,.,.
+VPO609,Volkswagen,Jetta R-Line 1.4,Plateado,Automatica,L -Premium automatico,Disponible,5,285545,.,.
+FSD013,Renault,Koleos 2.5,Blanco,Mecanica,LE -SUV especial,Disponible,5,292545,.,.
+LER420,Renault,Koleos 2.5,Blanco,Mecanica,LE -SUV especial,Disponible,5,292545,.,.
+WEE420,Renault,Koleos 2.5,Blanco,Mecanica,LE -SUV especial,Disponible,5,292545,.,.
+LRF201,Renault,Koleos 2.5,Blanco,Mecanica,LE -SUV especial,Disponible,5,292545,.,.
+LTE978,Renault,Koleos 2.5,Blanco,Mecanica,LE -SUV especial,Disponible,5,292545,.,.
+KRE127,Nissan,Qashqai 2.0,Blanco,Mecanica,LE -SUV especial,Disponible,5,292545,.,.
+MER978,Nissan,Qashqai 2.0,Blanco,Mecanica,LE -SUV especial,Disponible,5,292545,.,.
+HER023,Nissan,Qashqai 2.0,Blanco,Mecanica,LE -SUV especial,Disponible,5,292545,.,.
+WQE961,Nissan,Qashqai 2.0,Blanco,Mecanica,LE -SUV especial,Disponible,5,292545,.,.
+FRE032,Nissan,Qashqai 2.0,Blanco,Mecanica,LE -SUV especial,Disponible,5,292545,.,.
+TWQ339,Toyota,Corolla Xei 1.8,Blanco,Automatica,LP -Sedan prime,Disponible,5,256577,.,.
+FWQ986,Toyota,Corolla Xei 1.8,Blanco,Automatica,LP -Sedan prime,Disponible,5,256577,.,.
+PDW565,Toyota,Corolla Xei 1.8,Blanco,Automatica,LP -Sedan prime,Disponible,5,256577,.,.
+GRE873,Toyota,Corolla Xei 1.8,Blanco,Automatica,LP -Sedan prime,Disponible,5,256577,.,.
+WER978,Toyota,Corolla Xei 1.8,Blanco,Automatica,LP -Sedan prime,Disponible,5,256577,.,.
+RED456,Toyota,Corolla Xei 1.8,Blanco,Automatica,LP -Sedan prime,Disponible,5,256577,.,.
+FWE783,Toyota,Corolla Xei 1.8,Blanco,Automatica,LP -Sedan prime,Disponible,5,256577,.,.
+CSX000,Toyota,Corolla Xei 1.8,Blanco,Automatica,LP -Sedan prime,Disponible,5,256577,.,.
+DSE961,Toyota,Corolla Xei 1.8,Blanco,Automatica,LP -Sedan prime,Disponible,5,256577,.,.
+KRO631,Toyota,Corolla Xei 1.8,Blanco,Automatica,LP -Sedan prime,Disponible,5,256577,.,.
+GLI679,Changan,E-star Electrico,Blanco,Automatica,LY -Electrico automatico,Disponible,5,250000,.,.
+FOP346,Changan,E-star Electrico,Blanco,Automatica,LY -Electrico automatico,Disponible,5,250000,.,.
+DAE763,Changan,E-star Electrico,Blanco,Automatica,LY -Electrico automatico,Disponible,5,250000,.,.
+GER789,Changan,E-star Electrico,Blanco,Automatica,LY -Electrico automatico,Disponible,5,250000,.,.
+FWE645,Changan,E-star Electrico,Blanco,Automatica,LY -Electrico automatico,Disponible,5,250000,.,.
+BER301,Changan,E-star Electrico,Blanco,Automatica,LY -Electrico automatico,Disponible,5,250000,.,.
+LOW679,Changan,E-star Electrico,Blanco,Automatica,LY -Electrico automatico,Disponible,5,250000,.,.
+CUF196,Changan,E-star Electrico,Blanco,Automatica,LY -Electrico automatico,Disponible,5,250000,.,.
+ITE301,Changan,E-star Electrico,Blanco,Automatica,LY -Electrico automatico,Disponible,5,250000,.,.
+FER231,Changan,E-star Electrico,Blanco,Automatica,LY -Electrico automatico,Disponible,5,250000,.,.
+NOB319,Renault,Duster Oroch 1.6,Gris,Mecanica,VP -Pick up con aire plus,Disponible,5,305364,.,.
+FUN159,Renault,Duster Oroch 1.6,Gris,Mecanica,VP -Pick up con aire plus,Disponible,5,305364,.,.
+PRE694,Renault,Duster Oroch 1.6,Gris,Mecanica,VP -Pick up con aire plus,Disponible,5,305364,.,.
+HIG973,Renault,Duster Oroch 1.6,Gris,Mecanica,VP -Pick up con aire plus,Disponible,5,305364,.,.
+GRE741,Renault,Duster Oroch 1.6,Gris,Mecanica,VP -Pick up con aire plus,Disponible,5,305364,.,.
+APO986,Renault,Duster Oroch 1.6,Gris,Mecanica,VP -Pick up con aire plus,Disponible,5,305364,.,.
+LUE156,Renault,Duster Oroch 1.6,Gris,Mecanica,VP -Pick up con aire plus,Disponible,5,305364,.,.
+FUC961,Renault,Duster Oroch 1.6,Gris,Mecanica,VP -Pick up con aire plus,Disponible,5,305364,.,.
+FAL098,Renault,Duster Oroch 1.6,Gris,Mecanica,VP -Pick up con aire plus,Disponible,5,305364,.,.
+LOR111,Renault,Duster Oroch 1.6,Gris,Mecanica,VP -Pick up con aire plus,Disponible,5,305364,.,.
+HYE357,Ford,Ranger XLT 3.2,Dorado,Automatica,PX - 4x4 especial automatico,Disponible,5,365450,.,.
+KSA679,Ford,Ranger XLT 3.2,Dorado,Automatica,PX - 4x4 especial automatico,Disponible,5,365450,.,.
+GAR479,Ford,Ranger XLT 3.2,Dorado,Automatica,PX - 4x4 especial automatico,Disponible,5,365450,.,.
+HST314,Ford,Ranger XLT 3.2,Dorado,Automatica,PX - 4x4 especial automatico,Disponible,5,365450,.,.
+JUR579,Ford,Ranger XLT 3.2,Dorado,Automatica,PX - 4x4 especial automatico,Disponible,5,365450,.,.
+LOP987,Ford,Ranger XLT 3.2,Dorado,Automatica,PX - 4x4 especial automatico,Disponible,5,365450,.,.
+URE730,Ford,Ranger XLT 3.2,Dorado,Automatica,PX - 4x4 especial automatico,Disponible,5,365450,.,.
+IPA911,Ford,Ranger XLT 3.2,Dorado,Automatica,PX - 4x4 especial automatico,Disponible,5,365450,.,.
+JUU873,Ford,Ranger XLT 3.2,Dorado,Automatica,PX - 4x4 especial automatico,Disponible,5,365450,.,.
+GIM503,Ford,Ranger XLT 3.2,Dorado,Automatica,PX - 4x4 especial automatico,Disponible,5,365450,.,.
