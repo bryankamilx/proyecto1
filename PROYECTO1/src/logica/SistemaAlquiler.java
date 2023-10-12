@@ -14,6 +14,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import org.apache.commons.lang3.ObjectUtils;
 import java.io.FileReader;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.text.ParseException;
@@ -25,17 +26,22 @@ public class SistemaAlquiler {
     private List<Vehiculo> inventario;
     private List<Cliente> clientes;
     private List<Reserva> reservas;
+    private List<Seguro> seguros;
 
-    public SistemaAlquiler(List<Sede> sedes, List<Vehiculo> inventario, List<Cliente> clientes, List<Reserva> reservas) {
+    public SistemaAlquiler() {
+    	List<Sede> sedes = new ArrayList<>();
+    	List<Vehiculo> inventario = new ArrayList<>();
+        List<Cliente> clientes = new ArrayList<>();
+        List<Reserva> reservas = new ArrayList<>();
+        List<Seguro> seguros = new ArrayList<>();
+    	
         this.sedes = sedes;
         this.inventario = inventario;
         this.clientes = clientes;
         this.reservas = reservas;
+        this.seguros = seguros;
     }
     
-    public SistemaAlquiler() {
-
-    }
     
     
     public void agregarCliente(Cliente datos)
@@ -104,9 +110,6 @@ public class SistemaAlquiler {
         return bandera;
     }
 
-    public void agregarSede(Sede sede) {
-        sedes.add(sede);
-    }
 
     public Administrador nuevoAdministrador(String usuario,String contraseña) {
         Administrador administrador = new Administrador(usuario,contraseña);
@@ -116,7 +119,18 @@ public class SistemaAlquiler {
     public void agregarVehiculo(String placa, String marca, String modelo, String color, String transmision, String categoria, 
     		String estado, String pasajeros, String tarifa) {
         Vehiculo nuevoVehiculo = new Vehiculo(placa, marca, modelo, color, transmision, categoria, estado, pasajeros, tarifa);
-        //inventario.add(nuevoVehiculo);
+        inventario.add(nuevoVehiculo);
+    }
+    
+    public void eliminarAuto(String placaEliminar) {
+        Iterator<Vehiculo> iterator = inventario.iterator();
+        while (iterator.hasNext()) {
+            Vehiculo vehiculo = iterator.next();
+            if (vehiculo.getPlaca().equals(placaEliminar)) {
+                iterator.remove(); 
+                System.out.println("Vehículo con placa " + placaEliminar + " eliminado del inventario.");
+            }
+        }
     }
 
 
@@ -237,7 +251,60 @@ public class SistemaAlquiler {
     public void devolverVehiculo(Vehiculo vehiculo) {
 
     }
-    
-    
+
+	public List<Vehiculo> getVehiculos() {
+		return inventario;
+	}
+	
+	public List<Seguro> getSeguros() {
+		return seguros;
+	}
+
+	public void agregarSeguro(String nombreSeguro, double precioSeguro) {
+		Seguro nuevoSeguro = new Seguro(nombreSeguro, precioSeguro);
+        seguros.add(nuevoSeguro);
+	}
+	
+	public boolean eliminarSeguro(String nombreSeguro) {
+	    for (Seguro seguro : seguros) {
+	        if (seguro.getNombre().equalsIgnoreCase(nombreSeguro)) {
+	            seguros.remove(seguro);
+	            return true;
+	        }
+	    }
+		return false;
+	}
+
+
+
+	public List<Sede> getSedes() {
+	    return sedes;
+	}
+
+
+
+	public void agregarSede(String nombreSede, String direccionSede) {
+		
+		Sede sede = new Sede(nombreSede, direccionSede);
+	    sedes.add(sede);
+	}
+
+
+
+	public boolean eliminarSede(String nombreSede) {
+	    boolean sedeEncontrada = false;
+
+	    Iterator<Sede> iterator = sedes.iterator();
+	    while (iterator.hasNext()) {
+	        Sede sede = iterator.next();
+	        if (sede.getNombre().equalsIgnoreCase(nombreSede)) {
+	            iterator.remove();
+	            sedeEncontrada = true;
+	        }
+	    }
+	    return sedeEncontrada;
+	}
+
+	
 
 }

@@ -13,12 +13,10 @@ import java.io.FileReader;
 public class Sede {
     private String nombre;
     private String direccion;
-    private String horarios;
 
-    public Sede(String nombre, String direccion, String horarios) {
+    public Sede(String nombre, String direccion) {
         this.nombre = nombre;
         this.direccion= direccion;
-        this.horarios = horarios;
     }
 
     public String getNombre() {
@@ -39,13 +37,7 @@ public class Sede {
 		this.direccion = direccion;
 	}
 
-	public String getHorarios() {
-        return horarios;
-    }
-
-    public void setHorarios(String horarios) {
-        this.horarios = horarios;
-    }
+    
     
     public static List<String> seleccionarSede(Scanner scanner) {
     	
