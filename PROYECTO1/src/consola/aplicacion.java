@@ -46,10 +46,15 @@ public class aplicacion {
             	System.out.print("Nombre de usuario: ");
                 String nombreUsuario = scanner.nextLine();
 
-                System.out.print("Contraseña: ");
+                System.out.print("Contrasena: ");
                 String contrasena = scanner.nextLine();
                 
                 boolean verif = sistema.autenticarCliente(nombreUsuario, contrasena);
+                
+                if (verif == true) 
+                {
+                	ejecutarMenuCliente(nombreUsuario, sistema, scanner);
+                }
             	
             } else if (opcion == 2) {
             	boolean autenticado = false;
@@ -130,6 +135,42 @@ public class aplicacion {
         
 
         scanner.close();
+    }
+    
+    private static void ejecutarMenuCliente(String nombre, SistemaAlquiler sistema, Scanner scanner) 
+    {
+    	boolean cl_aut = false;
+    	
+    	while (!cl_aut)
+    	{
+    		System.out.println("Bienvenido " + nombre);
+    		System.out.println("1. Realizar una reserva");
+    		System.out.println("2. Extender un alquiler");
+    		System.out.println("3. Salir del menu");
+    		System.out.print("Seleccione una opcion: ");
+    		
+    		int opcion = scanner.nextInt();
+            scanner.nextLine();
+            
+            if (opcion == 1) 
+            {
+            	sistema.realizarReserva(nombre, scanner);
+            }
+            
+            else if (opcion == 2 ) {
+            	//hacer la extension revisando la disponibilidad de vehiculos.
+            }
+            
+            else if (opcion == 3 ) 
+            {
+            	cl_aut = true;
+            }
+            else 
+            {
+                System.out.println("Opcion no valida. Por favor, seleccione una opcion valida.");
+            }
+    		
+    	}
     }
     
     private static void ejecutarMenuAdministrador(SistemaAlquiler sistema) {
