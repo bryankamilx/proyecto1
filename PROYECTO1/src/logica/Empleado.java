@@ -7,13 +7,14 @@ public class Empleado implements Usuario {
     private String contrasena;
     private String nombre;
     private String cargo;
-    
+    private Sede sede;
 
-    public Empleado(String nombreUsuario, String contrasena, String nombre, String cargo) {
+    public Empleado(String nombreUsuario, String contrasena, String nombre, String cargo, Sede sede) {
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
         this.nombre = nombre;
         this.cargo = cargo;
+        this.sede = sede;
     }
 
     @Override
@@ -40,4 +41,8 @@ public class Empleado implements Usuario {
     	
     			
     }
+
+	public Sede getSede() {
+		return sede;
+	}
 }

@@ -143,11 +143,6 @@ public class SistemaAlquiler {
 		return administrador;
     }
     
-    public Empleado nuevoEmpleado(String usuario,String contraseña) {
-        Empleado empleado = new Empleado(usuario,contraseña, contraseña, contraseña);
-        //El tercer y cuarto elemento del new Empleado no son relevantes, solo que no sé como sacarlos
-		return empleado;
-    }
 
     public void agregarVehiculo(String placa, String marca, String modelo, String color, String transmision, String categoria, 
     		String estado, String pasajeros, String tarifa) {
@@ -314,28 +309,37 @@ public class SistemaAlquiler {
 	    return sedes;
 	}
 
+	
+	public List<AdministradorLocal> getAdministradoresLocales() {
+        List<AdministradorLocal> administradoresLocales = new ArrayList<>();
+        for (Sede sede : sedes) {
+            AdministradorLocal administradorLocal = sede.getAdministradorLocal();
+            if (administradorLocal != null) {
+                administradoresLocales.add(administradorLocal);
+            }
+        }
+        return administradoresLocales;
+    }
 
 
-	public void agregarSede(String nombreSede, String direccionSede) {
+
+	public List<Empleado> getEmpleadosPorSede(Sede sede) {
+        List<Empleado> empleadosPorSede = new ArrayList<>();
+        for (Empleado empleado : sede.getEmpleados()) {
+            if (empleado.getSede().getNombre().equals(sede.getNombre())) {
+                empleadosPorSede.add(empleado);
+            }
+        }
+        return empleadosPorSede;
+    }
+
+
+
+	public void crearEmpleado(String nombreUsuario, String contrasena, String nombre, String cargo, Sede sede) {
 		
-		Sede sede = new Sede(nombreSede, direccionSede);
-	    sedes.add(sede);
-	}
-
-
-
-	public boolean eliminarSede(String nombreSede) {
-	    boolean sedeEncontrada = false;
-
-	    Iterator<Sede> iterator = sedes.iterator();
-	    while (iterator.hasNext()) {
-	        Sede sede = iterator.next();
-	        if (sede.getNombre().equalsIgnoreCase(nombreSede)) {
-	            iterator.remove();
-	            sedeEncontrada = true;
-	        }
-	    }
-	    return sedeEncontrada;
+		Empleado nuevoEmpleado = new Empleado(nombreUsuario,contrasena,nombre,cargo,sede);
+		sede.agregarEmpleado(nuevoEmpleado);
+		
 	}
 
 	

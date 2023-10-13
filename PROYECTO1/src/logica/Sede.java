@@ -11,35 +11,50 @@ import org.apache.commons.lang3.ObjectUtils;
 import java.io.FileReader;
 
 public class Sede {
+	
     private String nombre;
     private String direccion;
+    private AdministradorLocal administradorLocal;
+    private List<Empleado> empleados;
 
-    public Sede(String nombre, String direccion) {
-        this.nombre = nombre;
-        this.direccion= direccion;
-    }
-
+    
     public String getNombre() {
-        return nombre;
-    }
+		return nombre;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
-    public String getDireccion()
-	{
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+
+	public String getDireccion() {
 		return direccion;
 	}
 
-	public void setDireccion(String direccion)
-	{
+
+
+	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
 
-    
-    
-    public static List<String> seleccionarSede(Scanner scanner) {
+
+	public AdministradorLocal getAdministradorLocal() {
+        return this.administradorLocal;
+    }
+
+
+
+	public void setAdmininistradorLocal(AdministradorLocal admininistradorLocal) {
+		this.administradorLocal = admininistradorLocal;
+	}
+
+
+
+
+
+	public static List<String> seleccionarSede(Scanner scanner) {
     	
     	try (CSVReader reader = new CSVReader(new FileReader("datos/sedes.csv"))) {
     		List<List<String>> listaDeListas = new ArrayList<>();
@@ -101,6 +116,21 @@ public class Sede {
 
         return null;
     	}
+
+
+	public List<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+
+	public void setEmpleados(List<Empleado> empleados) {
+		this.empleados = empleados;
+	}
+
+
+	public void agregarEmpleado(Empleado empleado) {
+        empleados.add(empleado);
+    }
     	
     
     
