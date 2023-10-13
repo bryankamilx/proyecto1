@@ -79,6 +79,33 @@ public class SistemaAlquiler {
          }
     }
     
+    
+    public void agregarEmpleado(Empleado datos)
+    {
+    	 String rutaCompleta = "datos/empleados.csv";
+    	 
+    	 boolean archivoExiste = new File(rutaCompleta).exists();
+
+         List<String> nuevaFila = new ArrayList<>();
+         
+         nuevaFila.add(datos.getNombreUsuario());
+         nuevaFila.add(datos.getContrasena());
+         nuevaFila.add(datos.getNombre());
+         nuevaFila.add(datos.getCargo());
+         
+         
+
+         try (CSVWriter writer = new CSVWriter(new FileWriter(rutaCompleta, true))) {
+             if (archivoExiste==false) {
+                 String[] encabezados = {"Nombre Usuario", "Contrasena", "Nombre Completo", "Cargo"};
+                 writer.writeNext(encabezados);
+             }
+             writer.writeNext(nuevaFila.toArray(new String[0]));
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+    }
+    
     public boolean autenticarCliente(String nombreUsuario, String contrasena) {
     	String usuarioIngresado = nombreUsuario;
         String contrasenaIngresada = contrasena;
@@ -114,6 +141,12 @@ public class SistemaAlquiler {
     public Administrador nuevoAdministrador(String usuario,String contraseña) {
         Administrador administrador = new Administrador(usuario,contraseña);
 		return administrador;
+    }
+    
+    public Empleado nuevoEmpleado(String usuario,String contraseña) {
+        Empleado empleado = new Empleado(usuario,contraseña, contraseña, contraseña);
+        //El tercer y cuarto elemento del new Empleado no son relevantes, solo que no sé como sacarlos
+		return empleado;
     }
 
     public void agregarVehiculo(String placa, String marca, String modelo, String color, String transmision, String categoria, 

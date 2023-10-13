@@ -1,10 +1,13 @@
 package logica;
+import logica.Vehiculo;
+import javax.swing.JOptionPane;
 
 public class Empleado implements Usuario {
     private String nombreUsuario;
     private String contrasena;
     private String nombre;
     private String cargo;
+    
 
     public Empleado(String nombreUsuario, String contrasena, String nombre, String cargo) {
         this.nombreUsuario = nombreUsuario;
@@ -29,5 +32,12 @@ public class Empleado implements Usuario {
 
     public String getCargo() {
         return cargo;
+    }
+    
+    public void ActualizarEstadoVehiculo()
+    {
+    	String input = JOptionPane.showInputDialog("Por favor, ingresa la placa del carro:");
+    	
+    			
     }
 }

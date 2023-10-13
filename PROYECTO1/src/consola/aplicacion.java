@@ -3,6 +3,7 @@ package consola;
 import java.util.Scanner;
 import logica.SistemaAlquiler;
 import logica.Cliente;
+import logica.Empleado;
 import logica.Sede;
 import logica.Seguro;
 import logica.Administrador;
@@ -26,6 +27,7 @@ public class aplicacion {
 
         SistemaAlquiler sistema = new SistemaAlquiler();
         Administrador administrador = sistema.nuevoAdministrador("grupo9", "123");
+        Empleado empleado = sistema.nuevoEmpleado("grupo9", "1234");
 
 
         Scanner scanner = new Scanner(System.in);
@@ -79,6 +81,23 @@ public class aplicacion {
 
 
             } else if (opcion == 3) {
+            	boolean autenticado = false;
+                while (!autenticado) {
+                    System.out.print("Ingrese su nombre de usuario: ");
+                    String nombreUsuario = scanner.nextLine();
+                    System.out.print("Ingrese su contraseña: ");
+                    String contrasena = scanner.nextLine();
+
+                    if (nombreUsuario.equals(empleado.getNombreUsuario()) && contrasena.equals(empleado.getContrasena())) {
+                    //Aquí podemos poner otro if que nos indique cual es el cargo, entonces si es empleado normal se abre el menú de empleado, si es un admin local se abre el menú del admin local
+                        System.out.println("\nInicio de sesión exitoso como empleado.");
+                        ejecutarMenuEmpleado(sistema, scanner);
+                        autenticado = true;
+
+                    } else {
+                        System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
+                    }
+                }
                 
             } else if (opcion == 4) {
             
@@ -175,6 +194,60 @@ public class aplicacion {
     	}
     }
     
+    private static void ejecutarMenuEmpleado(SistemaAlquiler sistema, Scanner scanner) 
+    {
+    	boolean cl_aut = false;
+    	
+    	while (!cl_aut)
+    	{
+    		System.out.println("Bienvenido empleado.");
+    		
+    		System.out.println("\n");
+    		
+    		System.out.println("¿Qué desea hacer?");
+    		
+    		System.out.println("\n");
+    		
+    		System.out.println("1. Actualizar estado de un vehículo");
+    		System.out.println("2. Reportar mantenimiento");
+    		System.out.println("3. Calcular fecha de disponibilidad");
+    		System.out.println("4. Gestionar procesos de vehículos");
+    		System.out.println("5. Salir del menú");
+    		System.out.println("\n");
+    		
+    		System.out.print("Seleccione una opcion: ");
+    		
+    		int opcion = scanner.nextInt();
+            scanner.nextLine();
+            
+            if (opcion == 1) 
+            {
+            	//Terminar método de actualizar vehículo.
+            }
+            
+            else if (opcion == 2 ) {
+            	//Terminar método de hacer mantenimiento.
+            }
+            
+            else if (opcion == 3 ) {
+            	//Terminar método de calcular disponibilidad.
+            }
+            
+            else if (opcion == 4 ) {
+            	//Terminar método de gestionar procesos.
+            }
+            
+            else if (opcion == 5 ) {
+            	cl_aut = true;
+            }
+            else 
+            {
+                System.out.println("Opcion no valida. Por favor, seleccione una opcion valida.");
+            }
+    		
+    	}
+    }
+    
     private static void ejecutarMenuAdministrador(SistemaAlquiler sistema) {
 
         Scanner scanner = new Scanner(System.in);
@@ -247,7 +320,27 @@ public class aplicacion {
             	ejecutarMenuSedes(sistema);
             	
             } else if (opcion == 5) {
-                // Lógica para crear usuario de empleado
+            	System.out.print("Creando nuevo empleado....");
+            	System.out.print("\n");
+            	System.out.print("\n");
+            	
+            	System.out.print("Ingrese el nuevo nombre de usuario para el empleado: ");
+                String nombreUsuarioEmpleado = scanner.nextLine();
+
+                System.out.print("Ingrese la contraseña deseada para el empleado: ");
+                String contrasenaEmpleado = scanner.nextLine();
+                
+                System.out.print("Ingrese el nombre del empleado: ");
+                String nombreEmpleado = scanner.nextLine();
+                
+                System.out.print("Ingrese el cargo del empleado: ");
+                String cargoEmpleado = scanner.nextLine();
+                
+                Empleado datos = new Empleado(nombreUsuarioEmpleado,contrasenaEmpleado, nombreEmpleado, cargoEmpleado);
+                     sistema.agregarEmpleado(datos);
+                     System.out.println("La cuenta del empleado se ha creado satisfactoriamente.");
+                
+                
             } else if (opcion == 6) {
                 salir = true;
             } else {
