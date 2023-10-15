@@ -357,7 +357,7 @@ public class SistemaAlquiler {
 	{
 		String csvFilePath = "./datos/carros.csv";
 		
-		String respuesta = "Placa no encontrada"; // Valor predeterminado
+		String respuesta = "Placa no encontrada";
 	    
 	    try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
 	        String line;
