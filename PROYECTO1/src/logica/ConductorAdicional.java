@@ -34,6 +34,13 @@ public class ConductorAdicional {
     public void setDocumentoIdentidad(String documentoIdentidad) {
         this.documentoIdentidad = documentoIdentidad;
     }
+    public Alquiler getAlquiler() {
+		return alquiler;
+	}
+
+	public void setAlquiler(Alquiler alquiler) {
+		this.alquiler = alquiler;
+	}
     
     
     public static int conductoresAgregados (Scanner scanner, String usuario, String id) {
@@ -45,17 +52,7 @@ public class ConductorAdicional {
     		
         System.out.print("Nombre conductor: ");
         String nombre = scanner.nextLine();
-
-<<<<<<< HEAD
-	public Alquiler getAlquiler() {
-		return alquiler;
-	}
-
-	public void setAlquiler(Alquiler alquiler) {
-		this.alquiler = alquiler;
-	}
-
-=======
+        
         System.out.print("Fecha de nacimiento (yyyy-MM-dd): ");
         String fechaNacimiento = scanner.nextLine();
 
@@ -114,6 +111,5 @@ public class ConductorAdicional {
         }
     }
     	return contador;}
-    
->>>>>>> branch 'p1' of https://github.com/bryankamilx/proyecto1.git
+   
 }

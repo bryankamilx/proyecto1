@@ -157,8 +157,8 @@ public class Persistencia {
 		 escribirVehiculos(sistema, rutaVehiculos);
 		 escribirClientes(sistema, rutaClientes);
 		 escribirEmpleados(sistema, rutaEmpleados);
-		 escribirReservas(sistema, rutaReservas);
-		 escribirSeguros(sistema, rutaSeguros);
+//		 escribirReservas(sistema, rutaReservas);
+//		 escribirSeguros(sistema, rutaSeguros);
 	}
 
 	public void escribirSeguros(SistemaAlquiler sistema, String rutaSeguros) {

@@ -1,4 +1,2 @@
-"ID","Categoria","UsuarioCliente","SedeRecogida","SedeEntrega","FechaRecogida","FechaEntrega","CostoParcial","CostoTreinta"
-"11b10d05-8bf9-4358-8944-29aaae0a1002","PX - 4x4 especial automatico","laura118","Aeropuerto El Dorado","Aeropuerto El Dorado","10/12/2023 11:00","10/16/2023 11:00","1461800.0","1461800.0"
-"f538b790-0ae8-4919-be5f-4ff02baad899","H -Ejecutivo automatico","andres241","Aeropuerto El Dorado","Aeropuerto El Dorado","10/12/2023 11:00","10/13/2023 11:00","235545.0","235545.0"
-"3c4cca3c-95fc-4152-bae3-cf197f9fc47f","FY -Intermedio hibrido ","patricia533","Nuestro Bogota","Nuestro Bogota","12/11/2023 10:02","12/19/2023 10:02","1566184.0","1566184.0"
+"Id reserva","Categoria escogida","Usuario del cliente","Sede de recogida","Sede de entrega","Fecha de inicio alquiler","Fecha fin alquiler","Dias facturados","Costo sin adicionales"," Treinta por ciento costo"
+"95f1aef9-e9a0-4daa-b1de-89cac118b4ce","PX - 4x4 especial automatico","t","Aeropuerto El Dorado","Aeropuerto El Dorado","2023-10-15 13:00","2023-10-20 13:00","5.0","1827250","548175.0"
