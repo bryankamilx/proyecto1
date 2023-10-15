@@ -1,6 +1,18 @@
 package logica;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvException;
 
 public class Vehiculo {
     private String placa;
@@ -132,7 +144,78 @@ public class Vehiculo {
         estado = "DISPONIBLE";
     }
 
-	
+	public static List<String> escogerCarro(String categoria, String inicio, String ffinal) {
+		String rutaCompleta = "datos/carros.csv";
+   	 	String estado = "Disponible";
+   	 	String categoriaEsc = null;
+   	 	String placa = null;
+   	 	List<String> retorno = new ArrayList<>();
+   	 	List<String[]> allRows = null;
+   	 	
+   	 	
+   	 	
+   	 //escoger carro y cambiar el estado	
+   	 try (CSVReader reader2 = new CSVReader(new FileReader(rutaCompleta))) {
+   		try {
+   	        allRows = reader2.readAll();
+   	    } catch (CsvException csvException) {
+   	        csvException.printStackTrace();
+   	    }
+         boolean categoryFound = false;
+         List<String> availableCategories = new ArrayList<>();
+         Map<String, Double> categoryRates = new HashMap<>();
+         double originalCategoryRate = 0;
+
+         for (String[] row : allRows) {
+             if (!categoryFound && row[5].equals(categoria) && row[6].equals(estado)) {
+                 placa = row[0];
+                 categoriaEsc = categoria;
+                 categoryFound = true;
+             } else if (row[5].equals(categoria)) {
+                 originalCategoryRate = Double.parseDouble(row[8]);
+             }
+         }
+
+         if (!categoryFound) {
+             for (String[] row : allRows) {
+                 if (row[6].equals("Disponible")) {
+                     availableCategories.add(row[5]);
+                     categoryRates.put(row[5], Double.parseDouble(row[8]));
+                 }
+             }
+             Collections.sort(availableCategories, (cat1, cat2) -> Double.compare(categoryRates.get(cat1), categoryRates.get(cat2)));
+
+             for (String category : availableCategories) {
+                 if (!categoryFound && categoryRates.get(category) > originalCategoryRate) {
+                     categoriaEsc = category;
+                     break;
+                 }
+             }
+         }
+     } catch (IOException e) {
+         e.printStackTrace();
+     }
+
+     boolean bandera = false;
+     try (CSVWriter writer = new CSVWriter(new FileWriter(rutaCompleta))) {
+         for (String[] row : allRows) {
+             if (row[5].equals(categoriaEsc) && row[6].equals(estado) && !bandera) {
+                 String[] newRow = {placa, row[1], row[2], row[3], row[4], row[5], "Alquilado", row[7], row[8],
+                         "Alquilado desde " + inicio + " hasta " + ffinal, "Fuera de las sedes"};
+                 writer.writeNext(newRow);
+                 bandera= true;
+             } else {
+                 writer.writeNext(row);
+             }
+         }
+     } catch (IOException e) {
+         e.printStackTrace();
+     }
+
+     retorno.add(categoriaEsc);
+     retorno.add(placa);
+     return retorno;
+	}
 }
 	
 	
