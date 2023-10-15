@@ -35,9 +35,11 @@ public class Empleado implements Usuario {
         return cargo;
     }
     
-    public void ActualizarEstadoVehiculo()
+    public static String ActualizarEstadoVehiculo(String placa)
     {
     	String input = JOptionPane.showInputDialog("Por favor, ingresa la placa del carro:");
+    	
+		return input;
     	
     			
     }

@@ -283,10 +283,9 @@ public class aplicacion {
             System.out.println("1. Completar alquiler de reserva previa");
             System.out.println("2. Hacer alquiler sin reserva previa");
             System.out.println("3. Actualizar estado de un vehículo");
-            System.out.println("4. Reportar mantenimiento");
-            System.out.println("5. Calcular fecha de disponibilidad");
-            System.out.println("6. Gestionar procesos de vehiculos");
-            System.out.println("7. Salir del menu");
+            System.out.println("4. Reportar mantenimiento de vehículo y reportar fecha de disponibilidad");
+            System.out.println("5. Gestionar procesos de vehiculos");
+            System.out.println("6. Salir del menu");
             System.out.println("\n");
             
             System.out.print("Seleccione una opcion: ");
@@ -306,25 +305,115 @@ public class aplicacion {
             }
             if (opcion == 3) 
             {
-                // Terminar método de actualizar vehículo.
+                System.out.println("Indique la placa del carro que desea consultar: ");
+                String placa = scanner.nextLine();
+                
+                String estado = logica.SistemaAlquiler.buscarDisponible(placa);
+                System.out.println(estado);
+                if (estado != "Placa no encontrada")
+                {
+                	System.out.println("El vehículo de placa " + placa  + " se encuentra en el siguiente estado: " + estado);
+                	
+                	
+                	System.out.println("Desea actualizar su estado a (1) = Disponible o (2) = Alquilado");
+                	int respuesta = scanner.nextInt();
+                	
+                	//DISPONIBLE
+                	if (respuesta == 1)
+                	{
+                		String estatus = "Disponible";
+                		logica.SistemaAlquiler.cambiarEstado(placa, estatus);
+                		
+                		System.out.println("\n");
+                		System.out.println("\n");
+                		
+                		System.out.println("Ahora el vehículo se encuentra en estado de Disponible.");
+                		
+                		
+                	}
+                	
+                	
+                
+	                else if (respuesta == 2) 
+	                {
+	                	
+	                	String estatus = "Alquilado";
+                		logica.SistemaAlquiler.cambiarEstado(placa, estatus);
+                		
+                		System.out.println("\n");
+                		System.out.println("\n");
+                		
+                		System.out.println("Ahora el vehículo se encuentra en estado de Alquilado.");
+                		
+	                }
+                	
+                }
+                
             }
-            else if (opcion == 4 ) {
-                // Terminar método de hacer mantenimiento.
+                
+
+            else if (opcion == 4) 
+            {
+            	System.out.println("Indique la placa del carro que desea consultar: ");
+                String placa = scanner.nextLine();
+                
+                System.out.println("¿Desea (Si) = registrar en vehículo en mantenimiento e (No) = retirarlo?");
+            	String tema = scanner.nextLine();
+            	
+            	if(tema.equals("Si"))
+            	{
+	                System.out.println("A continuación, explique brevemente el problema del vehículo.");
+	                String observacion = scanner.nextLine();
+	                System.out.println("\n");
+	        		
+	        		System.out.println("Según su criterio, ¿cuál será la fecha de reintegro del vehículo?");
+	        		
+	        		System.out.println("\n");
+	        		System.out.println("Entiendase reintegro como el momento en el que el carro volverá a estar disponible.");
+	        		String fecha = scanner.nextLine();
+	        		
+	        		String estado = "Mantenimiento";
+	        		
+	        		logica.SistemaAlquiler.cambiarMantenimiento(placa, estado, observacion, fecha);
+	        		
+	        		System.out.println("\n");
+	        		System.out.println("\n");
+	        		
+	        		System.out.println("Listo, el vehículo ahora se encuentra registrado como en mantenimiento.");
+            	}
+            	else if (tema.equals("No"))
+            	{
+            	                    
+                    String estatus = "Disponible";
+                    
+                    String observacion = "";
+                    
+                    String fecha = "";
+                    
+                    logica.SistemaAlquiler.cambiarMantenimiento(placa, estatus, observacion, fecha);
+                    
+                    System.out.println("\n");
+            		
+            		System.out.println("Listo, el vehículo ahora se encuentra disponible.");
+                    
+            	}
+            	else
+            	{
+            		System.out.println("No escogió una opción valida. Vuelva a realizar el proceso.");
+            	}
             }
+
             else if (opcion == 5 ) {
-                // Terminar método de calcular disponibilidad.
-            }
-            else if (opcion == 6 ) {
                 // Terminar método de gestionar procesos.
             }
-            else if (opcion == 7 ) {
+            else if (opcion == 6 ) {
                 cl_aut = true;
             }
             else 
             {
                 System.out.println("Opcion no valida. Por favor, seleccione una opcion valida.");
             }
-        }
+            }
     }
 
     private static void ejecutarMenuAdministrador(SistemaAlquiler sistema) {

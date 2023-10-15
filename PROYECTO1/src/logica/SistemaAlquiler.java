@@ -3,6 +3,8 @@ package logica;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,6 +21,8 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.text.ParseException;
 import java.util.UUID;
+
+
 
 
 public class SistemaAlquiler {
@@ -346,5 +350,132 @@ public class SistemaAlquiler {
 	public List<Reserva> getReservas() {
         return reservas;
     }
+	
+	
+	//FUNCIONES PARA EMPLEADO "NO SE DONDE PONERLAS"
+	public static String buscarDisponible (String plaquita)
+	{
+		String csvFilePath = "./datos/carros.csv";
+		
+		String respuesta = "Placa no encontrada"; // Valor predeterminado
+	    
+	    try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+	        String line;
+	        while ((line = br.readLine()) != null) {
+	            String[] campos = line.split(",");
+	            String placa = campos[0];
+	            
+	            System.out.println(placa);
+	            String placaSinComillas = placa.substring(1, placa.length() - 1);
+	            System.out.println(placaSinComillas);
+	            System.out.println(plaquita);
+	            
+	            
+	            String estado = campos[6];
+	            System.out.println(estado);
+	            
+	            if (placaSinComillas.equals(plaquita)) {
+	            	String estadoSinComillas = estado.substring(1, estado.length() - 1);
+	                respuesta = estadoSinComillas;
+	                break;
+	            }
+	        }
+	    } 
+	    catch (IOException e) 
+	    {
+	        e.printStackTrace();
+	    }
+	    return respuesta;
+	}
+	
 
+	public static void cambiarEstado(String plaquita, String estatus) 
+	{
+		String csvFilePath = "./datos/carros.csv";
+		
+		List<String> lineas = new ArrayList<>();
+		
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath)))
+        {
+        	String line;
+        	while ((line = br.readLine()) != null)
+        	{
+        		String[] campos = line.split(",");
+                String placa = campos[0];
+                String placaSinComillas = placa.substring(1, placa.length() - 1);
+                
+                if (placaSinComillas.equals(plaquita))
+                {
+                	campos[6] = estatus;
+                }
+                lineas.add(String.join(",", campos));
+                
+        	}
+        } 
+        catch (IOException e) 
+        {
+        	e.printStackTrace();
+        }
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(csvFilePath))) {
+            for (String linea : lineas) {
+                bw.write(linea);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        }
+    
+	
+	public static void cambiarMantenimiento (String plaquita, String estatus, String observacion, String fecha)
+	{
+		String respuesta = observacion + " " + "/" +" "+ fecha;
+		cambiarEstado(plaquita, estatus);
+		
+		String csvFilePath = "./datos/carros.csv";
+		List<String> lineas = new ArrayList<>();
+		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath)))
+        {
+        	String line;
+        	while ((line = br.readLine()) != null)
+        	{
+        		String[] campos = line.split(",");
+                String placa = campos[0];
+                String placaSinComillas = placa.substring(1, placa.length() - 1);
+                
+                if (placaSinComillas.equals(plaquita))
+                {
+                	campos[9] = respuesta;
+                }
+                lineas.add(String.join(",", campos));
+                
+        	}
+        } 
+        catch (IOException e) 
+        {
+        	e.printStackTrace();
+        }
+		
+		
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(csvFilePath)))
+		{
+			for (String linea : lineas)
+			{
+				bw.write(linea);
+                bw.newLine();
+			}
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
 }
+
+
+
+		
+
+
+
