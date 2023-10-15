@@ -7,7 +7,7 @@ public class Empleado implements Usuario {
     private String contrasena;
     private String nombre;
     private String cargo;
-    private Sede sede;
+	private Sede sede;
 
     public Empleado(String nombreUsuario, String contrasena, String nombre, String cargo, Sede sede) {
         this.nombreUsuario = nombreUsuario;

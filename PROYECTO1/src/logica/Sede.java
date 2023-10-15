@@ -12,7 +12,17 @@ import java.io.FileReader;
 
 public class Sede {
 	
-    private String nombre;
+    public Sede(String nombre, String direccion, AdministradorLocal administradorLocal, List<Empleado> empleados) {
+		super();
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.administradorLocal = administradorLocal;
+		this.empleados = (empleados != null) ? empleados : new ArrayList<>();
+		
+	}
+
+
+	private String nombre;
     private String direccion;
     private AdministradorLocal administradorLocal;
     private List<Empleado> empleados;

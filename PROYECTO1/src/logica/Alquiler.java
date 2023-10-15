@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Alquiler
 {	
-	private int id;
+	private String id;
 	private Vehiculo vehiculo;
 	private double costoTotal;
 	private boolean seguroAdicional;
@@ -12,7 +12,7 @@ public class Alquiler
 	
 
 
-    public Alquiler(int id, Vehiculo vehiculo, double costoTotal, boolean seguroAdicional,
+    public Alquiler(String id, Vehiculo vehiculo, double costoTotal, boolean seguroAdicional,
 		List<ConductorAdicional> conductoresAdicionales){
 	this.id = id;
 	this.vehiculo = vehiculo;
@@ -23,14 +23,14 @@ public class Alquiler
 
 
 
-	public int getId()
+	public String getId()
 	{
 		return id;
 	}
 
 
 
-	public void setId(int id)
+	public void setId(String id)
 	{
 		this.id = id;
 	}

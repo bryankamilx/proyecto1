@@ -1,7 +1,11 @@
 package consola;
 
 import java.util.Scanner;
+
+import com.opencsv.exceptions.CsvValidationException;
+
 import logica.SistemaAlquiler;
+import persistencia.Persistencia;
 import logica.Cliente;
 import logica.Empleado;
 import logica.Sede;
@@ -28,11 +32,22 @@ public class aplicacion {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CsvValidationException, NumberFormatException {
 
         SistemaAlquiler sistema = new SistemaAlquiler();
+        
         Administrador administrador = sistema.nuevoAdministrador("grupo9", "123");
-
+        AdministradorLocal admiBogota=sistema.agregarAdmLocalBogota("admiBogota", "456",null);
+        AdministradorLocal admiDorado=sistema.agregarAdmLocalDorado("admiDorado", "789",null);
+        Sede sedeDorado=sistema.agregarSede("Aeropuerto El Dorado", "Avenida Calle 26 # 96A-21", admiDorado, null);
+        Sede sedeBogota=sistema.agregarSede("Nuestro Bogota", "Avenida Carrera 86 # 55A-75", admiBogota, null);
+        admiBogota.setSede(sedeBogota);
+        admiDorado.setSede(sedeDorado);
+        
+        Persistencia persistencia = new Persistencia();
+        persistencia.cargarDatos(sistema, "datos/vehiculos.csv", "datos/clientes.csv", "datos/empleados.csv", "datos/reservas.csv", "datos/seguros.csv"); 
+        System.out.print("\nSE HAN CARGADO DATOS AUTOMATICAMENTE\nDEBE SALIR DE LA APLICACION PARA GUARDAR CAMBIOS\n");
+        
         Scanner scanner = new Scanner(System.in);
         boolean salir = false;
 
@@ -137,12 +152,10 @@ public class aplicacion {
 
                 System.out.print("Fecha de nacimiento (yyyy-MM-dd): ");
                 String fechaNacimientoStr = scanner.nextLine();
-                Date fechaNacimiento = parseFecha(fechaNacimientoStr);
+                String fechaNacimiento = fechaNacimientoStr;
 
                 System.out.print("Nacionalidad: ");
                 String nacionalidad = scanner.nextLine();
-
-                String imagenDocumento = nombreUsuario + ".pdf";
 
                 System.out.print("Numero de la licencia de conducción: ");
                 String numeroLicencia = scanner.nextLine();
@@ -152,21 +165,18 @@ public class aplicacion {
 
                 System.out.print("Fecha de vencimiento de la licencia de conducción (yyyy-MM-dd): ");
                 String fechavl = scanner.nextLine();
-                Date fechaVencimientoLicencia = parseFecha(fechavl);
+                String fechaVencimientoLicencia = fechavl;
 
                 System.out.print("Datos de la tarjeta de credito (numero-cvv-MM/yyyy): ");
                 String datosTarjetaCredito = scanner.nextLine();
 
-                Cliente datos = new Cliente(nombreUsuario, contrasena, nombre, numeroTelefonico, correo,
-                        fechaNacimiento, nacionalidad, imagenDocumento,
-                        numeroLicencia, paisExpedicionLicencia,
-                        fechaVencimientoLicencia, datosTarjetaCredito);
-                sistema.agregarCliente(datos);
+                sistema.agregarCliente(nombreUsuario, contrasena, nombre, numeroTelefonico, correo, fechaNacimiento, nacionalidad, numeroLicencia, paisExpedicionLicencia, fechaVencimientoLicencia, datosTarjetaCredito);
                 System.out.println("Su cuenta fue creada satisfactoriamente");
             } else if (opcion == 6) {
                 System.out.println("Gracias por usar el Sistema de Alquiler de Vehiculos. Hasta luego!");
+                persistencia.reescribirArchivos(sistema, "datos/vehiculos.csv", "datos/clientes.csv", "datos/empleados.csv", "datos/reservas.csv", "datos/seguros.csv");
                 salir = true; 
-            } else {
+            }else {
                 System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
             }
         }

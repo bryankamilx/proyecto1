@@ -1,3 +1,4 @@
+
  package logica;
 
 import java.util.Date;
@@ -8,18 +9,17 @@ public class Cliente implements Usuario {
     private String nombre;
     private String numeroTelefonico;
     private String correo;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     private String nacionalidad;
-    private String imagenDocumento;
     private String numeroLicencia;
     private String paisExpedicionLicencia;
-    private Date fechaVencimientoLicencia;
+    private String fechaVencimientoLicencia;
     private String datosTarjetaCredito;
 
     public Cliente(String nombreUsuario, String contrasena, String nombre, String numeroTelefonico,String correo,
-                   Date fechaNacimiento, String nacionalidad, String imagenDocumento,
+    		String fechaNacimiento, String nacionalidad,
                    String numeroLicencia, String paisExpedicionLicencia,
-                   Date fechaVencimientoLicencia, String datosTarjetaCredito) {
+                   String fechaVencimientoLicencia, String datosTarjetaCredito) {
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
         this.nombre = nombre;
@@ -27,7 +27,6 @@ public class Cliente implements Usuario {
         this.correo = correo;
         this.fechaNacimiento = fechaNacimiento;
         this.nacionalidad = nacionalidad;
-        this.imagenDocumento = imagenDocumento;
         this.numeroLicencia = numeroLicencia;
         this.paisExpedicionLicencia = paisExpedicionLicencia;
         this.fechaVencimientoLicencia = fechaVencimientoLicencia;
@@ -59,7 +58,7 @@ public class Cliente implements Usuario {
 		return correo;
 	}
 
-	public Date getFechaNacimiento()
+	public String getFechaNacimiento()
 	{
 		return fechaNacimiento;
 	}
@@ -67,11 +66,6 @@ public class Cliente implements Usuario {
 	public String getNacionalidad()
 	{
 		return nacionalidad;
-	}
-
-	public String getImagenDocumento()
-	{
-		return imagenDocumento;
 	}
 
 	public String getNumeroLicencia()
@@ -84,7 +78,7 @@ public class Cliente implements Usuario {
 		return paisExpedicionLicencia;
 	}
 
-	public Date getFechaVencimientoLicencia()
+	public String getFechaVencimientoLicencia()
 	{
 		return fechaVencimientoLicencia;
 	}

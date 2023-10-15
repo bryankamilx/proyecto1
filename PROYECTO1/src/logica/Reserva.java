@@ -12,31 +12,34 @@ import com.opencsv.CSVWriter;
 public class Reserva {
     private String id;
     private String categoria;
-    private String cliente;
+    private String usuarioCliente;
     private String sedeRecogida;
     private String sedeEntrega;
     private String fechaRecogida;
     private String fechaEntrega;
-    private String costoParcial;
+    private double costoParcial;
+    private double costoTreinta;
+    
 
-    public Reserva(String id, String categoria, String cliente, String sedeRecogida, String sedeEntrega,
-                   String fechaRecogida, String fechaEntrega, String costoParcial) {
+    public Reserva(String id, String categoria, String usuarioCliente, String sedeRecogida, String sedeEntrega,
+                   String fechaRecogida, String fechaEntrega, double costoParcial, double costoTreinta) {
         this.id = id;
-        this.cliente = cliente;
+        this.usuarioCliente = usuarioCliente;
         this.categoria = categoria;
         this.sedeRecogida = sedeRecogida;
         this.sedeEntrega = sedeEntrega;
         this.fechaRecogida = fechaRecogida;
         this.fechaEntrega = fechaEntrega;
         this.costoParcial = costoParcial;
+        this.setCostoTreinta(costoTreinta);
     }
 
     public String getId() {
         return id;
     }
 
-    public String getCliente() {
-        return cliente;
+    public String getUsuarioCliente() {
+        return usuarioCliente;
     }
 
     public String getSedeRecogida() {
@@ -60,7 +63,7 @@ public class Reserva {
 		return categoria;
 	}
 
-	public String getCostoParcial()
+	public double getCostoParcial()
 	{
 		return costoParcial;
 	}
@@ -108,4 +111,12 @@ public class Reserva {
     	
     	
     }
+
+	public double getCostoTreinta() {
+		return costoTreinta;
+	}
+
+	public void setCostoTreinta(double costoTreinta) {
+		this.costoTreinta = costoTreinta;
+	}
 }

@@ -3,6 +3,7 @@ package logica;
 public class ConductorAdicional {
     private String nombre;
     private String documentoIdentidad;
+    private Alquiler alquiler;
 
     public ConductorAdicional(String nombre, String documentoIdentidad) {
         this.nombre = nombre;
@@ -24,5 +25,13 @@ public class ConductorAdicional {
     public void setDocumentoIdentidad(String documentoIdentidad) {
         this.documentoIdentidad = documentoIdentidad;
     }
+
+	public Alquiler getAlquiler() {
+		return alquiler;
+	}
+
+	public void setAlquiler(Alquiler alquiler) {
+		this.alquiler = alquiler;
+	}
 
 }

@@ -43,68 +43,23 @@ public class SistemaAlquiler {
     }
     
     
+    public AdministradorLocal agregarAdmLocalBogota(String nombreUsuario, String contrasena, Sede sede) {
+    	AdministradorLocal administradorLocalNuestroBogota = new AdministradorLocal(nombreUsuario,contrasena,sede);
+    	return administradorLocalNuestroBogota;
+    }
     
-    public void agregarCliente(Cliente datos)
-    {
-    	 String rutaCompleta = "datos/clientes.csv";
-    	 SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-    	 boolean archivoExiste = new File(rutaCompleta).exists();
-
-         List<String> nuevaFila = new ArrayList<>();
-         
-         nuevaFila.add(datos.getNombreUsuario());
-         nuevaFila.add(datos.getContrasena());
-         nuevaFila.add(datos.getNombre());
-         nuevaFila.add(datos.getNumeroTelefonico());
-         nuevaFila.add(datos.getCorreo());
-         nuevaFila.add(formatoFecha.format(datos.getFechaNacimiento()));
-         nuevaFila.add(datos.getNacionalidad());
-         nuevaFila.add(datos.getImagenDocumento());
-         nuevaFila.add(datos.getNumeroLicencia());
-         nuevaFila.add(datos.getPaisExpedicionLicencia());
-         nuevaFila.add(formatoFecha.format(datos.getFechaVencimientoLicencia()));
-         nuevaFila.add(datos.getDatosTarjetaCredito());
-         
-
-         try (CSVWriter writer = new CSVWriter(new FileWriter(rutaCompleta, true))) {
-             if (archivoExiste==false) {
-                 String[] encabezados = {"Nombre Usuario", "Contrasena", "Nombre Completo", "Numero Telefonico", "Correo",
-                		 "Fecha De Nacimiento", "Nacionalidad", "Archivo Documentos", "Numero Licencia Conduccion", 
-                		 "Pais Expedicion Licencia", "Fecha Vencimiento Licencia", "Datos Medio De Pago" };
-                 writer.writeNext(encabezados);
-             }
-             writer.writeNext(nuevaFila.toArray(new String[0]));
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
+    public AdministradorLocal agregarAdmLocalDorado(String nombreUsuario, String contrasena, Sede sede) {
+    	AdministradorLocal administradorLocalDorado = new AdministradorLocal(nombreUsuario,contrasena,sede);
+    	return administradorLocalDorado;
+    }
+    
+    public Sede agregarSede(String nombre, String direccion, AdministradorLocal administradorLocal, List<Empleado> empleados) {
+    	Sede sede = new Sede(nombre,direccion,administradorLocal,empleados);
+    	sedes.add(sede);
+		return sede;
     }
     
     
-    public void agregarEmpleado(Empleado datos)
-    {
-    	 String rutaCompleta = "datos/empleados.csv";
-    	 
-    	 boolean archivoExiste = new File(rutaCompleta).exists();
-
-         List<String> nuevaFila = new ArrayList<>();
-         
-         nuevaFila.add(datos.getNombreUsuario());
-         nuevaFila.add(datos.getContrasena());
-         nuevaFila.add(datos.getNombre());
-         nuevaFila.add(datos.getCargo());
-         
-         
-
-         try (CSVWriter writer = new CSVWriter(new FileWriter(rutaCompleta, true))) {
-             if (archivoExiste==false) {
-                 String[] encabezados = {"Nombre Usuario", "Contrasena", "Nombre Completo", "Cargo"};
-                 writer.writeNext(encabezados);
-             }
-             writer.writeNext(nuevaFila.toArray(new String[0]));
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
-    }
     
     public boolean autenticarCliente(String nombreUsuario, String contrasena) {
     	String usuarioIngresado = nombreUsuario;
@@ -164,7 +119,7 @@ public class SistemaAlquiler {
 
     public void realizarReserva(String nombre, Scanner scanner) {
     	
-    	try (CSVReader reader = new CSVReader(new FileReader("datos/carros.csv"))) {
+    	try (CSVReader reader = new CSVReader(new FileReader("datos/vehiculos.csv"))) {
     		
     		String[] linea;
             boolean primeraLinea = true;
@@ -342,6 +297,48 @@ public class SistemaAlquiler {
 		
 	}
 
+
+
+	public void agregarReserva(String id, String categoria, String cliente, String sedeRecogida, String sedeEntrega,
+			String fechaRecogida, String fechaEntrega, double costoParcial, double costoTreinta) {
+		
+		Reserva nuevaReserva = new Reserva(id, categoria, cliente, sedeRecogida, sedeEntrega, fechaRecogida, fechaEntrega, costoParcial,costoTreinta);
+        reservas.add(nuevaReserva);
+	}
 	
+	public void agregarCliente(String nombreUsuario, String contrasena, String nombre, String numeroTelefonico,String correo,
+    		String fechaNacimiento, String nacionalidad,
+            String numeroLicencia, String paisExpedicionLicencia,
+            String fechaVencimientoLicencia, String datosTarjetaCredito) {
+		
+		Cliente cliente = new Cliente(nombreUsuario, contrasena, nombre, numeroTelefonico, correo, fechaNacimiento, nacionalidad, numeroLicencia, paisExpedicionLicencia, fechaVencimientoLicencia, datosTarjetaCredito);
+        clientes.add(cliente);
+	}
+
+
+	public List<Empleado> getEmpleados() {
+        List<Empleado> todosLosEmpleados = new ArrayList<>();
+        for (Sede sede : sedes) {
+            todosLosEmpleados.addAll(sede.getEmpleados());
+        }
+
+        return todosLosEmpleados;
+    }
+
+
+	public List<Cliente> getClientes() {
+	    List<Cliente> todosLosClientes = new ArrayList<>();
+
+	    for (Cliente cliente : clientes) {
+	        todosLosClientes.add(cliente);
+	    }
+
+	    return todosLosClientes;
+	}
+
+
+	public List<Reserva> getReservas() {
+        return reservas;
+    }
 
 }

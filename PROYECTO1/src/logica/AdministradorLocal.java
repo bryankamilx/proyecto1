@@ -1,7 +1,14 @@
 package logica;
 
 public class AdministradorLocal implements Usuario{
-	
+
+	public AdministradorLocal(String nombreUsuario, String contrasena, Sede sede) {
+		super();
+		this.nombreUsuario = nombreUsuario;
+		this.contrasena = contrasena;
+		this.sede = sede;
+	}
+
 	private String nombreUsuario;
     private String contrasena;
     private Sede sede;
@@ -18,5 +25,9 @@ public class AdministradorLocal implements Usuario{
 	
     public Sede getSede() {
 		return sede;
+	}
+    
+	public void setSede(Sede sede) {
+		this.sede = sede;
 	}
 }
