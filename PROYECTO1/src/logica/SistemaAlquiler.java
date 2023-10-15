@@ -269,6 +269,12 @@ public class SistemaAlquiler {
         }
 
     }
+    
+    public void completarAlquiler(String id, Scanner scanner) {
+    	
+    	Alquiler.completarAlquiler(id, scanner);
+    	
+    }
 
     public void realizarAlquiler(Cliente cliente, Vehiculo vehiculo, Sede sedeRecogida, Sede sedeEntrega,
                                   Date fechaRecogida, Date fechaEntrega, boolean seguroAdicional,

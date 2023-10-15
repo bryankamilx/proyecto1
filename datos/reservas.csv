@@ -1,4 +1,3 @@
-"Id reserva","Categoria escogida","Usuario del cliente","Sede de recogida","Sede de entrega","Fecha de inicio alquiler","Fecha fin alquiler","Costo sin adicionales"," Treinta por ciento costo"
-"11b10d05-8bf9-4358-8944-29aaae0a1002","PX - 4x4 especial automatico","x","Aeropuerto El Dorado","Aeropuerto El Dorado","2023-10-12 11:00","2023-10-16 11:00","1461800","438540.0"
-"f538b790-0ae8-4919-be5f-4ff02baad899","H -Ejecutivo automatico","z","Aeropuerto El Dorado","Aeropuerto El Dorado","2023-10-12 11:00","2023-10-13 11:00","235545","70663.5"
-"3c4cca3c-95fc-4152-bae3-cf197f9fc47f","FY -Intermedio hibrido ","x","Nuestro Bogota","Nuestro Bogota","2023-12-11 10:02","2023-12-19 10:02","1566184","469855.2"
+"Id reserva","Categoria escogida","Usuario del cliente","Sede de recogida","Sede de entrega","Fecha de inicio alquiler","Fecha fin alquiler","Dias facturados","Costo sin adicionales"," Treinta por ciento costo"
+"5ee536a3-5764-4633-a1f5-d6209d967489","PX - 4x4 especial automatico","x","Aeropuerto El Dorado","Aeropuerto El Dorado","2023-10-15 11:00","2023-10-20 11:00","5.0","1827250","548175.0"
+"a7f94403-04c7-4af1-969c-0fd08bce80de","VP -Pick up con aire plus","z","Aeropuerto El Dorado","Aeropuerto El Dorado","2023-11-12 13:00","2023-11-20 13:00","8.0","2442912","732873.6"

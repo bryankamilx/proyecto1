@@ -85,6 +85,7 @@ public class Reserva {
     	nuevaFila.add(ent);
     	nuevaFila.add(inicio);
     	nuevaFila.add(fin);
+    	nuevaFila.add(Double.toString(dias));
     	nuevaFila.add(Integer.toString(valorsinext));
     	nuevaFila.add(Double.toString(treinta));
     	
@@ -93,7 +94,7 @@ public class Reserva {
     	try (CSVWriter writer = new CSVWriter(new FileWriter(rutaCompleta, true))) {
             if (archivoExiste==false) {
                 String[] encabezados = {"Id reserva", "Categoria escogida", "Usuario del cliente", "Sede de recogida", "Sede de entrega",
-               		 "Fecha de inicio alquiler", "Fecha fin alquiler", "Costo sin adicionales", " Treinta por ciento costo"};
+               		 "Fecha de inicio alquiler", "Fecha fin alquiler","Dias facturados", "Costo sin adicionales", " Treinta por ciento costo"};
                 writer.writeNext(encabezados);
             }
             writer.writeNext(nuevaFila.toArray(new String[0]));
