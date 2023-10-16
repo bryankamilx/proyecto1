@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
@@ -319,5 +321,30 @@ public class Persistencia {
 	        e.printStackTrace();
 	    }
 	}
+	
+	 public static void escribirEventosVehiculos(SistemaAlquiler sistema, String rutaEventos) {
+	        try {
+	            FileWriter fileWriter = new FileWriter(rutaEventos);
+	            CSVWriter csvWriter = new CSVWriter(fileWriter);
+
+	            String[] header = {"placa", "evento"};
+	            csvWriter.writeNext(header);
+	            Map<String, List<String>> eventos = sistema.getEventosVehiculos();
+
+	            for (Map.Entry<String, List<String>> entry : eventos.entrySet()) {
+	                String placa = entry.getKey();
+	                List<String> eventosPlaca = entry.getValue();
+	                for (String evento : eventosPlaca) {
+	                    String[] data = {placa, evento};
+	                    csvWriter.writeNext(data);
+	                }
+	            }
+
+	            csvWriter.close();
+	            fileWriter.close();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	
 }

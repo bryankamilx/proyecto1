@@ -310,7 +310,8 @@ public class aplicacion {
             {
                 System.out.println("Indique la placa del carro que desea consultar: ");
                 String placa = scanner.nextLine();
-                
+                sistema.agregarEventoAlHistorial(placa, "Se consultó el estado de disponibilidad del auto con placa "+placa);
+                Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
                 String estado = logica.SistemaAlquiler.buscarDisponible(placa);
                 System.out.println(estado);
                 if (estado != "Placa no encontrada")
@@ -331,8 +332,8 @@ public class aplicacion {
                 		System.out.println("\n");
                 		
                 		System.out.println("Ahora el vehículo se encuentra en estado de Disponible.");
-                		
-                		
+                		sistema.agregarEventoAlHistorial(placa, "Se actualizo el estado del vechiculo con placa " + placa + " a disponible");
+                		Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
                 	}
                 	
                 	
@@ -347,7 +348,8 @@ public class aplicacion {
                 		System.out.println("\n");
                 		
                 		System.out.println("Ahora el vehículo se encuentra en estado de Alquilado.");
-                		
+                		sistema.agregarEventoAlHistorial(placa, "Se actualizo el estado del vechiculo con placa " + placa + " a alquilado");
+                		Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
 	                }
                 	
                 }
@@ -367,6 +369,8 @@ public class aplicacion {
             	{
 	                System.out.println("A continuación, explique brevemente el problema del vehículo.");
 	                String observacion = scanner.nextLine();
+	                sistema.agregarEventoAlHistorial(placa, "Se añadio la siguiente observacion al vehiculo con placa " + placa + ":" + observacion);
+	                Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
 	                System.out.println("\n");
 	        		
 	        		System.out.println("Según su criterio, ¿cuál será la fecha de reintegro del vehículo?");
@@ -383,6 +387,8 @@ public class aplicacion {
 	        		System.out.println("\n");
 	        		
 	        		System.out.println("Listo, el vehículo ahora se encuentra registrado como en mantenimiento.");
+	        		sistema.agregarEventoAlHistorial(placa, "Se actualizo el estado del vechiculo con placa " + placa + " a mantenimiento");
+	        		Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
             	}
             	else if (tema.equals("No"))
             	{
@@ -398,7 +404,8 @@ public class aplicacion {
                     System.out.println("\n");
             		
             		System.out.println("Listo, el vehículo ahora se encuentra disponible.");
-                    
+            		sistema.agregarEventoAlHistorial(placa, "Se actualizo el estado del vechiculo con placa " + placa + " a disponible");
+            		Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
             	}
             	else
             	{
@@ -468,7 +475,9 @@ public class aplicacion {
                 String tarifa = scanner.nextLine();
 
                 sistema.agregarVehiculo(placa, marca, modelo, color, transmision, categoria, estado, pasajeros, tarifa);
+                sistema.agregarEventoAlHistorial(placa, "Se anadio el vechiculo con placa " + placa + " al invetario.");
                 Persistencia.escribirVehiculos(sistema,"datos/vehiculos.csv");
+                Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
                 
             } else if (opcion == 2) {
                 
@@ -476,6 +485,8 @@ public class aplicacion {
                 String placaAEliminar = scanner.nextLine();
                 sistema.eliminarAuto(placaAEliminar);
                 Persistencia.escribirVehiculos(sistema,"datos/vehiculos.csv");
+                sistema.agregarEventoAlHistorial(placaAEliminar, "Se elimino el auto con placa " + placaAEliminar + " del invetario.");
+                Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
                 
             } else if (opcion == 3) {
                 ejecutarMenuSeguros(sistema);

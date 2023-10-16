@@ -1,3 +1,3 @@
-Tipo de seguro,Tarifa por dia ,Detalles 
-Seguro obligatorio,29000,"Con este seguro se puede incurrir en un pago de un deducible para cubrir una parte de los perjuicios ocasionados en los casos de siniestros (totales o parciales), por responsabilidad civil extracontractual, por daños o por hurto del vehículo. Esto incluye tambien gastos administrativos."
-Seguro proteccion total,61086,"Este seguro es una cobertura adicional que se puede tomar de acuerdo con los riesgos que se deseen asumir, cubre el 100% de la pérdida total o parcial del vehículo y sus partes por daño o hurto, salvo por los casos de uso indebido o dolo. Al adquirir esta protección, te evitas el pago de la participación obligatoria en caso de siniestro."
+"Nombre","Precio"
+"Seguro obligatorio","29000.0"
+"Seguro proteccion total","61086.0"

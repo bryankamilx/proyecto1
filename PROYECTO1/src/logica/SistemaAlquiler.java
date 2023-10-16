@@ -1,7 +1,9 @@
 package logica;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -29,8 +31,9 @@ public class SistemaAlquiler {
     private List<Sede> sedes;
     private List<Vehiculo> inventario;
     private List<Cliente> clientes;
-    private List<Reserva> reservas;
+	private List<Reserva> reservas;
     private List<Seguro> seguros;
+    private HashMap<String, List<String>> historialVehiculos;
 
     public SistemaAlquiler() {
     	List<Sede> sedes = new ArrayList<>();
@@ -38,12 +41,14 @@ public class SistemaAlquiler {
         List<Cliente> clientes = new ArrayList<>();
         List<Reserva> reservas = new ArrayList<>();
         List<Seguro> seguros = new ArrayList<>();
+        HashMap<String, List<String>> historialVehiculos = new HashMap<String, List<String>>();
     	
         this.sedes = sedes;
         this.inventario = inventario;
         this.clientes = clientes;
         this.reservas = reservas;
         this.seguros = seguros;
+        this.historialVehiculos = historialVehiculos;
     }
     
     
@@ -463,6 +468,28 @@ public class SistemaAlquiler {
 	        }
 	        return false; 
 	    }
+
+
+	 public void agregarEventoAlHistorial(String placaVehiculo, String evento) {
+	        if (historialVehiculos.containsKey(placaVehiculo)) {
+	            List<String> historial = historialVehiculos.get(placaVehiculo);
+	            historial.add(evento);
+	        } else {
+	            List<String> nuevoHistorial = new ArrayList<>();
+	            nuevoHistorial.add(evento);
+	            historialVehiculos.put(placaVehiculo, nuevoHistorial);
+	        }    
+	    }
+	 
+	 public HashMap<String, List<String>> getEventosVehiculos() {
+			return historialVehiculos;
+		}
+
+
+	public void setHistorialVehiculos(HashMap<String, List<String>> historialVehiculos) {
+		this.historialVehiculos = historialVehiculos;
+	}
+	 
 }
 
 
