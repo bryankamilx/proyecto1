@@ -152,14 +152,6 @@ public class Persistencia {
         }
     }
 
-	public void reescribirArchivos(SistemaAlquiler sistema, String rutaVehiculos, String rutaClientes, String rutaEmpleados, String rutaReservas, String rutaSeguros) {
-		
-		 escribirVehiculos(sistema, rutaVehiculos);
-		 escribirClientes(sistema, rutaClientes);
-		 escribirEmpleados(sistema, rutaEmpleados);
-//		 escribirReservas(sistema, rutaReservas);
-//		 escribirSeguros(sistema, rutaSeguros);
-	}
 
 	public static void escribirSeguros(SistemaAlquiler sistema, String rutaSeguros) {
         try {

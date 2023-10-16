@@ -119,7 +119,6 @@ public class Alquiler
             int indiceCostoTotal = 8;
             int indiceTreinta = 9;
 
-            //lectura reserva
             String[] fila;
             while ((fila = reader.readNext()) != null) {
                 String reservaId = fila[indiceId];
@@ -153,7 +152,6 @@ public class Alquiler
                     }
                     int valorTotal = ((Integer.parseInt(costo)-(int)Double.parseDouble(treinta))+(Integer.parseInt(seguro.get(1))*(int)Double.parseDouble(dias)));
                     
-                    //crear el archivo del alquiler con todo lo recolectado
                     String rutaCompleta = "datos/alquileres.csv";
                     boolean archivoExiste = new File(rutaCompleta).exists();
 

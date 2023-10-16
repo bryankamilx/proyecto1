@@ -450,6 +450,19 @@ public class SistemaAlquiler {
 			e.printStackTrace();
 		}
 	}
+
+
+	 public boolean autenticarEmpleado(String nombreUsuario, String contrasena) {
+	        for (Sede sede : sedes) {
+	            List<Empleado> empleadosSede = sede.getEmpleados();
+	            for (Empleado empleado : empleadosSede) {
+	                if (empleado.getNombreUsuario().equals(nombreUsuario) && empleado.getContrasena().equals(contrasena)) {
+	                    return true; 
+	                }
+	            }
+	        }
+	        return false; 
+	    }
 }
 
 

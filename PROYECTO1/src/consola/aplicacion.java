@@ -119,15 +119,14 @@ public class aplicacion {
                     System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
                 }
             } else if (opcion == 4) {
-                boolean autenticado = false;
-                while (!autenticado) {
+                boolean autenticado = false;               
                     System.out.print("Ingrese su nombre de usuario: ");
                     String nombreUsuario = scanner.nextLine();
                     System.out.print("Ingrese su contraseña: ");
                     String contrasena = scanner.nextLine();
+                    autenticado=sistema.autenticarEmpleado(nombreUsuario, contrasena);
 
-                    Empleado empleado = new Empleado(nombreUsuario,contrasena,"hola","vendedor",Null);
-					if (nombreUsuario.equals(empleado .getNombreUsuario()) && contrasena.equals(empleado.getContrasena())) {
+					if (autenticado) {
                         System.out.println("\nInicio de sesión exitoso como empleado.");
                         ejecutarMenuEmpleado(sistema, scanner);
                         autenticado = true;
@@ -135,7 +134,7 @@ public class aplicacion {
                         System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
                     }
                 }
-            } else if (opcion == 5) {
+            else if (opcion == 5) {
 
                 System.out.print("Nombre de usuario: ");
                 String nombreUsuario = scanner.nextLine();
