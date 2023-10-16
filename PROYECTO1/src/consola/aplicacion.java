@@ -46,20 +46,20 @@ public class aplicacion {
         
         Persistencia persistencia = new Persistencia();
         persistencia.cargarDatos(sistema, "datos/vehiculos.csv", "datos/clientes.csv", "datos/empleados.csv", "datos/reservas.csv", "datos/seguros.csv"); 
-        System.out.print("\nSE HAN CARGADO DATOS AUTOMATICAMENTE\nDEBE SALIR DE LA APLICACION PARA GUARDAR CAMBIOS\n");
+        System.out.print("\nSE HAN CARGADO DATOS AUTOMATICAMENTE\n");
         
         Scanner scanner = new Scanner(System.in);
         boolean salir = false;
 
         while (!salir) {
-            System.out.println("\nBienvenido al Sistema de Alquiler de Vehiculos");
+            System.out.println("\nBienvenido/a al Sistema de Alquiler de Vehiculos!");
             System.out.println("1. Iniciar sesion como cliente");
             System.out.println("2. Ingresar como administrador");
             System.out.println("3. Ingresar como administrador local");
             System.out.println("4. Iniciar sesion como empleado");
             System.out.println("5. Registrarse como cliente");
             System.out.println("6. Salir");
-            System.out.println("Seleccione una opcion: ");
+            System.out.println("Por favor seleccione una opcion: ");
 
             int opcion = scanner.nextInt();
             scanner.nextLine(); 
@@ -76,7 +76,9 @@ public class aplicacion {
                 
                 if (verif) {
                     ejecutarMenuCliente(nombreUsuario, sistema, scanner);
-                }
+            } else {
+                System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
+            }
                 
             } else if (opcion == 2) {
                 boolean autenticado = false;
@@ -134,7 +136,7 @@ public class aplicacion {
                     }
                 }
             } else if (opcion == 5) {
-                // Registro de nuevo cliente
+
                 System.out.print("Nombre de usuario: ");
                 String nombreUsuario = scanner.nextLine();
 
@@ -172,9 +174,9 @@ public class aplicacion {
 
                 sistema.agregarCliente(nombreUsuario, contrasena, nombre, numeroTelefonico, correo, fechaNacimiento, nacionalidad, numeroLicencia, paisExpedicionLicencia, fechaVencimientoLicencia, datosTarjetaCredito);
                 System.out.println("Su cuenta fue creada satisfactoriamente");
+                Persistencia.escribirClientes(sistema, "datos/clientes.csv");
             } else if (opcion == 6) {
                 System.out.println("Gracias por usar el Sistema de Alquiler de Vehiculos. Hasta luego!");
-                persistencia.reescribirArchivos(sistema, "datos/vehiculos.csv", "datos/clientes.csv", "datos/empleados.csv", "datos/reservas.csv", "datos/seguros.csv");
                 salir = true; 
             }else {
                 System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
@@ -222,6 +224,8 @@ public class aplicacion {
     	            Sede sedeActual = admiActual.getSede();
     	            
     	            sistema.crearEmpleado(nombreUsuario,contrasena,nombre,cargo,sedeActual);
+    	            Persistencia.escribirEmpleados(sistema, "datos/empleados.csv");
+    	            
     	        } else if (opcion == 3) {
     	            salir = true;
     	        } else {
@@ -239,7 +243,7 @@ public class aplicacion {
 
         while (!cl_aut)
         {
-            System.out.println("Bienvenido " + nombre);
+            System.out.println("Bienvenido/a " + nombre + "!");
             System.out.println("1. Realizar una reserva");
             System.out.println("2. Extender un alquiler");
             System.out.println("3. Salir del menu");
@@ -416,7 +420,7 @@ public class aplicacion {
             }
     }
 
-    private static void ejecutarMenuAdministrador(SistemaAlquiler sistema) {
+    private static void ejecutarMenuAdministrador(SistemaAlquiler sistema) throws CsvValidationException, NumberFormatException {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -465,17 +469,17 @@ public class aplicacion {
                 String tarifa = scanner.nextLine();
 
                 sistema.agregarVehiculo(placa, marca, modelo, color, transmision, categoria, estado, pasajeros, tarifa);
-
+                Persistencia.escribirVehiculos(sistema,"datos/vehiculos.csv");
+                
             } else if (opcion == 2) {
                 
                 System.out.print("Ingrese la placa del vehículo que desea eliminar: ");
                 String placaAEliminar = scanner.nextLine();
                 sistema.eliminarAuto(placaAEliminar);
-
+                Persistencia.escribirVehiculos(sistema,"datos/vehiculos.csv");
+                
             } else if (opcion == 3) {
-                
                 ejecutarMenuSeguros(sistema);
-                
             } else if (opcion == 4) {
                 salir = true;
             } else {
@@ -484,7 +488,7 @@ public class aplicacion {
         }
     }
 
-    private static void ejecutarMenuSeguros(SistemaAlquiler sistema) {
+    private static void ejecutarMenuSeguros(SistemaAlquiler sistema) throws CsvValidationException, NumberFormatException {
         
         Scanner scanner = new Scanner(System.in);
         
@@ -519,12 +523,16 @@ public class aplicacion {
                 double precioSeguro = scanner.nextInt();
                 scanner.nextLine();
                 sistema.agregarSeguro(nombreSeguro,precioSeguro);
+                Persistencia.escribirSeguros(sistema, "datos/seguros.csv");
+                
                 System.out.println("Nuevo seguro agregado con éxito.");
             } else if (opcionSeguros == 3) {
                 
                 System.out.print("Nombre del seguro a eliminar: ");
                 String nombreSeguroEliminar = scanner.nextLine();
                 boolean seguroEliminado = sistema.eliminarSeguro(nombreSeguroEliminar);
+                Persistencia.escribirSeguros(sistema, "datos/seguros.csv");
+                Persistencia.leerSeguros(sistema, "datos/seguros.csv");
                 if (seguroEliminado) {
                     System.out.println("Seguro eliminado con éxito.");
                 } else {

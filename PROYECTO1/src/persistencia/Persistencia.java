@@ -30,7 +30,7 @@ public class Persistencia {
 
 }
 
-	public void leerSeguros(SistemaAlquiler sistema, String rutaSeguros) throws CsvValidationException, NumberFormatException {
+	public static void leerSeguros(SistemaAlquiler sistema, String rutaSeguros) throws CsvValidationException, NumberFormatException {
 	    try {
 	        CSVReader csvReader = new CSVReaderBuilder(new FileReader(rutaSeguros))
 	            .withSkipLines(1)
@@ -47,7 +47,7 @@ public class Persistencia {
 	}
 
 
-	public void leerReservas(SistemaAlquiler sistema, String rutaReservas) throws CsvValidationException {
+	public static void leerReservas(SistemaAlquiler sistema, String rutaReservas) throws CsvValidationException {
 	    try {
 	        CSVReader csvReader = new CSVReaderBuilder(new FileReader(rutaReservas))
 	            .withSkipLines(1)
@@ -70,7 +70,7 @@ public class Persistencia {
 	    }
 	}
 
-	public void leerEmpleados(SistemaAlquiler sistema, String rutaEmpleados) {
+	public static void leerEmpleados(SistemaAlquiler sistema, String rutaEmpleados) {
 	    try {
 	        CSVReader csvReader = new CSVReaderBuilder(new FileReader(rutaEmpleados))
 	            .withSkipLines(1)
@@ -104,7 +104,7 @@ public class Persistencia {
 	    }
 	}
 
-	public void leerClientes(SistemaAlquiler sistema, String rutaClientes) throws CsvValidationException {
+	public static void leerClientes(SistemaAlquiler sistema, String rutaClientes) throws CsvValidationException {
 	    try {
 	        CSVReader csvReader = new CSVReaderBuilder(new FileReader(rutaClientes))
 	            .withSkipLines(1)
@@ -129,7 +129,7 @@ public class Persistencia {
 	    }
 	}
 
-	public void leerVehiculos(SistemaAlquiler sistema, String rutaVehiculos) {
+	public static void leerVehiculos(SistemaAlquiler sistema, String rutaVehiculos) {
         try {
             CSVReader csvReader = new CSVReaderBuilder(new FileReader(rutaVehiculos))
                 .withSkipLines(1)
@@ -161,7 +161,7 @@ public class Persistencia {
 //		 escribirSeguros(sistema, rutaSeguros);
 	}
 
-	public void escribirSeguros(SistemaAlquiler sistema, String rutaSeguros) {
+	public static void escribirSeguros(SistemaAlquiler sistema, String rutaSeguros) {
         try {
             FileWriter fileWriter = new FileWriter(rutaSeguros);
             CSVWriter csvWriter = new CSVWriter(fileWriter);
@@ -185,7 +185,7 @@ public class Persistencia {
         }
     }
 
-	public void escribirReservas(SistemaAlquiler sistema, String rutaReservas) {
+	public static void escribirReservas(SistemaAlquiler sistema, String rutaReservas) {
 	        try {
 
 	            FileWriter fileWriter = new FileWriter(rutaReservas);
@@ -224,7 +224,7 @@ public class Persistencia {
 	        }
 	    }
 
-	public void escribirClientes(SistemaAlquiler sistema, String rutaClientes) {
+	public static void escribirClientes(SistemaAlquiler sistema, String rutaClientes) {
 	    try {
 
 	        FileWriter fileWriter = new FileWriter(rutaClientes);
@@ -262,7 +262,7 @@ public class Persistencia {
 	    }
 	}
 
-	public void escribirEmpleados(SistemaAlquiler sistema, String rutaEmpleados) {
+	public static void escribirEmpleados(SistemaAlquiler sistema, String rutaEmpleados) {
     try {
 
         FileWriter fileWriter = new FileWriter(rutaEmpleados);
@@ -292,7 +292,7 @@ public class Persistencia {
     }
 }
 
-	private void escribirVehiculos(SistemaAlquiler sistema, String rutaVehiculos) {
+	public static void escribirVehiculos(SistemaAlquiler sistema, String rutaVehiculos) {
 		try {
 
 	        FileWriter fileWriter = new FileWriter(rutaVehiculos);

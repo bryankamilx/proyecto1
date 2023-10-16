@@ -66,34 +66,12 @@ public class SistemaAlquiler {
     
     
     public boolean autenticarCliente(String nombreUsuario, String contrasena) {
-    	String usuarioIngresado = nombreUsuario;
-        String contrasenaIngresada = contrasena;
-        boolean bandera = false;
-
-        try (CSVReader reader = new CSVReader(new FileReader("datos/clientes.csv"))) {
-            
-            int indiceUsuario = 0;
-            int indiceContrasena = 1;
-
-            String[] fila;
-            while ((fila = reader.readNext()) != null) {
-                String usuarioEnArchivo = fila[indiceUsuario];
-                String contrasenaEnArchivo = fila[indiceContrasena];
-
-                if (usuarioEnArchivo.equals(usuarioIngresado) && contrasenaEnArchivo.equals(contrasenaIngresada)) {
-                    System.out.println("Autenticacion exitosa.");
-                    bandera = true;
-                    return bandera;
-                    
-                }
+        for (Cliente cliente : clientes) {
+            if (cliente.getNombreUsuario().equals(nombreUsuario) && cliente.getContrasena().equals(contrasena)) {
+                return true; 
             }
-            if (bandera==false) {	
-            System.out.println("Nombre de usuario o contrasena incorrectos.");
-            return bandera;}
-        } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
         }
-        return bandera;
+        return false; 
     }
 
 
@@ -305,6 +283,7 @@ public class SistemaAlquiler {
 		Empleado nuevoEmpleado = new Empleado(nombreUsuario,contrasena,nombre,cargo,sede);
 		sede.agregarEmpleado(nuevoEmpleado);
 		
+		
 	}
 
 
@@ -355,7 +334,7 @@ public class SistemaAlquiler {
 	//FUNCIONES PARA EMPLEADO "NO SE DONDE PONERLAS"
 	public static String buscarDisponible (String plaquita)
 	{
-		String csvFilePath = "./datos/carros.csv";
+		String csvFilePath = "./datos/vehiculos.csv";
 		
 		String respuesta = "Placa no encontrada";
 	    
@@ -391,7 +370,7 @@ public class SistemaAlquiler {
 
 	public static void cambiarEstado(String plaquita, String estatus) 
 	{
-		String csvFilePath = "./datos/carros.csv";
+		String csvFilePath = "./datos/vehiculos.csv";
 		
 		List<String> lineas = new ArrayList<>();
 		
@@ -433,7 +412,7 @@ public class SistemaAlquiler {
 		String respuesta = observacion + " " + "/" +" "+ fecha;
 		cambiarEstado(plaquita, estatus);
 		
-		String csvFilePath = "./datos/carros.csv";
+		String csvFilePath = "./datos/vehiculos.csv";
 		List<String> lineas = new ArrayList<>();
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath)))
         {
