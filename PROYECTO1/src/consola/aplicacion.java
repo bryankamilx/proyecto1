@@ -14,6 +14,7 @@ import logica.Administrador;
 import logica.AdministradorLocal;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.text.ParseException;
@@ -437,7 +438,8 @@ public class aplicacion {
             System.out.println("1. Registrar compra de nuevos vehículos");
             System.out.println("2. Dar de baja un vehículo");
             System.out.println("3. Configurar seguros");
-            System.out.println("4. Salir del menú de administrador\n");
+            System.out.println("4. Generar un archivo de log con historial de un vehiculo");
+            System.out.println("5. Salir del menú de administrador\n");
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
@@ -491,8 +493,13 @@ public class aplicacion {
             } else if (opcion == 3) {
                 ejecutarMenuSeguros(sistema);
             } else if (opcion == 4) {
+            	System.out.print("Digite la placa del vehiculo a consultar: ");
+                String placa = scanner.nextLine();
+                List<String> eventosAuto = sistema.buscarEventosPorPlaca(placa);
+                Persistencia.archivoLog(eventosAuto,"datos");
+            } else if (opcion == 5) {
                 salir = true;
-            } else {
+            }else {
                 System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
             }
         }

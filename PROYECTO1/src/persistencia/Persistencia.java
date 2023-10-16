@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -346,5 +347,26 @@ public class Persistencia {
 	            e.printStackTrace();
 	        }
 	    }
+
+	 public static void archivoLog(List<String> eventos, String rutaDirectorio) {
+		    try {
+		        String rutaArchivo = rutaDirectorio + File.separator + "archivoLog.csv";
+		        FileWriter fileWriter = new FileWriter(rutaArchivo);
+		        CSVWriter csvWriter = new CSVWriter(fileWriter);
+		        
+		        String[] header = {"eventos"};
+		        csvWriter.writeNext(header);
+
+		        for (String evento : eventos) {
+		            String[] data = {evento};
+		            csvWriter.writeNext(data);
+		        }
+
+		        csvWriter.close();
+		        fileWriter.close();
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		}
 	
 }

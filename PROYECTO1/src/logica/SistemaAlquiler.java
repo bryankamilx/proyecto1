@@ -489,6 +489,15 @@ public class SistemaAlquiler {
 	public void setHistorialVehiculos(HashMap<String, List<String>> historialVehiculos) {
 		this.historialVehiculos = historialVehiculos;
 	}
+
+
+	 public List<String> buscarEventosPorPlaca(String placa) {
+	        if (historialVehiculos.containsKey(placa)) {
+	            return historialVehiculos.get(placa);
+	        } else {
+	            return new ArrayList<>();
+	        }
+	    }
 	 
 }
 
