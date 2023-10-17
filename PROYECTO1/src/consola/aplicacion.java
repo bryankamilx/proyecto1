@@ -159,13 +159,13 @@ public class aplicacion {
                 System.out.print("Nacionalidad: ");
                 String nacionalidad = scanner.nextLine();
 
-                System.out.print("Numero de la licencia de conducción: ");
+                System.out.print("Numero de la licencia de conduccion: ");
                 String numeroLicencia = scanner.nextLine();
 
-                System.out.print("Pais de expedicion de la licencia de conducción: ");
+                System.out.print("Pais de expedicion de la licencia de conduccion: ");
                 String paisExpedicionLicencia = scanner.nextLine();
 
-                System.out.print("Fecha de vencimiento de la licencia de conducción (yyyy-MM-dd): ");
+                System.out.print("Fecha de vencimiento de la licencia de conduccion (yyyy-MM-dd): ");
                 String fechavl = scanner.nextLine();
                 String fechaVencimientoLicencia = fechavl;
 
@@ -245,8 +245,7 @@ public class aplicacion {
         {
             System.out.println("Bienvenido/a " + nombre + "!");
             System.out.println("1. Realizar una reserva");
-            System.out.println("2. Extender un alquiler");
-            System.out.println("3. Salir del menu");
+            System.out.println("2. Salir del menu");
             System.out.print("Seleccione una opcion: ");
 
             int opcion = scanner.nextInt();
@@ -256,10 +255,7 @@ public class aplicacion {
             {
                 sistema.realizarReserva(nombre, scanner);
             }
-            else if (opcion == 2 ) {
-                // Hacer la extensión revisando la disponibilidad de vehículos.
-            }
-            else if (opcion == 3 ) 
+            else if (opcion == 2 ) 
             {
                 cl_aut = true;
             }
@@ -285,11 +281,9 @@ public class aplicacion {
             System.out.println("\n");
             
             System.out.println("1. Completar alquiler de reserva previa");
-            System.out.println("2. Hacer alquiler sin reserva previa");
-            System.out.println("3. Actualizar estado de un vehículo");
-            System.out.println("4. Reportar mantenimiento de vehículo y reportar fecha de disponibilidad");
-            System.out.println("5. Gestionar procesos de vehiculos");
-            System.out.println("6. Salir del menu");
+            System.out.println("2. Actualizar estado de un vehículo");
+            System.out.println("3. Reportar mantenimiento de vehículo y reportar fecha de disponibilidad");
+            System.out.println("4. Salir del menu");
             System.out.println("\n");
             
             System.out.print("Seleccione una opcion: ");
@@ -304,10 +298,6 @@ public class aplicacion {
                 sistema.completarAlquiler(id, scanner);
             }
             else if (opcion == 2) 
-            {
-                
-            }
-            if (opcion == 3) 
             {
                 System.out.println("Indique la placa del carro que desea consultar: ");
                 String placa = scanner.nextLine();
@@ -358,7 +348,7 @@ public class aplicacion {
             }
                 
 
-            else if (opcion == 4) 
+            else if (opcion == 3) 
             {
             	System.out.println("Indique la placa del carro que desea consultar: ");
                 String placa = scanner.nextLine();
@@ -414,10 +404,8 @@ public class aplicacion {
             	}
             }
 
-            else if (opcion == 5 ) {
-                // Terminar método de gestionar procesos.
-            }
-            else if (opcion == 6 ) {
+       
+            else if (opcion == 4 ) {
                 cl_aut = true;
             }
             else 
@@ -538,8 +526,10 @@ public class aplicacion {
                 String nombreSeguro = scanner.nextLine();
                 System.out.print("Precio del nuevo seguro: ");
                 double precioSeguro = scanner.nextInt();
+                System.out.print("Detalles del nuevo seguro: ");
+                String detallesSeguro = scanner.nextLine();
                 scanner.nextLine();
-                sistema.agregarSeguro(nombreSeguro,precioSeguro);
+                sistema.agregarSeguro(nombreSeguro,precioSeguro,detallesSeguro);
                 Persistencia.escribirSeguros(sistema, "datos/seguros.csv");
                 
                 System.out.println("Nuevo seguro agregado con éxito.");

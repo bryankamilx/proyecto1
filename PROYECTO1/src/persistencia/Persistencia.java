@@ -42,7 +42,8 @@ public class Persistencia {
 	        while ((linea = csvReader.readNext()) != null) {
 	            String nombre = linea[0];
 	            double precio = Double.parseDouble(linea[1]);
-	            sistema.agregarSeguro(nombre, precio);
+	            String detalles = linea[2];
+	            sistema.agregarSeguro(nombre, precio, detalles);
 	        }
 	    } catch (IOException e) {
 	        e.printStackTrace();
@@ -160,7 +161,7 @@ public class Persistencia {
         try {
             FileWriter fileWriter = new FileWriter(rutaSeguros);
             CSVWriter csvWriter = new CSVWriter(fileWriter);
-            String[] header = {"Nombre", "Precio"};
+            String[] header = {"Nombre", "Precio", "Detalles"};
             csvWriter.writeNext(header);
 
             List<Seguro> seguros = sistema.getSeguros(); 
@@ -168,8 +169,9 @@ public class Persistencia {
             for (Seguro seguro : seguros) {
                 String nombre = seguro.getNombre();
                 double precio = seguro.getPrecio();
+                String detalles = seguro.getDetalles();
 
-                String[] data = {nombre, Double.toString(precio)};
+                String[] data = {nombre, Double.toString(precio), detalles};
                 csvWriter.writeNext(data);
             }
 

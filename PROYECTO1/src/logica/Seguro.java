@@ -13,11 +13,25 @@ public class Seguro {
 	
 	private String nombre;
 	private double precio;
+	private String detalles;
 	
-	public Seguro(String nombre, double precio) {
+	public Seguro(String nombre, double precio, String detalles) {
 		super();
 		this.nombre = nombre;
 		this.precio = precio;
+		this.detalles = detalles;
+	}
+	
+	
+
+	public String getDetalles()
+	{
+		return detalles;
+	}
+
+	public void setDetalles(String detalles)
+	{
+		this.detalles = detalles;
 	}
 
 	public String getNombre() {

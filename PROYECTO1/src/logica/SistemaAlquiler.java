@@ -236,8 +236,8 @@ public class SistemaAlquiler {
 		return seguros;
 	}
 
-	public void agregarSeguro(String nombreSeguro, double precioSeguro) {
-		Seguro nuevoSeguro = new Seguro(nombreSeguro, precioSeguro);
+	public void agregarSeguro(String nombreSeguro, double precioSeguro, String detalles) {
+		Seguro nuevoSeguro = new Seguro(nombreSeguro, precioSeguro, detalles);
         seguros.add(nuevoSeguro);
 	}
 	
