@@ -76,7 +76,7 @@ public class aplicacion {
                 boolean verif = sistema.autenticarCliente(nombreUsuario, contrasena);
                 
                 if (verif) {
-                    ejecutarMenuCliente(nombreUsuario, sistema, scanner);
+                    cCliente.ejecutarMenuCliente(nombreUsuario, sistema, scanner);
             } else {
                 System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
             }
@@ -91,7 +91,7 @@ public class aplicacion {
 
                     if (nombreUsuario.equals(administrador.getNombreUsuario()) && contrasena.equals(administrador.getContrasena())) {
                         System.out.println("\nInicio de sesión exitoso como administrador.");
-                        ejecutarMenuAdministrador(sistema);
+						cAdmi.ejecutarMenuAdministrador(sistema);
                         autenticado = true;
                     } else {
                         System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
@@ -105,19 +105,22 @@ public class aplicacion {
 
                 List<AdministradorLocal> administradoresLocales = sistema.getAdministradoresLocales();
                 AdministradorLocal admiActual = null;
+                boolean autenticado = false;
 
                 for (AdministradorLocal adminLocal : administradoresLocales) {
                     if (nombreUsuario.equals(adminLocal.getNombreUsuario()) && contrasena.equals(adminLocal.getContrasena())) {
                         admiActual = adminLocal;
+                        autenticado = true;
                         System.out.println("\nInicio de sesión exitoso como administrador local.");
-                        break; 
                     }
                 }
 
-                if (admiActual != null) {
-                    ejecutarMenuAdministradorLocal(sistema, scanner, admiActual);
-                } else {
+                if (!autenticado) {
                     System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
+                }
+
+                if (admiActual != null) {
+                    cAdmiLocal.ejecutarMenuAdministradorLocal(sistema, scanner, admiActual);
                 }
             } else if (opcion == 4) {
                 boolean autenticado = false;               
@@ -129,52 +132,16 @@ public class aplicacion {
 
 					if (autenticado) {
                         System.out.println("\nInicio de sesión exitoso como empleado.");
-                        ejecutarMenuEmpleado(sistema, scanner);
+                        cEmpleado.ejecutarMenuEmpleado(sistema, scanner);
                         autenticado = true;
                     } else {
                         System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
                     }
                 }
             else if (opcion == 5) {
+            	
+            	cCliente.crearCliente(sistema,scanner);
 
-                System.out.print("Nombre de usuario: ");
-                String nombreUsuario = scanner.nextLine();
-
-                System.out.print("Contraseña: ");
-                String contrasena = scanner.nextLine();
-
-                System.out.print("Nombre: ");
-                String nombre = scanner.nextLine();
-
-                System.out.print("Numero telefonico: ");
-                String numeroTelefonico = scanner.nextLine();
-
-                System.out.print("Correo electronico: ");
-                String correo = scanner.nextLine();
-
-                System.out.print("Fecha de nacimiento (yyyy-MM-dd): ");
-                String fechaNacimientoStr = scanner.nextLine();
-                String fechaNacimiento = fechaNacimientoStr;
-
-                System.out.print("Nacionalidad: ");
-                String nacionalidad = scanner.nextLine();
-
-                System.out.print("Numero de la licencia de conduccion: ");
-                String numeroLicencia = scanner.nextLine();
-
-                System.out.print("Pais de expedicion de la licencia de conduccion: ");
-                String paisExpedicionLicencia = scanner.nextLine();
-
-                System.out.print("Fecha de vencimiento de la licencia de conduccion (yyyy-MM-dd): ");
-                String fechavl = scanner.nextLine();
-                String fechaVencimientoLicencia = fechavl;
-
-                System.out.print("Datos de la tarjeta de credito (numero-cvv-MM/yyyy): ");
-                String datosTarjetaCredito = scanner.nextLine();
-
-                sistema.agregarCliente(nombreUsuario, contrasena, nombre, numeroTelefonico, correo, fechaNacimiento, nacionalidad, numeroLicencia, paisExpedicionLicencia, fechaVencimientoLicencia, datosTarjetaCredito);
-                System.out.println("Su cuenta fue creada satisfactoriamente");
-                Persistencia.escribirClientes(sistema, "datos/clientes.csv");
             } else if (opcion == 6) {
                 System.out.println("Gracias por usar el Sistema de Alquiler de Vehiculos. Hasta luego!");
                 salir = true; 
@@ -186,370 +153,4 @@ public class aplicacion {
         scanner.close();
     }
 
-    private static void ejecutarMenuAdministradorLocal(SistemaAlquiler sistema, Scanner scanner, AdministradorLocal admiActual) {
-		
-    	 boolean salir = false;
-
-    	    while (!salir) {
-    	        System.out.println("\nMenú del Administrador Local");
-    	        System.out.println("1. Ver lista de empleados de su sede");
-    	        System.out.println("2. Crear un nuevo empleado para su sede");
-    	        System.out.println("3. Salir del menú del Administrador Local");
-    	        System.out.print("Seleccione una opción: ");
-
-    	        int opcion = scanner.nextInt();
-    	        scanner.nextLine();
-
-    	        if (opcion == 1) {
-    	            System.out.println("Lista de empleados de su sede:");
-    	            List<Empleado> empleadosDeSede = sistema.getEmpleadosPorSede(admiActual.getSede());
-    	            for (Empleado empleado : empleadosDeSede) {
-    	                System.out.println("Nombre: " + empleado.getNombre());
-    	            }
-    	        } else if (opcion == 2) {
-
-    	            System.out.println("Creación de un nuevo empleado");
-    	            System.out.print("Nombre de usuario: ");
-    	            String nombreUsuario = scanner.nextLine();
-
-    	            System.out.print("Contraseña: ");
-    	            String contrasena = scanner.nextLine();
-
-    	            System.out.print("Nombre: ");
-    	            String nombre = scanner.nextLine();
-
-    	            System.out.print("Cargo: ");
-    	            String cargo = scanner.nextLine();
-    	            
-    	            Sede sedeActual = admiActual.getSede();
-    	            
-    	            sistema.crearEmpleado(nombreUsuario,contrasena,nombre,cargo,sedeActual);
-    	            Persistencia.escribirEmpleados(sistema, "datos/empleados.csv");
-    	            
-    	        } else if (opcion == 3) {
-    	            salir = true;
-    	        } else {
-    	            System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
-    	        }
-    	    }
-    	}
-	
-    	
-	
-
-	private static void ejecutarMenuCliente(String nombre, SistemaAlquiler sistema, Scanner scanner) 
-    {
-        boolean cl_aut = false;
-
-        while (!cl_aut)
-        {
-            System.out.println("Bienvenido/a " + nombre + "!");
-            System.out.println("1. Realizar una reserva");
-            System.out.println("2. Salir del menu");
-            System.out.print("Seleccione una opcion: ");
-
-            int opcion = scanner.nextInt();
-            scanner.nextLine();
-
-            if (opcion == 1) 
-            {
-                sistema.realizarReserva(nombre, scanner);
-            }
-            else if (opcion == 2 ) 
-            {
-                cl_aut = true;
-            }
-            else 
-            {
-                System.out.println("Opcion no valida. Por favor, seleccione una opcion valida.");
-            }
-        }
-    }
-
-    private static void ejecutarMenuEmpleado(SistemaAlquiler sistema, Scanner scanner) 
-    {
-        boolean cl_aut = false;
-
-        while (!cl_aut)
-        {
-            System.out.println("Bienvenido empleado.");
-            
-            System.out.println("\n");
-            
-            System.out.println("Que desea hacer?");
-            
-            System.out.println("\n");
-            
-            System.out.println("1. Completar alquiler de reserva previa");
-            System.out.println("2. Actualizar estado de un vehículo");
-            System.out.println("3. Reportar mantenimiento de vehículo y reportar fecha de disponibilidad");
-            System.out.println("4. Salir del menu");
-            System.out.println("\n");
-            
-            System.out.print("Seleccione una opcion: ");
-            
-            int opcion = scanner.nextInt();
-            scanner.nextLine();
-            
-            if (opcion == 1) 
-            {
-            	System.out.println("Id de la reserva: ");
-                String id = scanner.nextLine();
-                sistema.completarAlquiler(id, scanner);
-            }
-            else if (opcion == 2) 
-            {
-                System.out.println("Indique la placa del carro que desea consultar: ");
-                String placa = scanner.nextLine();
-                sistema.agregarEventoAlHistorial(placa, "Se consultó el estado de disponibilidad del auto con placa "+placa);
-                Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
-                String estado = logica.SistemaAlquiler.buscarDisponible(placa);
-                System.out.println(estado);
-                if (estado != "Placa no encontrada")
-                {
-                	System.out.println("El vehículo de placa " + placa  + " se encuentra en el siguiente estado: " + estado);
-                	
-                	
-                	System.out.println("Desea actualizar su estado a (1) = Disponible o (2) = Alquilado");
-                	int respuesta = scanner.nextInt();
-                	
-                	//DISPONIBLE
-                	if (respuesta == 1)
-                	{
-                		String estatus = "Disponible";
-                		logica.SistemaAlquiler.cambiarEstado(placa, estatus);
-                		
-                		System.out.println("\n");
-                		System.out.println("\n");
-                		
-                		System.out.println("Ahora el vehículo se encuentra en estado de Disponible.");
-                		sistema.agregarEventoAlHistorial(placa, "Se actualizo el estado del vechiculo con placa " + placa + " a disponible");
-                		Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
-                	}
-                	
-                	
-                
-	                else if (respuesta == 2) 
-	                {
-	                	
-	                	String estatus = "Alquilado";
-                		logica.SistemaAlquiler.cambiarEstado(placa, estatus);
-                		
-                		System.out.println("\n");
-                		System.out.println("\n");
-                		
-                		System.out.println("Ahora el vehículo se encuentra en estado de Alquilado.");
-                		sistema.agregarEventoAlHistorial(placa, "Se actualizo el estado del vechiculo con placa " + placa + " a alquilado");
-                		Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
-	                }
-                	
-                }
-                
-            }
-                
-
-            else if (opcion == 3) 
-            {
-            	System.out.println("Indique la placa del carro que desea consultar: ");
-                String placa = scanner.nextLine();
-                
-                System.out.println("¿Desea (Si) = registrar en vehículo en mantenimiento e (No) = retirarlo?");
-            	String tema = scanner.nextLine();
-            	
-            	if(tema.equals("Si"))
-            	{
-	                System.out.println("A continuación, explique brevemente el problema del vehículo.");
-	                String observacion = scanner.nextLine();
-	                sistema.agregarEventoAlHistorial(placa, "Se añadio la siguiente observacion al vehiculo con placa " + placa + ":" + observacion);
-	                Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
-	                System.out.println("\n");
-	        		
-	        		System.out.println("Según su criterio, ¿cuál será la fecha de reintegro del vehículo?");
-	        		
-	        		System.out.println("\n");
-	        		System.out.println("Entiendase reintegro como el momento en el que el carro volverá a estar disponible.");
-	        		String fecha = scanner.nextLine();
-	        		
-	        		String estado = "Mantenimiento";
-	        		
-	        		logica.SistemaAlquiler.cambiarMantenimiento(placa, estado, observacion, fecha);
-	        		
-	        		System.out.println("\n");
-	        		System.out.println("\n");
-	        		
-	        		System.out.println("Listo, el vehículo ahora se encuentra registrado como en mantenimiento.");
-	        		sistema.agregarEventoAlHistorial(placa, "Se actualizo el estado del vechiculo con placa " + placa + " a mantenimiento");
-	        		Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
-            	}
-            	else if (tema.equals("No"))
-            	{
-            	                    
-                    String estatus = "Disponible";
-                    
-                    String observacion = "";
-                    
-                    String fecha = "";
-                    
-                    logica.SistemaAlquiler.cambiarMantenimiento(placa, estatus, observacion, fecha);
-                    
-                    System.out.println("\n");
-            		
-            		System.out.println("Listo, el vehículo ahora se encuentra disponible.");
-            		sistema.agregarEventoAlHistorial(placa, "Se actualizo el estado del vechiculo con placa " + placa + " a disponible");
-            		Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
-            	}
-            	else
-            	{
-            		System.out.println("No escogió una opción valida. Vuelva a realizar el proceso.");
-            	}
-            }
-
-       
-            else if (opcion == 4 ) {
-                cl_aut = true;
-            }
-            else 
-            {
-                System.out.println("Opcion no valida. Por favor, seleccione una opcion valida.");
-            }
-            }
-    }
-
-    private static void ejecutarMenuAdministrador(SistemaAlquiler sistema) throws CsvValidationException, NumberFormatException {
-
-        Scanner scanner = new Scanner(System.in);
-
-        boolean salir = false;
-        while (!salir) {
-            System.out.println("\nBienvenido administrador");
-
-            System.out.println("1. Registrar compra de nuevos vehículos");
-            System.out.println("2. Dar de baja un vehículo");
-            System.out.println("3. Configurar seguros");
-            System.out.println("4. Generar un archivo de log con historial de un vehiculo");
-            System.out.println("5. Salir del menú de administrador\n");
-            System.out.print("Seleccione una opción: ");
-
-            int opcion = scanner.nextInt();
-            scanner.nextLine();
-
-            if (opcion == 1) {
-
-                System.out.println("Ingrese los detalles del nuevo vehículo:\n");
-
-                System.out.print("Placa: ");
-                String placa = scanner.nextLine();
-
-                System.out.print("Marca: ");
-                String marca = scanner.nextLine();
-
-                System.out.print("Modelo: ");
-                String modelo = scanner.nextLine();
-
-                System.out.print("Color: ");
-                String color = scanner.nextLine();
-
-                System.out.print("Transmisión: ");
-                String transmision = scanner.nextLine();
-
-                System.out.print("Categoría: ");
-                String categoria = scanner.nextLine();
-
-                System.out.print("Estado: ");
-                String estado = scanner.nextLine();
-
-                System.out.print("Pasajeros: ");
-                String pasajeros = scanner.nextLine();
-
-                System.out.print("Tarifa: ");
-                String tarifa = scanner.nextLine();
-
-                sistema.agregarVehiculo(placa, marca, modelo, color, transmision, categoria, estado, pasajeros, tarifa);
-                sistema.agregarEventoAlHistorial(placa, "Se anadio el vechiculo con placa " + placa + " al invetario.");
-                Persistencia.escribirVehiculos(sistema,"datos/vehiculos.csv");
-                Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
-                
-            } else if (opcion == 2) {
-                
-                System.out.print("Ingrese la placa del vehículo que desea eliminar: ");
-                String placaAEliminar = scanner.nextLine();
-                sistema.eliminarAuto(placaAEliminar);
-                Persistencia.escribirVehiculos(sistema,"datos/vehiculos.csv");
-                sistema.agregarEventoAlHistorial(placaAEliminar, "Se elimino el auto con placa " + placaAEliminar + " del invetario.");
-                Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
-                
-            } else if (opcion == 3) {
-                ejecutarMenuSeguros(sistema);
-            } else if (opcion == 4) {
-            	System.out.print("Digite la placa del vehiculo a consultar: ");
-                String placa = scanner.nextLine();
-                List<String> eventosAuto = sistema.buscarEventosPorPlaca(placa);
-                Persistencia.archivoLog(eventosAuto,"datos");
-            } else if (opcion == 5) {
-                salir = true;
-            }else {
-                System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
-            }
-        }
-    }
-
-    private static void ejecutarMenuSeguros(SistemaAlquiler sistema) throws CsvValidationException, NumberFormatException {
-        
-        Scanner scanner = new Scanner(System.in);
-        
-        boolean salirSeguros = false;
-
-        while (!salirSeguros) {
-            System.out.println("\nGestión de Seguros");
-            System.out.println("1. Ver seguros actuales");
-            System.out.println("2. Agregar nuevo seguro");
-            System.out.println("3. Eliminar seguro");
-            System.out.println("4. Volver al menú principal\n");
-            System.out.println("Seleccione una opción: ");
-
-            int opcionSeguros = scanner.nextInt();
-            scanner.nextLine();
-
-            if (opcionSeguros == 1) {
-                
-                if (sistema.getSeguros().isEmpty()) {
-                    System.out.println("No hay seguros registrados en el sistema.");
-                } else {
-                    System.out.println("Lista de seguros:");
-                    for (Seguro seguro : sistema.getSeguros()) {
-                        System.out.println("Nombre: " + seguro.getNombre() + ", Precio: " + seguro.getPrecio());
-                    }
-                }
-            } else if (opcionSeguros == 2) {
-                
-                System.out.print("Nombre del nuevo seguro: ");
-                String nombreSeguro = scanner.nextLine();
-                System.out.print("Precio del nuevo seguro: ");
-                double precioSeguro = scanner.nextInt();
-                System.out.print("Detalles del nuevo seguro: ");
-                String detallesSeguro = scanner.nextLine();
-                scanner.nextLine();
-                sistema.agregarSeguro(nombreSeguro,precioSeguro,detallesSeguro);
-                Persistencia.escribirSeguros(sistema, "datos/seguros.csv");
-                
-                System.out.println("Nuevo seguro agregado con éxito.");
-            } else if (opcionSeguros == 3) {
-                
-                System.out.print("Nombre del seguro a eliminar: ");
-                String nombreSeguroEliminar = scanner.nextLine();
-                boolean seguroEliminado = sistema.eliminarSeguro(nombreSeguroEliminar);
-                Persistencia.escribirSeguros(sistema, "datos/seguros.csv");
-                Persistencia.leerSeguros(sistema, "datos/seguros.csv");
-                if (seguroEliminado) {
-                    System.out.println("Seguro eliminado con éxito.");
-                } else {
-                    System.out.println("No se encontró un seguro con ese nombre.");
-                }
-            } else if (opcionSeguros == 4) {
-                salirSeguros = true; 
-            } else {
-                System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
-            }
-        }
-    }
 }
