@@ -1,4 +1,4 @@
-package consola;
+package interfaz;
 
 import java.util.Scanner;
 

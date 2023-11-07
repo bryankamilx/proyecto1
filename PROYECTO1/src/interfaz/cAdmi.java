@@ -1,4 +1,4 @@
-package consola;
+package interfaz;
 
 import java.util.Scanner;
 
@@ -145,7 +145,7 @@ private static void ejecutarMenuSeguros(SistemaAlquiler sistema) throws CsvValid
                 String nombreSeguroEliminar = scanner.nextLine();
                 boolean seguroEliminado = sistema.eliminarSeguro(nombreSeguroEliminar);
                 Persistencia.escribirSeguros(sistema, "datos/seguros.csv");
-                Persistencia.leerSeguros(sistema, "datos/seguros.csv");
+                //Persistencia.leerSeguros(sistema, "datos/seguros.csv");
                 if (seguroEliminado) {
                     System.out.println("Seguro eliminado con éxito.");
                 } else {
