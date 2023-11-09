@@ -1,192 +1,107 @@
 package interfaz;
 
-import java.util.Scanner;
-
-import javax.swing.JFrame;
-import javax.swing.UIManager;
-
-import com.opencsv.exceptions.CsvValidationException;
-
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import logica.SistemaAlquiler;
-import persistencia.Persistencia;
-import logica.Cliente;
-import logica.Empleado;
-import logica.Sede;
-import logica.Seguro;
-import logica.Administrador;
-import logica.AdministradorLocal;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.awt.BorderLayout;
-import java.text.ParseException;
+public class Principal extends Application {
 
-public class Principal extends JFrame{
-	
-	private PanelAdmi panelAdmi;
-	private PanelAdmiLocal panelAdmiLocal;
-	private PanelCliente panelCliente;
-	private PanelEmpleado panelEmpleado;
-	
-    
-    private static final Sede Null = null;
+    private SistemaAlquiler sistema;
+    private Label labelResultado;
+    private Button btnIniciarEmpleado;
+    private Button btnIniciarAdmin;
+    private Button btnIniciarAdminLocal;
+    private Scene escenaPrincipal;  // Variable para almacenar la escena principal
 
-	private static Date parseFecha(String fechaStr) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            return sdf.parse(fechaStr);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public static void main(String[] args) {
+        launch(args);
     }
 
-    public Principal() throws CsvValidationException, NumberFormatException {
-    	
-    	
-    	setTitle( "Alquiler de autos" );
-		setSize( 600, 700 );
-		setLocationRelativeTo( null );
-		setResizable( false );
-		setDefaultCloseOperation( EXIT_ON_CLOSE );
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Sistema de Alquiler de Vehículos");
 
-        SistemaAlquiler sistema = new SistemaAlquiler();
-        
-        setLayout(new BorderLayout( ));
-        
-        
-        Administrador administrador = sistema.nuevoAdministrador("grupo9", "123");
-        AdministradorLocal admiBogota=sistema.agregarAdmLocalBogota("admiBogota", "456",null);
-        AdministradorLocal admiDorado=sistema.agregarAdmLocalDorado("admiDorado", "789",null);
-        Sede sedeDorado=sistema.agregarSede("Aeropuerto El Dorado", "Avenida Calle 26 # 96A-21", admiDorado, null);
-        Sede sedeBogota=sistema.agregarSede("Nuestro Bogota", "Avenida Carrera 86 # 55A-75", admiBogota, null);
-        admiBogota.setSede(sedeBogota);
-        admiDorado.setSede(sedeDorado);
-        
-        Persistencia persistencia = new Persistencia();
-        persistencia.cargarDatos(sistema, "datos/vehiculos.csv", "datos/clientes.csv", "datos/empleados.csv", "datos/reservas.csv", "datos/seguros.csv"); 
-        System.out.print("\nSE HAN CARGADO DATOS AUTOMATICAMENTE\n");
-        
-        Scanner scanner = new Scanner(System.in);
-        boolean salir = false;
+        // Crear el sistema y cargar datos
+        sistema = new SistemaAlquiler();
 
-        while (!salir) {
-            System.out.println("\nBienvenido/a al Sistema de Alquiler de Vehiculos!");
-            System.out.println("1. Iniciar sesion como cliente");
-            System.out.println("2. Ingresar como administrador");
-            System.out.println("3. Ingresar como administrador local");
-            System.out.println("4. Iniciar sesion como empleado");
-            System.out.println("5. Registrarse como cliente");
-            System.out.println("6. Salir");
-            System.out.println("Por favor seleccione una opcion: ");
+        // Elementos de la interfaz
+        Button btnRegistrarse = new Button("Registrarse");
+        Button btnIniciarSesion = new Button("Iniciar Sesión");
+        Button btnOpcionesAvanzadas = new Button("Opciones Avanzadas");
+        btnIniciarEmpleado = new Button("Iniciar Sesión como Empleado");
+        btnIniciarAdmin = new Button("Iniciar Sesión como Administrador");
+        btnIniciarAdminLocal = new Button("Iniciar Sesión como Administrador Local");
+        Button btnSalir = new Button("Salir");
+        labelResultado = new Label();
 
-            int opcion = scanner.nextInt();
-            scanner.nextLine(); 
+        // Eventos de los botones
+        btnRegistrarse.setOnAction(e -> abrirVentanaRegistro());
+        btnIniciarSesion.setOnAction(e -> abrirVentanaIniciarSesion());
+        btnOpcionesAvanzadas.setOnAction(e -> mostrarOpcionesAvanzadas(primaryStage));
+        btnIniciarEmpleado.setOnAction(e -> iniciarSesionEmpleado());
+        btnIniciarAdmin.setOnAction(e -> iniciarSesionAdministrador());
+        btnIniciarAdminLocal.setOnAction(e -> iniciarSesionAdminLocal());
+        btnSalir.setOnAction(e -> primaryStage.close());
 
-            if (opcion == 1) {
-                
-                System.out.print("Nombre de usuario: ");
-                String nombreUsuario = scanner.nextLine();
+        // Diseño de la interfaz
+        VBox layout = new VBox(10);
+        layout.setPadding(new Insets(10));
+        layout.getChildren().addAll(btnRegistrarse, btnIniciarSesion, btnOpcionesAvanzadas, btnSalir, labelResultado);
 
-                System.out.print("Contrasena: ");
-                String contrasena = scanner.nextLine();
-                
-                boolean verif = sistema.autenticarCliente(nombreUsuario, contrasena);
-                
-                if (verif) {
-                    PanelCliente.ejecutarMenuCliente(nombreUsuario, sistema, scanner);
-            } else {
-                System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
-            }
-                
-            } else if (opcion == 2) {
-                boolean autenticado = false;
-                while (!autenticado) {
-                    System.out.print("Ingrese su nombre de usuario: ");
-                    String nombreUsuario = scanner.nextLine();
-                    System.out.print("Ingrese su contraseña: ");
-                    String contrasena = scanner.nextLine();
+        // Escena
+        Scene scene = new Scene(layout, 400, 300);
+        primaryStage.setScene(scene);
 
-                    if (nombreUsuario.equals(administrador.getNombreUsuario()) && contrasena.equals(administrador.getContrasena())) {
-                        System.out.println("\nInicio de sesión exitoso como administrador.");
-						PanelAdmi.ejecutarMenuAdministrador(sistema);
-                        autenticado = true;
-                    } else {
-                        System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
-                    }
-                }
-            } else if (opcion == 3) {
-                System.out.print("Ingrese su nombre de usuario como administrador local: ");
-                String nombreUsuario = scanner.nextLine();
-                System.out.print("Ingrese su contraseña como administrador local: ");
-                String contrasena = scanner.nextLine();
+        // Almacenar la escena principal
+        escenaPrincipal = scene;
 
-                List<AdministradorLocal> administradoresLocales = sistema.getAdministradoresLocales();
-                AdministradorLocal admiActual = null;
-                boolean autenticado = false;
-
-                for (AdministradorLocal adminLocal : administradoresLocales) {
-                    if (nombreUsuario.equals(adminLocal.getNombreUsuario()) && contrasena.equals(adminLocal.getContrasena())) {
-                        admiActual = adminLocal;
-                        autenticado = true;
-                        System.out.println("\nInicio de sesión exitoso como administrador local.");
-                    }
-                }
-
-                if (!autenticado) {
-                    System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
-                }
-
-                if (admiActual != null) {
-                    PanelAdmiLocal.ejecutarMenuAdministradorLocal(sistema, scanner, admiActual);
-                }
-            } else if (opcion == 4) {
-                boolean autenticado = false;               
-                    System.out.print("Ingrese su nombre de usuario: ");
-                    String nombreUsuario = scanner.nextLine();
-                    System.out.print("Ingrese su contraseña: ");
-                    String contrasena = scanner.nextLine();
-                    autenticado=sistema.autenticarEmpleado(nombreUsuario, contrasena);
-
-					if (autenticado) {
-                        System.out.println("\nInicio de sesión exitoso como empleado.");
-                        PanelEmpleado.ejecutarMenuEmpleado(sistema, scanner);
-                        autenticado = true;
-                    } else {
-                        System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
-                    }
-                }
-            else if (opcion == 5) {
-            	
-            	PanelCliente.crearCliente(sistema,scanner);
-
-            } else if (opcion == 6) {
-                System.out.println("Gracias por usar el Sistema de Alquiler de Vehiculos. Hasta luego!");
-                salir = true; 
-            }else {
-                System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
-            }
-        }
-
-        scanner.close();
+        // Mostrar la interfaz
+        primaryStage.show();
     }
-    
-    public static void main( String[] pArgs )
-	{
-		try
-		{
-			// Unifica la interfaz para Mac y para Windows.
-			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
 
-			Principal interfaz = new Principal( );
-			interfaz.setVisible( true );
-		}
-		catch( Exception e )
-		{
-			e.printStackTrace( );
-		}
-	}
+    private void abrirVentanaRegistro() {
+        // Lógica para abrir la ventana de registro
+        labelResultado.setText("Ventana de Registro");
+    }
 
+    private void abrirVentanaIniciarSesion() {
+        // Lógica para abrir la ventana de inicio de sesión
+        labelResultado.setText("Ventana de Inicio de Sesión");
+    }
+
+    private void mostrarOpcionesAvanzadas(Stage primaryStage) {
+        // Lógica para mostrar los botones de opciones avanzadas
+        VBox opcionesAvanzadasLayout = new VBox(10);
+        opcionesAvanzadasLayout.setPadding(new Insets(10));
+        opcionesAvanzadasLayout.getChildren().addAll(btnIniciarEmpleado, btnIniciarAdmin, btnIniciarAdminLocal, crearBtnRegresar(primaryStage));
+        Scene opcionesAvanzadasScene = new Scene(opcionesAvanzadasLayout, 400, 200);
+
+        // Actualizar la escena actual
+        primaryStage.setScene(opcionesAvanzadasScene);
+    }
+
+    private Button crearBtnRegresar(Stage primaryStage) {
+        Button btnRegresar = new Button("Regresar");
+        btnRegresar.setOnAction(e -> primaryStage.setScene(escenaPrincipal));  // Restaurar la escena principal
+        return btnRegresar;
+    }
+
+    private void iniciarSesionEmpleado() {
+        // Lógica para iniciar sesión como empleado
+        labelResultado.setText("Iniciar Sesión como Empleado");
+    }
+
+    private void iniciarSesionAdministrador() {
+        // Lógica para iniciar sesión como administrador
+        labelResultado.setText("Iniciar Sesión como Administrador");
+    }
+
+    private void iniciarSesionAdminLocal() {
+        // Lógica para iniciar sesión como administrador local
+        labelResultado.setText("Iniciar Sesión como Administrador Local");
+    }
 }
