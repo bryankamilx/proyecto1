@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.text.ParseException;
 
-public class cAdmi {
+public class PanelAdmi {
 	
 	public static void ejecutarMenuAdministrador(SistemaAlquiler sistema) throws CsvValidationException, NumberFormatException {
 

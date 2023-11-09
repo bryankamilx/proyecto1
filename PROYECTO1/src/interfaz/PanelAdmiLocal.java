@@ -9,7 +9,7 @@ import logica.Sede;
 import logica.SistemaAlquiler;
 import persistencia.Persistencia;
 
-public class cAdmiLocal {
+public class PanelAdmiLocal {
 	
 	public static void ejecutarMenuAdministradorLocal(SistemaAlquiler sistema, Scanner scanner, AdministradorLocal admiActual) {
 		

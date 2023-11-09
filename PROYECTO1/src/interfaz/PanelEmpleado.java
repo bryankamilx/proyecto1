@@ -5,7 +5,7 @@ import java.util.Scanner;
 import logica.SistemaAlquiler;
 import persistencia.Persistencia;
 
-public class cEmpleado {
+public class PanelEmpleado {
 	static void ejecutarMenuEmpleado(SistemaAlquiler sistema, Scanner scanner) 
     {
         boolean cl_aut = false;
