@@ -87,8 +87,8 @@ public class SistemaAlquiler {
     
 
     public void agregarVehiculo(String placa, String marca, String modelo, String color, String transmision, String categoria, 
-    		String estado, String pasajeros, String tarifa) {
-        Vehiculo nuevoVehiculo = new Vehiculo(placa, marca, modelo, color, transmision, categoria, estado, pasajeros, tarifa);
+    		String estado, String pasajeros, String tarifa, String observaciones, String ubicacion) {
+        Vehiculo nuevoVehiculo = new Vehiculo(placa, marca, modelo, color, transmision, categoria, estado, pasajeros, tarifa, observaciones, ubicacion);
         inventario.add(nuevoVehiculo);
     }
     
@@ -106,7 +106,7 @@ public class SistemaAlquiler {
 
     public void realizarReserva(String nombre, Scanner scanner) {
     	
-    	try (CSVReader reader = new CSVReader(new FileReader("datos/vehiculos.csv"))) {
+    	try (CSVReader reader = new CSVReader(new FileReader("datos/carros.csv"))) {
     		
     		String[] linea;
             boolean primeraLinea = true;
@@ -134,10 +134,12 @@ public class SistemaAlquiler {
                 String estado = linea[6];
                 String numeroPasajeros = linea[7];
                 String tarifaDiaria = linea[8]; 
+                String observaciones = linea[9];
+                String ubicacion = linea[10];
                  
 
                 Vehiculo carro = new Vehiculo(placa, marca, modelo, color, transmision,categoria, estado, 
-                		numeroPasajeros, tarifaDiaria);
+                		numeroPasajeros, tarifaDiaria, observaciones, ubicacion);
                 tiposDiferentes++;
                 
                 System.out.println("Opcion " + String.valueOf(tiposDiferentes));
@@ -236,7 +238,7 @@ public class SistemaAlquiler {
 		return seguros;
 	}
 
-	public void agregarSeguro(String nombreSeguro, double precioSeguro, String detalles) {
+	public void agregarSeguro(String nombreSeguro, String precioSeguro, String detalles) {
 		Seguro nuevoSeguro = new Seguro(nombreSeguro, precioSeguro, detalles);
         seguros.add(nuevoSeguro);
 	}
@@ -294,9 +296,9 @@ public class SistemaAlquiler {
 
 
 	public void agregarReserva(String id, String categoria, String cliente, String sedeRecogida, String sedeEntrega,
-			String fechaRecogida, String fechaEntrega, double costoParcial, double costoTreinta) {
+			String fechaRecogida, String fechaEntrega,String diasFacturados, String costoParcial, String costoTreinta) {
 		
-		Reserva nuevaReserva = new Reserva(id, categoria, cliente, sedeRecogida, sedeEntrega, fechaRecogida, fechaEntrega, costoParcial,costoTreinta);
+		Reserva nuevaReserva = new Reserva(id, categoria, cliente, sedeRecogida, sedeEntrega, fechaRecogida, fechaEntrega,diasFacturados, costoParcial,costoTreinta);
         reservas.add(nuevaReserva);
 	}
 	

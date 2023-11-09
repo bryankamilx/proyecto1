@@ -69,9 +69,16 @@ public class cAdmi {
 
                 System.out.print("Tarifa: ");
                 String tarifa = scanner.nextLine();
+                
+                System.out.print("Observaciones: ");
+                String observaciones = scanner.nextLine();
+                
+                System.out.print("Ubicacion: ");
+                String ubicacion = scanner.nextLine();
 
-                sistema.agregarVehiculo(placa, marca, modelo, color, transmision, categoria, estado, pasajeros, tarifa);
-                sistema.agregarEventoAlHistorial(placa, "Se anadio el vechiculo con placa " + placa + " al invetario.");
+                sistema.agregarVehiculo(placa, marca, modelo, color, transmision, categoria, estado, pasajeros, tarifa, observaciones,
+                		ubicacion);
+                sistema.agregarEventoAlHistorial(placa, "Se anadio el vechiculo con placa " + placa + " al inventario.");
                 Persistencia.escribirVehiculos(sistema,"datos/vehiculos.csv");
                 Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
                 
@@ -97,6 +104,7 @@ public class cAdmi {
                 System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
             }
         }
+        scanner.close();
     }
 	
 private static void ejecutarMenuSeguros(SistemaAlquiler sistema) throws CsvValidationException, NumberFormatException {
@@ -131,7 +139,7 @@ private static void ejecutarMenuSeguros(SistemaAlquiler sistema) throws CsvValid
                 System.out.print("Nombre del nuevo seguro: ");
                 String nombreSeguro = scanner.nextLine();
                 System.out.print("Precio del nuevo seguro: ");
-                double precioSeguro = scanner.nextInt();
+                String precioSeguro = scanner.nextLine();
                 System.out.print("Detalles del nuevo seguro: ");
                 String detallesSeguro = scanner.nextLine();
                 scanner.nextLine();
@@ -157,5 +165,6 @@ private static void ejecutarMenuSeguros(SistemaAlquiler sistema) throws CsvValid
                 System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
             }
         }
+        scanner.close();
     }
 }

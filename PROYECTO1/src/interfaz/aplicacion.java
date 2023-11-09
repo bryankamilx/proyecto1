@@ -46,7 +46,7 @@ public class aplicacion {
         admiDorado.setSede(sedeDorado);
         
         Persistencia persistencia = new Persistencia();
-        persistencia.cargarDatos(sistema, "datos/vehiculos.csv", "datos/clientes.csv", "datos/empleados.csv", "datos/reservas.csv", "datos/seguros.csv"); 
+        persistencia.cargarDatos(sistema, "datos/carros.csv", "datos/clientes.csv", "datos/empleados.csv", "datos/reservas.csv", "datos/seguros.csv"); 
         System.out.print("\nSE HAN CARGADO DATOS AUTOMATICAMENTE\n");
         
         Scanner scanner = new Scanner(System.in);

@@ -12,10 +12,10 @@ import com.opencsv.exceptions.CsvValidationException;
 public class Seguro {
 	
 	private String nombre;
-	private double precio;
+	private String precio;
 	private String detalles;
 	
-	public Seguro(String nombre, double precio, String detalles) {
+	public Seguro(String nombre, String precio, String detalles) {
 		super();
 		this.nombre = nombre;
 		this.precio = precio;
@@ -42,11 +42,11 @@ public class Seguro {
 		this.nombre = nombre;
 	}
 
-	public double getPrecio() {
+	public String getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(double precio) {
+	public void setPrecio(String precio) {
 		this.precio = precio;
 	}
 	
