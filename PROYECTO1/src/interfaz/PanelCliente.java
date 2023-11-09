@@ -5,7 +5,7 @@ import java.util.Scanner;
 import logica.SistemaAlquiler;
 import persistencia.Persistencia;
 
-public class cCliente {
+public class PanelCliente {
 
 	static void ejecutarMenuCliente(String nombre, SistemaAlquiler sistema, Scanner scanner) 
     {

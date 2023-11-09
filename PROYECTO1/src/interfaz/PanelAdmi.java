@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.text.ParseException;
 
-public class cAdmi {
+public class PanelAdmi {
 	
 	public static void ejecutarMenuAdministrador(SistemaAlquiler sistema) throws CsvValidationException, NumberFormatException {
 
@@ -78,7 +78,7 @@ public class cAdmi {
 
                 sistema.agregarVehiculo(placa, marca, modelo, color, transmision, categoria, estado, pasajeros, tarifa, observaciones,
                 		ubicacion);
-                sistema.agregarEventoAlHistorial(placa, "Se anadio el vechiculo con placa " + placa + " al inventario.");
+                sistema.agregarEventoAlHistorial(placa, "Se anadio el vechiculo con placa " + placa + " al invetario.");
                 Persistencia.escribirVehiculos(sistema,"datos/vehiculos.csv");
                 Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
                 
@@ -104,7 +104,6 @@ public class cAdmi {
                 System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
             }
         }
-        scanner.close();
     }
 	
 private static void ejecutarMenuSeguros(SistemaAlquiler sistema) throws CsvValidationException, NumberFormatException {
@@ -136,7 +135,7 @@ private static void ejecutarMenuSeguros(SistemaAlquiler sistema) throws CsvValid
                 }
             } else if (opcionSeguros == 2) {
                 
-                System.out.print("Nombre del nuevo seguro: ");
+            	System.out.print("Nombre del nuevo seguro: ");
                 String nombreSeguro = scanner.nextLine();
                 System.out.print("Precio del nuevo seguro: ");
                 String precioSeguro = scanner.nextLine();
@@ -165,6 +164,5 @@ private static void ejecutarMenuSeguros(SistemaAlquiler sistema) throws CsvValid
                 System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
             }
         }
-        scanner.close();
     }
 }

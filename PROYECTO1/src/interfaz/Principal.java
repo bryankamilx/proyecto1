@@ -2,6 +2,9 @@ package interfaz;
 
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+
 import com.opencsv.exceptions.CsvValidationException;
 
 import logica.SistemaAlquiler;
@@ -17,9 +20,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.awt.BorderLayout;
 import java.text.ParseException;
 
-public class aplicacion {
+public class Principal extends JFrame{
+	
+	private PanelAdmi panelAdmi;
+	private PanelAdmiLocal panelAdmiLocal;
+	private PanelCliente panelCliente;
+	private PanelEmpleado panelEmpleado;
+	
     
     private static final Sede Null = null;
 
@@ -33,9 +43,19 @@ public class aplicacion {
         }
     }
 
-    public static void main(String[] args) throws CsvValidationException, NumberFormatException {
+    public Principal() throws CsvValidationException, NumberFormatException {
+    	
+    	
+    	setTitle( "Alquiler de autos" );
+		setSize( 600, 700 );
+		setLocationRelativeTo( null );
+		setResizable( false );
+		setDefaultCloseOperation( EXIT_ON_CLOSE );
 
         SistemaAlquiler sistema = new SistemaAlquiler();
+        
+        setLayout(new BorderLayout( ));
+        
         
         Administrador administrador = sistema.nuevoAdministrador("grupo9", "123");
         AdministradorLocal admiBogota=sistema.agregarAdmLocalBogota("admiBogota", "456",null);
@@ -76,7 +96,7 @@ public class aplicacion {
                 boolean verif = sistema.autenticarCliente(nombreUsuario, contrasena);
                 
                 if (verif) {
-                    cCliente.ejecutarMenuCliente(nombreUsuario, sistema, scanner);
+                    PanelCliente.ejecutarMenuCliente(nombreUsuario, sistema, scanner);
             } else {
                 System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
             }
@@ -91,7 +111,7 @@ public class aplicacion {
 
                     if (nombreUsuario.equals(administrador.getNombreUsuario()) && contrasena.equals(administrador.getContrasena())) {
                         System.out.println("\nInicio de sesión exitoso como administrador.");
-						cAdmi.ejecutarMenuAdministrador(sistema);
+						PanelAdmi.ejecutarMenuAdministrador(sistema);
                         autenticado = true;
                     } else {
                         System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
@@ -120,7 +140,7 @@ public class aplicacion {
                 }
 
                 if (admiActual != null) {
-                    cAdmiLocal.ejecutarMenuAdministradorLocal(sistema, scanner, admiActual);
+                    PanelAdmiLocal.ejecutarMenuAdministradorLocal(sistema, scanner, admiActual);
                 }
             } else if (opcion == 4) {
                 boolean autenticado = false;               
@@ -132,7 +152,7 @@ public class aplicacion {
 
 					if (autenticado) {
                         System.out.println("\nInicio de sesión exitoso como empleado.");
-                        cEmpleado.ejecutarMenuEmpleado(sistema, scanner);
+                        PanelEmpleado.ejecutarMenuEmpleado(sistema, scanner);
                         autenticado = true;
                     } else {
                         System.out.println("\nCredenciales incorrectas. Intente nuevamente.");
@@ -140,7 +160,7 @@ public class aplicacion {
                 }
             else if (opcion == 5) {
             	
-            	cCliente.crearCliente(sistema,scanner);
+            	PanelCliente.crearCliente(sistema,scanner);
 
             } else if (opcion == 6) {
                 System.out.println("Gracias por usar el Sistema de Alquiler de Vehiculos. Hasta luego!");
@@ -152,5 +172,21 @@ public class aplicacion {
 
         scanner.close();
     }
+    
+    public static void main( String[] pArgs )
+	{
+		try
+		{
+			// Unifica la interfaz para Mac y para Windows.
+			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
+
+			Principal interfaz = new Principal( );
+			interfaz.setVisible( true );
+		}
+		catch( Exception e )
+		{
+			e.printStackTrace( );
+		}
+	}
 
 }
