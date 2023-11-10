@@ -41,7 +41,7 @@ public class Persistencia {
 	        String[] linea;
 	        while ((linea = csvReader.readNext()) != null) {
 	            String nombre = linea[0];
-	            double precio = Double.parseDouble(linea[1]);
+	            String precio = linea[1];
 	            String detalles = linea[2];
 	            sistema.agregarSeguro(nombre, precio, detalles);
 	        }
@@ -65,9 +65,10 @@ public class Persistencia {
 	            String sedeEntrega = linea[4];
 	            String fechaRecogida = linea[5];
 	            String fechaEntrega = linea[6];
-	            double costoParcial = Double.parseDouble(linea[7]);
-	            double costoTreinta = Double.parseDouble(linea[7]);
-	            sistema.agregarReserva(id, categoria, usuarioCliente, sedeRecogida, sedeEntrega, fechaRecogida, fechaEntrega, costoParcial,costoTreinta);
+	            String diasFacturados = linea[7];
+	            String costoParcial = linea[8];
+	            String costoTreinta = linea[9];
+	            sistema.agregarReserva(id, categoria, usuarioCliente, sedeRecogida, sedeEntrega, fechaRecogida, fechaEntrega,diasFacturados, costoParcial,costoTreinta);
 	        }
 	    } catch (IOException e) {
 	        e.printStackTrace();
@@ -149,7 +150,10 @@ public class Persistencia {
                 String estado = linea[6];
                 String cantidadPasajeros = linea[7];
                 String tarifaDiaria = linea[8];
-                sistema.agregarVehiculo(placa, marca, modelo, color, transmision, categoria, estado, cantidadPasajeros, tarifaDiaria);
+                String observaciones = linea[9];
+                String ubicacion = linea[10];
+                sistema.agregarVehiculo(placa, marca, modelo, color, transmision, categoria, estado, cantidadPasajeros, 
+                		tarifaDiaria, observaciones, ubicacion);
             }
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
@@ -168,10 +172,10 @@ public class Persistencia {
 
             for (Seguro seguro : seguros) {
                 String nombre = seguro.getNombre();
-                double precio = seguro.getPrecio();
+                String precio = seguro.getPrecio();
                 String detalles = seguro.getDetalles();
 
-                String[] data = {nombre, Double.toString(precio), detalles};
+                String[] data = {nombre, precio, detalles};
                 csvWriter.writeNext(data);
             }
 
@@ -192,8 +196,8 @@ public class Persistencia {
 
 
 	            String[] header = {
-	                "ID", "Categoria", "UsuarioCliente", "SedeRecogida", "SedeEntrega",
-	                "FechaRecogida", "FechaEntrega", "CostoParcial", "CostoTreinta"
+	            		"Id reserva", "Categoria escogida", "Usuario del cliente", "Sede de recogida", "Sede de entrega",
+	               		 "Fecha de inicio alquiler", "Fecha fin alquiler","Dias facturados", "Costo sin adicionales", " Treinta por ciento costo"
 	            };
 
 	            csvWriter.writeNext(header);
@@ -208,8 +212,9 @@ public class Persistencia {
 	                    reserva.getSedeEntrega(),
 	                    reserva.getFechaRecogida(),
 	                    reserva.getFechaEntrega(),
-	                    String.valueOf(reserva.getCostoParcial()),
-	                    String.valueOf(reserva.getCostoTreinta())
+	                    reserva.getDiasFacturados(),
+	                    reserva.getCostoParcial(),
+	                    reserva.getCostoTreinta()
 	                };
 
 	                csvWriter.writeNext(data);
@@ -298,7 +303,8 @@ public class Persistencia {
 	        CSVWriter csvWriter = new CSVWriter(fileWriter);
 
 
-	        String[] header = {"Placa", "Marca", "Modelo", "Color", "Transmisión", "Categoría", "Estado", "Pasajeros", "Tarifa"};
+	        String[] header = {"Placa", "Marca", "Modelo", "Color", "Transmisión", "Categoría", "Estado", "Pasajeros", "Tarifa", 
+	        		"Observaciones", "Ubicacion"};
 	        csvWriter.writeNext(header);
 
 
@@ -312,7 +318,9 @@ public class Persistencia {
 	                vehiculo.getCategoria(),
 	                vehiculo.getEstado(),
 	                vehiculo.getPasajeros(),
-	                vehiculo.getTarifa()
+	                vehiculo.getTarifa(),
+	                vehiculo.getObservaciones(),
+	                vehiculo.getUbicacion()
 	            };
 	            csvWriter.writeNext(data);
 	        }

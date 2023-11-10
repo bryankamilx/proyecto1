@@ -104,4 +104,6 @@ public class Principal extends Application {
         // Lógica para iniciar sesión como administrador local
         labelResultado.setText("Iniciar Sesión como Administrador Local");
     }
+    
 }
+

@@ -69,8 +69,15 @@ public class PanelAdmi {
 
                 System.out.print("Tarifa: ");
                 String tarifa = scanner.nextLine();
+                
+                System.out.print("Observaciones: ");
+                String observaciones = scanner.nextLine();
+                
+                System.out.print("Ubicacion: ");
+                String ubicacion = scanner.nextLine();
 
-                sistema.agregarVehiculo(placa, marca, modelo, color, transmision, categoria, estado, pasajeros, tarifa);
+                sistema.agregarVehiculo(placa, marca, modelo, color, transmision, categoria, estado, pasajeros, tarifa, observaciones,
+                		ubicacion);
                 sistema.agregarEventoAlHistorial(placa, "Se anadio el vechiculo con placa " + placa + " al invetario.");
                 Persistencia.escribirVehiculos(sistema,"datos/vehiculos.csv");
                 Persistencia.escribirEventosVehiculos(sistema,"datos/eventos.csv");
@@ -128,10 +135,10 @@ private static void ejecutarMenuSeguros(SistemaAlquiler sistema) throws CsvValid
                 }
             } else if (opcionSeguros == 2) {
                 
-                System.out.print("Nombre del nuevo seguro: ");
+            	System.out.print("Nombre del nuevo seguro: ");
                 String nombreSeguro = scanner.nextLine();
                 System.out.print("Precio del nuevo seguro: ");
-                double precioSeguro = scanner.nextInt();
+                String precioSeguro = scanner.nextLine();
                 System.out.print("Detalles del nuevo seguro: ");
                 String detallesSeguro = scanner.nextLine();
                 scanner.nextLine();
