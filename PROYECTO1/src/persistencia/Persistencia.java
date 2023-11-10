@@ -196,8 +196,8 @@ public class Persistencia {
 
 
 	            String[] header = {
-	                "ID", "Categoria", "UsuarioCliente", "SedeRecogida", "SedeEntrega",
-	                "FechaRecogida", "FechaEntrega", "CostoParcial", "CostoTreinta"
+	            		"Id reserva", "Categoria escogida", "Usuario del cliente", "Sede de recogida", "Sede de entrega",
+	               		 "Fecha de inicio alquiler", "Fecha fin alquiler","Dias facturados", "Costo sin adicionales", " Treinta por ciento costo"
 	            };
 
 	            csvWriter.writeNext(header);
@@ -303,7 +303,8 @@ public class Persistencia {
 	        CSVWriter csvWriter = new CSVWriter(fileWriter);
 
 
-	        String[] header = {"Placa", "Marca", "Modelo", "Color", "Transmisión", "Categoría", "Estado", "Pasajeros", "Tarifa"};
+	        String[] header = {"Placa", "Marca", "Modelo", "Color", "Transmisión", "Categoría", "Estado", "Pasajeros", "Tarifa", 
+	        		"Observaciones", "Ubicacion"};
 	        csvWriter.writeNext(header);
 
 
@@ -317,7 +318,9 @@ public class Persistencia {
 	                vehiculo.getCategoria(),
 	                vehiculo.getEstado(),
 	                vehiculo.getPasajeros(),
-	                vehiculo.getTarifa()
+	                vehiculo.getTarifa(),
+	                vehiculo.getObservaciones(),
+	                vehiculo.getUbicacion()
 	            };
 	            csvWriter.writeNext(data);
 	        }

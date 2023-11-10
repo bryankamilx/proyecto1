@@ -73,51 +73,6 @@ public class Reserva {
 	{
 		return costoParcial;
 	}
-    
-    public static void cargarReserva(String id, List<String> datos, String cliente, List<String> recogida, List<String> entregada, 
-    		String inicio, String fin, double dias) {
-    	String rutaCompleta = "datos/reservas.csv";
-    	boolean archivoExiste = new File(rutaCompleta).exists();
-        List<String> nuevaFila = new ArrayList<>();
-    	
-        String tarifa_diaria=datos.get(1);
-    	int valorsinext= Integer.parseInt(tarifa_diaria)* (int)dias;
-    	double treinta = valorsinext * 0.30;
-    	String categoria = datos.get(0);
-    	String rec = recogida.get(0);
-    	String ent = entregada.get(0);
-    	
-    	nuevaFila.add(id);
-    	nuevaFila.add(categoria);
-    	nuevaFila.add(cliente);
-    	nuevaFila.add(rec);
-    	nuevaFila.add(ent);
-    	nuevaFila.add(inicio);
-    	nuevaFila.add(fin);
-    	nuevaFila.add(Double.toString(dias));
-    	nuevaFila.add(Integer.toString(valorsinext));
-    	nuevaFila.add(Double.toString(treinta));
-    	
-    	
-    	
-    	try (CSVWriter writer = new CSVWriter(new FileWriter(rutaCompleta, true))) {
-            if (archivoExiste==false) {
-                String[] encabezados = {"Id reserva", "Categoria escogida", "Usuario del cliente", "Sede de recogida", "Sede de entrega",
-               		 "Fecha de inicio alquiler", "Fecha fin alquiler","Dias facturados", "Costo sin adicionales", " Treinta por ciento costo"};
-                writer.writeNext(encabezados);
-            }
-            writer.writeNext(nuevaFila.toArray(new String[0]));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    
-    	System.out.println("Su reserva fue creada exitosamente");
-    	System.out.println("El valor total sin adicionales de su reserva es de: " + Integer.toString(valorsinext) );
-    	System.out.println("Se cargo el treinta por ciento de ese valor (" + Double.toString(treinta) + ") a su medio de pago");
-    	
-    	
-    	
-    }
 
 	public String getCostoTreinta() {
 		return costoTreinta;
