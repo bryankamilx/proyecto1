@@ -5,8 +5,11 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import logica.SistemaAlquiler;
+import logica.*;
+import persistencia.Persistencia;
+import com.opencsv.exceptions.CsvValidationException;
 
 public class Principal extends Application {
 
@@ -15,23 +18,34 @@ public class Principal extends Application {
     private Button btnIniciarEmpleado;
     private Button btnIniciarAdmin;
     private Button btnIniciarAdminLocal;
-    private Scene escenaPrincipal;  // Variable para almacenar la escena principal
+    private Scene escenaPrincipal;
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws CsvValidationException, NumberFormatException {
         primaryStage.setTitle("Sistema de Alquiler de Vehículos");
 
         // Crear el sistema y cargar datos
         sistema = new SistemaAlquiler();
+        Administrador administrador = sistema.nuevoAdministrador("grupo9", "123");
+        AdministradorLocal admiBogota=sistema.agregarAdmLocalBogota("admiBogota", "456",null);
+        AdministradorLocal admiDorado=sistema.agregarAdmLocalDorado("admiDorado", "789",null);
+        Sede sedeDorado=sistema.agregarSede("Aeropuerto El Dorado", "Avenida Calle 26 # 96A-21", admiDorado, null);
+        Sede sedeBogota=sistema.agregarSede("Nuestro Bogota", "Avenida Carrera 86 # 55A-75", admiBogota, null);
+        admiBogota.setSede(sedeBogota);
+        admiDorado.setSede(sedeDorado);
+        
+        Persistencia persistencia = new Persistencia();
+        persistencia.cargarDatos(sistema, "datos/carros.csv", "datos/clientes.csv", "datos/empleados.csv", "datos/reservas.csv", "datos/seguros.csv"); 
 
         // Elementos de la interfaz
         Button btnRegistrarse = new Button("Registrarse");
         Button btnIniciarSesion = new Button("Iniciar Sesión");
         Button btnOpcionesAvanzadas = new Button("Opciones Avanzadas");
+        
         btnIniciarEmpleado = new Button("Iniciar Sesión como Empleado");
         btnIniciarAdmin = new Button("Iniciar Sesión como Administrador");
         btnIniciarAdminLocal = new Button("Iniciar Sesión como Administrador Local");
@@ -39,7 +53,7 @@ public class Principal extends Application {
         labelResultado = new Label();
 
         // Eventos de los botones
-        btnRegistrarse.setOnAction(e -> abrirVentanaRegistro());
+        btnRegistrarse.setOnAction(e -> abrirVentanaRegistro(primaryStage));
         btnIniciarSesion.setOnAction(e -> abrirVentanaIniciarSesion());
         btnOpcionesAvanzadas.setOnAction(e -> mostrarOpcionesAvanzadas(primaryStage));
         btnIniciarEmpleado.setOnAction(e -> iniciarSesionEmpleado());
@@ -50,7 +64,7 @@ public class Principal extends Application {
         // Diseño de la interfaz
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(10));
-        layout.getChildren().addAll(btnRegistrarse, btnIniciarSesion, btnOpcionesAvanzadas, btnSalir, labelResultado);
+        layout.getChildren().addAll( btnIniciarSesion, btnRegistrarse, btnOpcionesAvanzadas, btnSalir, labelResultado);
 
         // Escena
         Scene scene = new Scene(layout, 400, 300);
@@ -63,9 +77,94 @@ public class Principal extends Application {
         primaryStage.show();
     }
 
-    private void abrirVentanaRegistro() {
-        // Lógica para abrir la ventana de registro
-        labelResultado.setText("Ventana de Registro");
+    private void abrirVentanaRegistro(Stage primaryStage) {
+    	GridPane layout = new GridPane();
+        layout.setVgap(10);
+        layout.setHgap(10);
+        layout.setPadding(new Insets(10));
+        
+        Label lblNombreUsuario = new Label("Nombre de usuario:");
+        TextField nombreUsuarioField = new TextField();
+        Label lblContrasena = new Label("Contraseña:");
+        PasswordField contrasenaField = new PasswordField();
+        Label lblNombre = new Label("Nombre:");
+        TextField nombreField = new TextField();
+        Label lblNumero = new Label("Numero telefonico:");
+        TextField numeroField = new TextField();
+        Label lblCorreo = new Label("Correo electronico:");
+        TextField correoField = new TextField();
+        Label lblNacimiento = new Label("Fecha de nacimiento (yyyy-MM-dd):");
+        TextField fechaNacimientoField = new TextField();
+        Label lblNacionalidad = new Label("Nacionalidad:");
+        TextField nacionalidadField = new TextField();
+        Label lblNumeroLic = new Label("Numero licencia de conduccion:");
+        TextField numeroLicConField = new TextField();
+        Label lblPaisEx = new Label("Pais de expedicion de la licencia de conduccion:");
+        TextField paisExLicField = new TextField();
+        Label lblVencimiento = new Label("Fecha de vencimiento de la licencia de conduccion (yyyy-MM-dd):");
+        TextField fechaVenLicField = new TextField();
+        Label lblTarjeta = new Label("Datos de la tarjeta de credito (numero-cvv-MM/yyyy):");
+        TextField datosTarjetaField = new TextField();
+
+
+        Button btnAceptar = new Button("Aceptar");
+        btnAceptar.setOnAction(e -> {
+            String nombreUsuario = nombreUsuarioField.getText();
+            String contrasena = contrasenaField.getText();
+            String nombre = nombreField.getText();
+            String numero = numeroField.getText();
+            String correo = correoField.getText();
+            String fechaNacimiento = fechaNacimientoField.getText();
+            String nacionalidad = nacionalidadField.getText();
+            String numeroLicencia = numeroLicConField.getText();
+            String expedicion = paisExLicField.getText();
+            String vencimiento = fechaVenLicField.getText();
+            String tarjeta = datosTarjetaField.getText();
+            sistema.agregarCliente(nombreUsuario, contrasena, nombre, numero, correo, fechaNacimiento, 
+            		nacionalidad, numeroLicencia, expedicion, vencimiento, tarjeta);
+            Persistencia.escribirClientes(sistema, "datos/clientes.csv");
+            mostrarMensajeExito();
+            primaryStage.setScene(escenaPrincipal);
+        });
+        
+       
+        layout.add(new Label("Registro de Cliente"), 0, 0, 2, 1); // Columna 0, Fila 0, Span 2 columnas
+        layout.add(lblNombreUsuario, 0, 1);
+        layout.add(nombreUsuarioField, 1, 1);
+        layout.add(lblContrasena, 0, 2);
+        layout.add(contrasenaField, 1, 2);
+        layout.add(lblNombre, 0, 3);
+        layout.add(nombreField, 1, 3);
+        layout.add(lblNumero, 0, 4);
+        layout.add(numeroField, 1, 4);
+        layout.add(lblCorreo, 0, 5);
+        layout.add(correoField, 1, 5);
+        layout.add(lblNacimiento, 0, 6);
+        layout.add(fechaNacimientoField, 1, 6);
+        layout.add(lblNacionalidad, 0, 7);
+        layout.add(nacionalidadField, 1, 7);
+        layout.add(lblNumeroLic, 0, 8);
+        layout.add(numeroLicConField, 1, 8);
+        layout.add(lblPaisEx, 0, 9);
+        layout.add(paisExLicField, 1, 9);
+        layout.add(lblVencimiento, 0, 10);
+        layout.add(fechaVenLicField, 1, 10);
+        layout.add(lblTarjeta, 0, 11);
+        layout.add(datosTarjetaField, 1, 11);
+        layout.add(crearBtnRegresar(primaryStage), 0, 12);
+        layout.add(btnAceptar, 1, 12);
+        
+
+        Scene scene = new Scene(layout, 800, 500);
+        primaryStage.setScene(scene);
+    }
+    
+    private void mostrarMensajeExito() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Éxito");
+        alert.setHeaderText(null);
+        alert.setContentText("Su cuenta fue creada satisfactoriamente.");
+        alert.showAndWait();
     }
 
     private void abrirVentanaIniciarSesion() {

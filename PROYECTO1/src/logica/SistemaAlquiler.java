@@ -26,8 +26,6 @@ import java.util.UUID;
 import interfaz.*;
 
 
-
-
 public class SistemaAlquiler {
     private List<Sede> sedes;
     private List<Vehiculo> inventario;
