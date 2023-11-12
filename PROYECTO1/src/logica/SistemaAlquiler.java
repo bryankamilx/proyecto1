@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 import java.text.ParseException;
 import java.util.UUID;
 import interfaz.*;
+import persistencia.Persistencia;
 
 
 public class SistemaAlquiler {
@@ -89,19 +90,26 @@ public class SistemaAlquiler {
     		String estado, String pasajeros, String tarifa, String observaciones, String ubicacion) {
         Vehiculo nuevoVehiculo = new Vehiculo(placa, marca, modelo, color, transmision, categoria, estado, pasajeros, tarifa, observaciones, ubicacion);
         inventario.add(nuevoVehiculo);
+        Persistencia.escribirVehiculos(this,"datos/vehiculos.csv");
+        agregarEventoAlHistorial(placa, "Se anadio el vechiculo con placa " + placa + " al invetario.");
+        Persistencia.escribirEventosVehiculos(this,"datos/eventos.csv");
     }
     
 
 
-	public void eliminarAuto(String placaEliminar) {
+	public boolean eliminarAuto(String placaEliminar) {
         Iterator<Vehiculo> iterator = inventario.iterator();
         while (iterator.hasNext()) {
             Vehiculo vehiculo = iterator.next();
             if (vehiculo.getPlaca().equals(placaEliminar)) {
                 iterator.remove(); 
-                System.out.println("Vehículo con placa " + placaEliminar + " eliminado del inventario.");
+                Persistencia.escribirVehiculos(this,"datos/vehiculos.csv");
+                agregarEventoAlHistorial(placaEliminar, "Se elimino el auto con placa " + placaEliminar + " del invetario.");
+                Persistencia.escribirEventosVehiculos(this,"datos/eventos.csv");
+                return true;
             }
         }
+		return false;
     }
 
 
@@ -149,19 +157,27 @@ public class SistemaAlquiler {
 		return inventario;
 	}
 	
-	public List<Seguro> getSeguros() {
-		return seguros;
-	}
+	public Map<String, String> obtenerSeguros() {
+        Map<String, String> mapaSeguros = new HashMap<>();
+        for (Seguro seguro : seguros) {
+            mapaSeguros.put(seguro.getNombre(), seguro.getPrecio());
+        }
+        return mapaSeguros;
+    }
+	
+	
 
 	public void agregarSeguro(String nombreSeguro, String precioSeguro, String detalles) {
 		Seguro nuevoSeguro = new Seguro(nombreSeguro, precioSeguro, detalles);
         seguros.add(nuevoSeguro);
+        Persistencia.escribirSeguros(this, "datos/seguros.csv");
 	}
 	
 	public boolean eliminarSeguro(String nombreSeguro) {
 	    for (Seguro seguro : seguros) {
 	        if (seguro.getNombre().equalsIgnoreCase(nombreSeguro)) {
 	            seguros.remove(seguro);
+	            Persistencia.escribirSeguros(this, "datos/seguros.csv");
 	            return true;
 	        }
 	    }
@@ -459,6 +475,11 @@ public class SistemaAlquiler {
 	            return new ArrayList<>();
 	        }
 	    }
+
+
+	public List<Seguro> getSeguros() {
+		return seguros;
+	}
 	 
 }
 

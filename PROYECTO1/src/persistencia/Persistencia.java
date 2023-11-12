@@ -5,8 +5,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
@@ -23,15 +25,34 @@ import logica.Vehiculo;
 
 public class Persistencia {
 	
-	public void cargarDatos(SistemaAlquiler sistema,String rutaVehiculos, String rutaClientes, String rutaEmpleados, String rutaReservas, String rutaSeguros) throws CsvValidationException, NumberFormatException {
+	public void cargarDatos(SistemaAlquiler sistema,String rutaVehiculos, String rutaClientes, String rutaEmpleados, String rutaReservas, String rutaSeguros, String rutaEventos) throws CsvValidationException, NumberFormatException {
         
 		leerVehiculos(sistema,rutaVehiculos);
         leerClientes(sistema,rutaClientes);
         leerEmpleados(sistema,rutaEmpleados);
         leerReservas(sistema,rutaReservas);
         leerSeguros(sistema,rutaSeguros);
+        leerEventos(sistema,rutaEventos);
 
 }
+
+	public static void leerEventos(SistemaAlquiler sistema, String rutaEventos) {
+	    try {
+	        CSVReader csvReader = new CSVReaderBuilder(new FileReader(rutaEventos))
+	            .withSkipLines(1)
+	            .build();
+	        String[] linea;
+
+	        while ((linea = csvReader.readNext()) != null) {
+	            String placaVehiculo = linea[0];
+	            String evento = linea[1];
+	            
+	            sistema.agregarEventoAlHistorial(placaVehiculo, evento);
+	        }
+	    } catch (IOException | CsvValidationException e) {
+	        e.printStackTrace();
+	    }
+	}
 
 	public static void leerSeguros(SistemaAlquiler sistema, String rutaSeguros) throws CsvValidationException, NumberFormatException {
 	    try {
@@ -333,50 +354,55 @@ public class Persistencia {
 	    }
 	}
 	
-	 public static void escribirEventosVehiculos(SistemaAlquiler sistema, String rutaEventos) {
-	        try {
-	            FileWriter fileWriter = new FileWriter(rutaEventos);
-	            CSVWriter csvWriter = new CSVWriter(fileWriter);
+	public static void escribirEventosVehiculos(SistemaAlquiler sistema, String rutaEventos) {
+	    try {
+	        FileWriter fileWriter = new FileWriter(rutaEventos);
+	        CSVWriter csvWriter = new CSVWriter(fileWriter);
 
-	            String[] header = {"placa", "evento"};
-	            csvWriter.writeNext(header);
-	            Map<String, List<String>> eventos = sistema.getEventosVehiculos();
+	        String[] header = {"placa", "evento"};
+	        csvWriter.writeNext(header);
 
-	            for (Map.Entry<String, List<String>> entry : eventos.entrySet()) {
-	                String placa = entry.getKey();
-	                List<String> eventosPlaca = entry.getValue();
-	                for (String evento : eventosPlaca) {
-	                    String[] data = {placa, evento};
-	                    csvWriter.writeNext(data);
-	                }
+	        Map<String, List<String>> eventos = sistema.getEventosVehiculos();
+
+	        for (Map.Entry<String, List<String>> entry : eventos.entrySet()) {
+	            String placa = entry.getKey();
+	            List<String> eventosPlaca = entry.getValue();
+
+	            for (String evento : eventosPlaca) {
+	                String[] data = {placa, evento};
+	                csvWriter.writeNext(data);
 	            }
-
-	            csvWriter.close();
-	            fileWriter.close();
-	        } catch (IOException e) {
-	            e.printStackTrace();
 	        }
+
+	        csvWriter.close();
+	        fileWriter.close();
+	    } catch (IOException e) {
+	        e.printStackTrace();
 	    }
+	}
 
-	 public static void archivoLog(List<String> eventos, String rutaDirectorio) {
-		    try {
-		        String rutaArchivo = rutaDirectorio + File.separator + "archivoLog.csv";
-		        FileWriter fileWriter = new FileWriter(rutaArchivo);
-		        CSVWriter csvWriter = new CSVWriter(fileWriter);
-		        
-		        String[] header = {"eventos"};
-		        csvWriter.writeNext(header);
+	public static void archivoLog(List<String> eventos, String rutaDirectorio) {
+	    try {
+	        String rutaArchivo = rutaDirectorio + File.separator + "archivoLog.csv";
+	        FileWriter fileWriter = new FileWriter(rutaArchivo);
+	        CSVWriter csvWriter = new CSVWriter(fileWriter);
 
-		        for (String evento : eventos) {
-		            String[] data = {evento};
-		            csvWriter.writeNext(data);
-		        }
+	        String[] header = {"eventos"};
+	        csvWriter.writeNext(header);
 
-		        csvWriter.close();
-		        fileWriter.close();
-		    } catch (IOException e) {
-		        e.printStackTrace();
-		    }
-		}
+	        // Usamos un conjunto (Set) para almacenar eventos únicos
+	        Set<String> eventosUnicos = new HashSet<>(eventos);
+
+	        for (String evento : eventosUnicos) {
+	            String[] data = {evento};
+	            csvWriter.writeNext(data);
+	        }
+
+	        csvWriter.close();
+	        fileWriter.close();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
 	
 }

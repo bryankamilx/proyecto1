@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="lib/opencsv-5.8.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang3-3.13.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFXLib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -39,7 +39,7 @@ public class Principal extends Application {
         admiDorado.setSede(sedeDorado);
         
         Persistencia persistencia = new Persistencia();
-        persistencia.cargarDatos(sistema, "datos/carros.csv", "datos/clientes.csv", "datos/empleados.csv", "datos/reservas.csv", "datos/seguros.csv"); 
+        persistencia.cargarDatos(sistema, "datos/carros.csv", "datos/clientes.csv", "datos/empleados.csv", "datos/reservas.csv", "datos/seguros.csv","datos/eventos.csv"); 
 
         // Elementos de la interfaz
         Button btnRegistrarse = new Button("Registrarse");
@@ -57,7 +57,7 @@ public class Principal extends Application {
         btnIniciarSesion.setOnAction(e -> abrirVentanaIniciarSesion());
         btnOpcionesAvanzadas.setOnAction(e -> mostrarOpcionesAvanzadas(primaryStage));
         btnIniciarEmpleado.setOnAction(e -> iniciarSesionEmpleado());
-        btnIniciarAdmin.setOnAction(e -> iniciarSesionAdministrador());
+        btnIniciarAdmin.setOnAction(e -> iniciarSesionAdmin(primaryStage,sistema));
         btnIniciarAdminLocal.setOnAction(e -> iniciarSesionAdminLocal());
         btnSalir.setOnAction(e -> primaryStage.close());
 
@@ -77,7 +77,10 @@ public class Principal extends Application {
         primaryStage.show();
     }
 
-    private void abrirVentanaRegistro(Stage primaryStage) {
+
+	
+
+	private void abrirVentanaRegistro(Stage primaryStage) {
     	GridPane layout = new GridPane();
         layout.setVgap(10);
         layout.setHgap(10);
@@ -158,6 +161,11 @@ public class Principal extends Application {
         Scene scene = new Scene(layout, 800, 500);
         primaryStage.setScene(scene);
     }
+	
+	private void iniciarSesionAdmin(Stage primaryStage, SistemaAlquiler sistema) {
+        PanelAdmi panelAdmi = new PanelAdmi();
+        PanelAdmi.iniciarSesionAdmin(primaryStage, escenaPrincipal,sistema);
+    }
     
     private void mostrarMensajeExito() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -194,10 +202,8 @@ public class Principal extends Application {
         labelResultado.setText("Iniciar Sesión como Empleado");
     }
 
-    private void iniciarSesionAdministrador() {
-        // Lógica para iniciar sesión como administrador
-        labelResultado.setText("Iniciar Sesión como Administrador");
-    }
+    // Método para mostrar un mensaje de error
+    
 
     private void iniciarSesionAdminLocal() {
         // Lógica para iniciar sesión como administrador local
