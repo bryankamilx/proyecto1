@@ -5,11 +5,16 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import logica.*;
 import persistencia.Persistencia;
 import com.opencsv.exceptions.CsvValidationException;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.paint.Color;
 
 public class Principal extends Application {
 
@@ -62,12 +67,41 @@ public class Principal extends Application {
         btnSalir.setOnAction(e -> primaryStage.close());
 
         // Diseño de la interfaz
-        VBox layout = new VBox(10);
-        layout.setPadding(new Insets(10));
-        layout.getChildren().addAll( btnIniciarSesion, btnRegistrarse, btnOpcionesAvanzadas, btnSalir, labelResultado);
+//        VBox layout = new VBox(10);
+//        layout.setPadding(new Insets(10));
+//        layout.getChildren().addAll( btnIniciarSesion, btnRegistrarse, btnOpcionesAvanzadas, btnSalir, labelResultado);
 
         // Escena
-        Scene scene = new Scene(layout, 400, 300);
+//        Scene scene = new Scene(layout, 400, 300);
+//        primaryStage.setScene(scene);
+        
+
+     // Diseño de la interfaz
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setVgap(10);
+        gridPane.setHgap(10);
+        gridPane.setPadding(new Insets(10));
+
+        Label lblTitulo = new Label("Alquiler de Vehículos");
+        lblTitulo.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        gridPane.add(lblTitulo, 4, 0, 5, 1); // Columna 0, Fila 0, Span 3 columnas
+        
+        btnRegistrarse.setStyle("-fx-background-color: #3498DB;"); // CornflowerBlue
+        btnIniciarSesion.setStyle("-fx-background-color: #5DADE2;"); // RoyalBlue
+        btnSalir.setStyle("-fx-background-color: #85C1E9;"); // DodgerBlue
+
+        gridPane.add(btnRegistrarse, 4, 1);
+        gridPane.add(btnIniciarSesion, 4, 2);
+        gridPane.add(btnSalir, 4, 3);
+
+        gridPane.add(btnOpcionesAvanzadas, 5, 5, 1, 1);
+        GridPane.setValignment(btnOpcionesAvanzadas, VPos.BOTTOM);
+        
+        gridPane.setStyle("-fx-background-color: beige;");
+
+        // Escena
+        Scene scene = new Scene(gridPane, 400, 300);
         primaryStage.setScene(scene);
 
         // Almacenar la escena principal
@@ -86,6 +120,8 @@ public class Principal extends Application {
         layout.setHgap(10);
         layout.setPadding(new Insets(10));
         
+        Label lblTitulo = new Label("Registro de Cliente");
+        lblTitulo.setFont(Font.font("Arial", FontWeight.BOLD, 15));
         Label lblNombreUsuario = new Label("Nombre de usuario:");
         TextField nombreUsuarioField = new TextField();
         Label lblContrasena = new Label("Contraseña:");
@@ -131,7 +167,7 @@ public class Principal extends Application {
         });
         
        
-        layout.add(new Label("Registro de Cliente"), 0, 0, 2, 1); // Columna 0, Fila 0, Span 2 columnas
+        layout.add(lblTitulo, 0, 0, 2, 1); // Columna 0, Fila 0, Span 2 columnas
         layout.add(lblNombreUsuario, 0, 1);
         layout.add(nombreUsuarioField, 1, 1);
         layout.add(lblContrasena, 0, 2);
@@ -157,8 +193,8 @@ public class Principal extends Application {
         layout.add(crearBtnRegresar(primaryStage), 0, 12);
         layout.add(btnAceptar, 1, 12);
         
-
-        Scene scene = new Scene(layout, 800, 500);
+        layout.setStyle("-fx-background-color: beige;");
+        Scene scene = new Scene(layout, 600, 500);
         primaryStage.setScene(scene);
     }
 	
