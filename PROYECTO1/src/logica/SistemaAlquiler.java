@@ -33,6 +33,8 @@ public class SistemaAlquiler {
 	private List<Reserva> reservas;
     private List<Seguro> seguros;
     private HashMap<String, List<String>> historialVehiculos;
+    private static String subtotal;
+    private static String treintapor;
 
     public SistemaAlquiler() {
     	List<Sede> sedes = new ArrayList<>();
@@ -105,7 +107,8 @@ public class SistemaAlquiler {
     }
 
 
-    public void realizarReserva(String nombre, Scanner scanner) {
+    public void realizarReserva(String nombre, String categoriaSelecc, 
+    		String fechaInicio, String fechaFin, String recoger, String entregar) {
     		           
             int tiposDiferentes = 0;
             Set<String> tiposImpresos = new HashSet<>();
@@ -129,12 +132,27 @@ public class SistemaAlquiler {
             	}
             	
             }
-            PanelCliente.completarDatosReserva(nombre, listaDeListas, scanner);
+            PanelCliente.completarDatosReserva(nombre, listaDeListas, categoriaSelecc, 
+            		fechaInicio, fechaFin, recoger, entregar);
             
 
     }
     
-    public void completarAlquiler(String id, Scanner scanner) {
+    
+    
+    public static String getSubtotal()
+	{
+		return subtotal;
+	}
+
+
+	public static String getTreintapor()
+	{
+		return treintapor;
+	}
+
+
+	public void completarAlquiler(String id, Scanner scanner) {
     	
     	PanelEmpleado.completarAlquiler(id, scanner);
     	
@@ -288,10 +306,9 @@ public class SistemaAlquiler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    
-    	System.out.println("Su reserva fue creada exitosamente");
-    	System.out.println("El valor total sin adicionales de su reserva es de: " + Integer.toString(valorsinext) );
-    	System.out.println("Se cargo el treinta por ciento de ese valor (" + Double.toString(treinta) + ") a su medio de pago");
+    	
+    	subtotal = Integer.toString(valorsinext);
+    	treintapor = Integer.toString((int)treinta);
     	
     	
     	
