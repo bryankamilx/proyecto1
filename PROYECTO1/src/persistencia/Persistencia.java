@@ -530,5 +530,12 @@ public class Persistencia {
 			e.printStackTrace();
 		}
 	}
+	public static boolean reconocimientoEmpleado(String usuario, String contrasena)
+	{
+		
+		return false;
+		
+	}
+
 	
 }

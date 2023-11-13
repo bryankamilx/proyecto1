@@ -14,7 +14,8 @@ import persistencia.Persistencia;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Principal extends Application {
 
@@ -28,8 +29,10 @@ public class Principal extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
 
-    @Override
+
+	@Override
     public void start(Stage primaryStage) throws CsvValidationException, NumberFormatException {
         primaryStage.setTitle("Sistema de Alquiler de Vehículos");
 
@@ -59,22 +62,12 @@ public class Principal extends Application {
 
         // Eventos de los botones
         btnRegistrarse.setOnAction(e -> abrirVentanaRegistro(primaryStage));
-        btnIniciarSesion.setOnAction(e -> abrirVentanaIniciarSesion());
+        btnIniciarSesion.setOnAction(e -> abrirVentanaIniciarSesion(sistema,primaryStage));
         btnOpcionesAvanzadas.setOnAction(e -> mostrarOpcionesAvanzadas(primaryStage));
         btnIniciarEmpleado.setOnAction(e -> iniciarSesionEmpleado());
         btnIniciarAdmin.setOnAction(e -> iniciarSesionAdmin(primaryStage,sistema));
         btnIniciarAdminLocal.setOnAction(e -> iniciarSesionAdminLocal());
-        btnSalir.setOnAction(e -> primaryStage.close());
-
-        // Diseño de la interfaz
-//        VBox layout = new VBox(10);
-//        layout.setPadding(new Insets(10));
-//        layout.getChildren().addAll( btnIniciarSesion, btnRegistrarse, btnOpcionesAvanzadas, btnSalir, labelResultado);
-
-        // Escena
-//        Scene scene = new Scene(layout, 400, 300);
-//        primaryStage.setScene(scene);
-        
+        btnSalir.setOnAction(e -> primaryStage.close());      
 
      // Diseño de la interfaz
         GridPane gridPane = new GridPane();
@@ -85,11 +78,11 @@ public class Principal extends Application {
 
         Label lblTitulo = new Label("Alquiler de Vehículos");
         lblTitulo.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        gridPane.add(lblTitulo, 4, 0, 5, 1); // Columna 0, Fila 0, Span 3 columnas
+        gridPane.add(lblTitulo, 4, 0, 5, 1); 
         
-        btnRegistrarse.setStyle("-fx-background-color: #3498DB;"); // CornflowerBlue
-        btnIniciarSesion.setStyle("-fx-background-color: #5DADE2;"); // RoyalBlue
-        btnSalir.setStyle("-fx-background-color: #85C1E9;"); // DodgerBlue
+        btnRegistrarse.setStyle("-fx-background-color: #3498DB;"); 
+        btnIniciarSesion.setStyle("-fx-background-color: #5DADE2;"); 
+        btnSalir.setStyle("-fx-background-color: #85C1E9;"); 
 
         gridPane.add(btnRegistrarse, 4, 1);
         gridPane.add(btnIniciarSesion, 4, 2);
@@ -162,7 +155,7 @@ public class Principal extends Application {
             sistema.agregarCliente(nombreUsuario, contrasena, nombre, numero, correo, fechaNacimiento, 
             		nacionalidad, numeroLicencia, expedicion, vencimiento, tarjeta);
             Persistencia.escribirClientes(sistema, "datos/clientes.csv");
-            mostrarMensajeExito();
+            mostrarMensajeExitoRegistro();
             primaryStage.setScene(escenaPrincipal);
         });
         
@@ -203,18 +196,70 @@ public class Principal extends Application {
         PanelAdmi.iniciarSesionAdmin(primaryStage, escenaPrincipal,sistema);
     }
     
-    private void mostrarMensajeExito() {
+    private void mostrarMensajeExitoRegistro() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Éxito");
         alert.setHeaderText(null);
         alert.setContentText("Su cuenta fue creada satisfactoriamente.");
         alert.showAndWait();
     }
+    
+    private void mostrarMensajeInicioFallido() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Érror");
+        alert.setHeaderText(null);
+        alert.setContentText("Credenciales incorrectas. Intente nuevamente.");
+        alert.showAndWait();
+    }
 
-    private void abrirVentanaIniciarSesion() {
+    private void abrirVentanaIniciarSesion(SistemaAlquiler sistema,Stage primaryStage) {
         // Lógica para abrir la ventana de inicio de sesión
         labelResultado.setText("Ventana de Inicio de Sesión");
+        GridPane layout = new GridPane();
+        layout.setVgap(10);
+        layout.setHgap(10);
+        layout.setPadding(new Insets(10));
+        
+        Label lblTitulo = new Label("Iniciar sesión");
+        lblTitulo.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+        Label lblNombreUsuario = new Label("Nombre de usuario:");
+        TextField nombreUsuarioField = new TextField();
+        Label lblContrasena = new Label("Contraseña:");
+        PasswordField contrasenaField = new PasswordField();
+        
+        
+        Button btnAceptar = new Button("Ingresar");
+        btnAceptar.setOnAction(e -> {
+            String nombreUsuario = nombreUsuarioField.getText();
+            String contrasena = contrasenaField.getText();
+            boolean verif= sistema.autenticarCliente(nombreUsuario, contrasena);
+            if (verif) {
+            	VentanasReserva ventanas= new VentanasReserva();
+                ventanas.mostrarMenuReservas(sistema,primaryStage,nombreUsuario, escenaPrincipal);
+            } else {
+        	mostrarMensajeInicioFallido();
+            }
+            
+            
+        });
+        
+        layout.add(lblTitulo, 0, 0, 2, 1); // Columna 0, Fila 0, Span 2 columnas
+        layout.add(lblNombreUsuario, 0, 1);
+        layout.add(nombreUsuarioField, 1, 1);
+        layout.add(lblContrasena, 0, 2);
+        layout.add(contrasenaField, 1, 2);
+        layout.add(crearBtnRegresar(primaryStage), 0, 3);
+        layout.add(btnAceptar, 1, 3);
+        
+        
+        layout.setStyle("-fx-background-color: beige;");
+        Scene scene = new Scene(layout, 400, 300);
+        primaryStage.setScene(scene);
+        
+       
     }
+    
+    
 
     private void mostrarOpcionesAvanzadas(Stage primaryStage) {
         // Lógica para mostrar los botones de opciones avanzadas
